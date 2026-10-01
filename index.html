@@ -354,8 +354,8 @@ button.tl-title:hover{text-decoration-color:currentColor}
 .pl-amt{text-align:right;font-variant-numeric:tabular-nums}
 .gtabs{margin-top:12px;display:flex;flex-wrap:wrap;gap:6px}
 .gtabs button{padding:5px 12px;border-radius:999px;border:0;background:var(--sunken);font-size:.9rem}
-.gtabs button[aria-selected="true"]{background:var(--ink);color:var(--paper)}
-.ggrp h4{margin:18px 0 2px;font-size:.9rem;color:var(--ink2)}
+.gtabs button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.ggrp{margin-top:6px}
 .grow{padding:10px 0;border-bottom:1px solid var(--line)}
 .gname{font-weight:600}
 .steps{margin-top:4px;display:grid;gap:4px;font-size:.9rem}
@@ -472,7 +472,7 @@ dialog::backdrop{background:rgba(8,14,26,.55)}
       </div>
       <div>
         <h3>어디서 어떤 카드</h3>
-        <div class="gtabs" id="guideTabs" role="tablist" aria-label="분류"></div>
+        <div class="gtabs" id="guideTabs" role="group" aria-label="분류"></div>
         <div id="guide"></div>
       </div>
     </div>
@@ -484,6 +484,7 @@ dialog::backdrop{background:rgba(8,14,26,.55)}
       <li>Uber 코드는 신규 TSUKIMIRFT (50%, 최대 1,500엔, 1회), 기존 TSUKIMIERI (25%, 최대 500엔, 2회)이고 10월 18일까지예요.</li>
       <li>Haru 누적 이벤트와 JCB 20%가 함께 적용되는지는 신한카드에 확인이 필요해요.</li>
       <li>롯데 이벤트에 앱과 온라인 결제가 포함되는지, 네이버·롯데·KB의 상시 해외 적립률은 확인하지 못했어요.</li>
+      <li>엔당 8.64원은 10월 1일 무렵의 시장 환율이에요. 카드 청구 금액은 해외 수수료 때문에 1–2% 높게 잡히니, 명세서가 나오면 위 칸을 고치세요.</li>
       <li>환급액은 정리해 둔 이벤트 조건으로 계산한 예상치예요. 실제 지급은 카드사 기준을 따라요.</li>
     </ul>
     <div class="backup"><button type="button" class="btn ghost" id="bkExport">기록 백업 파일 받기</button><label class="btn ghost">백업 파일 불러오기<input type="file" id="bkImport" accept="application/json,.json" hidden></label><span class="qp-state" id="bkState" role="status"></span></div>
@@ -881,7 +882,9 @@ const Store=(()=>{
   const get=(k,f)=>{try{const v=localStorage.getItem(NS+k);return v?JSON.parse(v):f}catch(e){return f}};
   const put=(k,v)=>{try{localStorage.setItem(NS+k,JSON.stringify(v))}catch(e){}};
   const s={checks:get('checks',{}),notes:get('notes',{}),custom:get('custom',{}),ui:get('ui',{}),weather:get('weather',null),pay:get('pay',null)};
-  if(!s.pay||!Array.isArray(s.pay.list)||!(s.pay.rate>0))s.pay={rate:9,list:[]};
+  const RATE0=8.64;
+  if(!s.pay||!Array.isArray(s.pay.list))s.pay={rate:RATE0,list:[]};
+  if(!s.pay.rateUser||!(s.pay.rate>0))s.pay.rate=RATE0;
   let db=null,failed=false;
   const dirty={checks:new Set(),notes:new Set(),custom:new Set(),gone:new Set()};
   const chain={};const subs=[];
@@ -924,11 +927,11 @@ const Store=(()=>{
     ui(patch){Object.assign(s.ui,patch);put('ui',s.ui)},
     payAdd(e){s.pay.list.push(Object.assign({id:'p'+Date.now().toString(36)+Math.random().toString(36).slice(2,5),ts:Date.now()},e));put('pay',s.pay);emit()},
     payDel(id){s.pay.list=s.pay.list.filter(x=>x.id!==id);put('pay',s.pay);emit()},
-    payRate(r){s.pay.rate=r;put('pay',s.pay);emit()},
+    payRate(r){s.pay.rate=r;s.pay.rateUser=true;put('pay',s.pay);emit()},
     dump(){return {v:1,checks:s.checks,notes:s.notes,custom:s.custom,pay:s.pay,ui:s.ui}},
     load(o){if(!o||typeof o!=='object')return false;
       ['checks','notes','custom','ui'].forEach(k=>{if(o[k]&&typeof o[k]==='object'){s[k]=o[k];put(k,s[k])}});
-      if(o.pay&&Array.isArray(o.pay.list)){s.pay={rate:+o.pay.rate>0?+o.pay.rate:9,list:o.pay.list};put('pay',s.pay)}
+      if(o.pay&&Array.isArray(o.pay.list)){s.pay={rate:o.pay.rateUser&&+o.pay.rate>0?+o.pay.rate:RATE0,rateUser:!!o.pay.rateUser,list:o.pay.list};put('pay',s.pay)}
       emit();return true}
   };
 })();
@@ -992,7 +995,7 @@ const GUIDE=[
   {g:'쇼핑',rows:[['돈키호테','donki','세 카드 모두 20% 안팎. Haru는 JCB 20%에 누적과 기본 3.5%가 더해져요.'],['유니클로','uniqlo','네이버 40%.'],['GU, BAPE, COMME des GARÇONS, BEAMS, HUMAN MADE, KAPITAL, STUSSY','kbfashion','KB 패션 월 합산 20만원 2만원권, 50만원 7만원권, 100만원 20만원권.'],['다이마루, 파르코, 한큐 교토점','dept','한큐 교토점은 JCB 대상이 아니에요.'],['한큐 우메다 본점, 한신 우메다 본점, 한큐맨즈 오사카','hankyu','JCB 상한 3,000엔. 한신의 무인양품과 로프트는 제외.'],['드럭스토어, 기념품, 그 외 패션','general','']]},
   {g:'숙박과 온라인',rows:[['호텔 현지 결제','hotel','Haru 100만원을 채우는 가장 큰 결제예요.'],['해외 사이트 예약, 입장권 앱 결제','online','네이버는 오프라인 실물 결제만 인정돼요.']]}
 ];
-let guideTab='전체';
+let guideTab='';
 function renderPay(){
   const S=payState();
   const bar=(cur,goals,cls)=>{const g=goals.find(x=>cur<x)||goals[goals.length-1],pct=Math.min(100,Math.round(cur/g*100));
@@ -1000,7 +1003,7 @@ function renderPay(){
   const tick=(ok,t,bad)=>`<li class="${ok?'ok':bad?'bad':''}">${esc(t)}</li>`;
   const jr=(n,o)=>`<li class="${o.earn>=o.cap?'ok':''}"><span>${n}</span><b>${o.earn?yen(o.earn):'–'}</b><small>${yen(o.y)} 결제, ${yen(o.min)}부터 적용, 상한 ${yen(o.cap)}</small></li>`;
   $('#paySum').innerHTML=`<div><p>지금까지 결제</p><b>${won(S.total)}</b></div><div><p>예상 환급</p><b>${won(S.refund)}</b></div><div><p>환급률</p><b>${S.total?(S.refund/S.total*100).toFixed(1)+'%':'–'}</b></div>
-    <label class="rate">엔당 <input type="number" id="payRate" inputmode="decimal" step="0.1" min="5" max="20" value="${S.rate}"> 원</label>`;
+    <label class="rate">엔당 <input type="number" id="payRate" inputmode="decimal" step="0.01" min="5" max="20" value="${S.rate}"> 원</label>`;
   $('#cardGrid').innerHTML=`
     <article class="kcard k-naver"><header><h4>네이버페이 머니카드</h4><p>10월 14일까지, 오프라인 실물 결제만</p></header><div class="kc-body">
       <p class="kc-big">${won(S.nEarn)} <small>최대 20만원</small></p><p class="kc-sub">오프라인 누적 ${won(S.nTot)}</p>${bar(S.nTot,[500000,1000000,1500000],'naver')}
@@ -1017,9 +1020,8 @@ function renderPay(){
     <article class="kcard k-kb"><header><h4>KB국민 Visa</h4><p>11월 30일까지, 신세계상품권</p></header><div class="kc-body">
       <p class="kc-big">${won(S.kEarn)} <small>상품권</small></p><p class="kc-sub">패션 ${won(S.kF)}, 백화점 ${won(S.kD)}</p>
       <ul class="ticks">${tick(S.kF>=200000,'패션 월 20만원, 2만원권')}${tick(S.kF>=500000,'패션 월 50만원, 7만원권')}${tick(S.kF>=1000000,'패션 월 100만원, 20만원권')}${tick(S.kDt>0,'백화점 월 50만원, 10만원권')}${tick(S.kDon,'돈키호테 10만원 이상, 2만원권')}</ul></div></article>`;
-  const tabs=['전체',...GUIDE.map(g=>g.g)];
-  $('#guideTabs').innerHTML=tabs.map(t=>`<button type="button" role="tab" aria-selected="${t===guideTab}" data-gtab="${t}">${t}</button>`).join('');
-  $('#guide').innerHTML=GUIDE.filter(g=>guideTab==='전체'||g.g===guideTab).map(g=>`<div class="ggrp"><h4>${g.g}</h4>${g.rows.map(([n,t,note])=>`<div class="grow"><p class="gname">${esc(n)}</p>${stepsHTML(rec(t,S))}${note?`<p class="gnote">${esc(note)}</p>`:''}</div>`).join('')}</div>`).join('');
+  $('#guideTabs').innerHTML=GUIDE.map(g=>`<button type="button" aria-pressed="${g.g===guideTab}" data-gtab="${g.g}">${g.g}</button>`).join('');
+  $('#guide').innerHTML=!guideTab?'<p class="gnote">분류를 누르면 그 안의 카드 순서가 나와요.</p>':GUIDE.filter(g=>g.g===guideTab).map(g=>`<div class="ggrp">${g.rows.map(([n,t,note])=>`<div class="grow"><p class="gname">${esc(n)}</p>${stepsHTML(rec(t,S))}${note?`<p class="gnote">${esc(note)}</p>`:''}</div>`).join('')}</div>`).join('');
   const days={};S.L.slice().sort((a,b)=>a.date<b.date?1:a.date>b.date?-1:b.ts-a.ts).forEach(e=>(days[e.date]=days[e.date]||[]).push(e));
   $('#payList').innerHTML=S.L.length?Object.keys(days).map(dt=>`<div class="pday"><h4>${+dt.slice(5,7)}월 ${+dt.slice(8,10)}일 <small>${won(days[dt].reduce((x,e)=>x+e.krw,0))}</small></h4><ul>${days[dt].map(e=>`<li><span class="kchip k-${e.card}">${CARDS[e.card].s}</span><span class="pl-name">${esc(e.memo||PTYPE[e.type])}<small>${esc(PTYPE[e.type])}</small></span><span class="pl-amt">${e.cur==='KRW'?won(e.krw):yen(e.yen)}<small>${e.cur==='KRW'?'':won(e.krw)}</small></span><button type="button" class="del" data-paydel="${e.id}" aria-label="${esc(e.memo||PTYPE[e.type])} 기록 삭제">삭제</button></li>`).join('')}</ul></div>`).join(''):'<p class="empty">아직 기록이 없어요. 결제할 때마다 적으면 위 카드 진행 상황과 일정의 카드 안내가 바뀌어요.</p>';
 }
@@ -1448,7 +1450,7 @@ function selectDay(i,scroll){
 document.addEventListener('click',e=>{
   const t=e.target.closest('[data-day],[data-place],[data-goto],[data-del],[data-addbtn],[data-scroll],[data-gtab],[data-paydel],#memoSave,#dayMemoSave,#pfAdd,#qpAdd,#bkExport');
   if(!t)return;
-  if(t.dataset.gtab){guideTab=t.dataset.gtab;renderPay();return}
+  if(t.dataset.gtab){guideTab=guideTab===t.dataset.gtab?'':t.dataset.gtab;renderPay();const b=$(`[data-gtab="${t.dataset.gtab}"]`);if(b)b.focus();return}
   if(t.dataset.paydel){Store.payDel(t.dataset.paydel);return}
   if(t.id==='pfAdd'){const amt=+$('#pfAmt').value;if(!(amt>0)){$('#pfAmt').focus();return}
     Store.payAdd({date:$('#pfDate').value||'2026-10-04',card:$('#pfCard').value,type:$('#pfType').value,cur:$('#pfCur').value,amt,memo:$('#pfMemo').value.trim().slice(0,60)});
