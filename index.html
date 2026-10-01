@@ -524,6 +524,7 @@ dialog::backdrop{background:rgba(8,14,26,.55)}
       <li>네이버 이벤트는 예산이 떨어지면 일찍 끝날 수 있어요. 정액 혜택 매장은 여행 초반에 결제하세요.</li>
       <li>네이버 첫 결제는 3만원 이상인 오프라인 결제로 시작해야 1만원을 받아요. 그 결제가 편의점이나 돈키호테 같은 정액 혜택 매장이면 두 혜택을 함께 받는 것으로 계산했어요.</li>
       <li>Uber는 두 사람 모두 신규라 TSUKIMIRFT (50%, 최대 1,500엔)를 계정마다 한 번씩 써요. 10월 18일까지예요. XSP3000과 LOTTEUBERJP는 등록되지 않았어요.</li>
+      <li>Uber는 등록된 코드 중 할인액이 가장 큰 것 하나만 자동으로 적용해요. 역 출도착 코드(JPU1SW26TRAINS, 20%)가 등록돼 있어도 4일 교토역에서 부르면 신규 코드가 먼저 써지니, 그 구간은 승강장 택시를 타세요.</li>
       <li>Haru 누적 이벤트와 JCB 20%가 함께 적용되는지는 신한카드에 확인이 필요해요.</li>
       <li>롯데 이벤트에 앱과 온라인 결제가 포함되는지, 네이버·롯데·KB의 상시 해외 적립률은 확인하지 못했어요.</li>
       <li>환율은 페이지를 열 때 그날의 기준 환율을 불러와요. 하루에 한 번 바뀌는 값이고, 못 불러오면 10월 1일 환율 8.64원을 써요.</li>
@@ -1370,7 +1371,7 @@ function taxiPlan(){
   legs.forEach(l=>{if(pick.includes(l)){plan[l.key]={app:'uber',save:off(l),text:`Uber ${who[k]} 계정, TSUKIMIRFT로 약 ${yen(off(l))} 할인`};uberSave+=off(l);k++}});
   let need=Math.max(0,5000-S.jcb.go.y),go=S.jcb.go.y;
   legs.forEach(l=>{if(plan[l.key])return;
-    if(l.stand)plan[l.key]={app:'stand',save:0,text:'승강장 택시, 앱 없이'};
+    if(l.stand)plan[l.key]={app:'stand',save:0,text:'승강장 택시, 앱 없이. 여기서 Uber를 부르면 신규 코드가 먼저 써져요'};
     else if(need>0){plan[l.key]={app:'go',save:0,text:'GO 앱에 Haru, JCB 20%'};need-=l.fare;go+=l.fare}
     else plan[l.key]={app:'street',save:0,text:'일반 택시. 안 잡히면 GO'}});
   const jcbSave=Math.max(0,(go>=3000?Math.min(1000,Math.floor(go*.2)):0)-S.jcb.go.earn);
