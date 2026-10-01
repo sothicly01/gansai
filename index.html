@@ -22,6 +22,7 @@
   --c-eat:#A9590C; --c-cafe:#8B5570; --c-sight:#4F6F3A; --c-shop:#27457A;
   --c-move:#5E6E85; --c-stay:#16233B; --c-todo:#B93A25; --c-rest:#8492A6;
   --pin-ink:#FFFFFF;
+  --k-naver:#1B8F4E;--k-haru:#27457A;--k-jcb:#6D4AA8;--k-lotte:#C23B2E;--k-kb:#9A7410;--k-cash:#5E6E85;
   --sc-ink:#16233B;--sc-kfar:#A9C3AC;--sc-kmid:#74986F;--sc-knear:#456B4A;--sc-ofar:#B3C0D1;--sc-omid:#8496AE;--sc-onear:#4C5F7A;--sc-roof:#2C3648;--sc-wood:#7A5340;--sc-wall:#F5F2EA;--sc-stone:#9A9EA6;--sc-croof:#3F7A6E;--sc-verm:#D2452D;--sc-bamboo:#5E9A55;--sc-water:#86A9C8;--sc-win:rgba(255,255,255,.45);--sc-sun:#F7C948;--sc-cloud:rgba(255,255,255,.88);--sc-rain:rgba(255,255,255,.6);--sc-gold:#E3A220;
   --display:"Hahmlet","Nanum Myeongjo","AppleMyungjo",serif;
   --sans:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",system-ui,sans-serif;
@@ -37,6 +38,7 @@
     --c-eat:#E9A95B; --c-cafe:#D3A0B9; --c-sight:#A3C487; --c-shop:#9DB9EE;
     --c-move:#9AA8BF; --c-stay:#E8EDF5; --c-todo:#F08A75; --c-rest:#7C8AA3;
     --pin-ink:#0E1625;
+    --k-naver:#5FCB8C;--k-haru:#9DB9EE;--k-jcb:#BBA2EC;--k-lotte:#F08A75;--k-kb:#E3BE5A;--k-cash:#9AA8BF;
     --sc-ink:#F2F5FA;--sc-kfar:#2B4239;--sc-kmid:#1F3229;--sc-knear:#14231C;--sc-ofar:#2B3A58;--sc-omid:#1F2C47;--sc-onear:#131D31;--sc-roof:#0B111E;--sc-wood:#3A2A23;--sc-wall:#AEB6C6;--sc-stone:#3A4050;--sc-croof:#1F4540;--sc-verm:#C4503C;--sc-bamboo:#2F5236;--sc-water:#182A47;--sc-win:#F3D27A;--sc-sun:#EDE7CF;--sc-cloud:rgba(170,185,210,.3);--sc-rain:rgba(200,215,235,.4);--sc-gold:#E9B94F;
   }
   :root:not([data-theme="light"]) .scene{--sky1:#0B1526;--sky2:#2A416B}
@@ -51,6 +53,7 @@
   --c-eat:#E9A95B; --c-cafe:#D3A0B9; --c-sight:#A3C487; --c-shop:#9DB9EE;
   --c-move:#9AA8BF; --c-stay:#E8EDF5; --c-todo:#F08A75; --c-rest:#7C8AA3;
   --pin-ink:#0E1625;
+  --k-naver:#5FCB8C;--k-haru:#9DB9EE;--k-jcb:#BBA2EC;--k-lotte:#F08A75;--k-kb:#E3BE5A;--k-cash:#9AA8BF;
   --sc-ink:#F2F5FA;--sc-kfar:#2B4239;--sc-kmid:#1F3229;--sc-knear:#14231C;--sc-ofar:#2B3A58;--sc-omid:#1F2C47;--sc-onear:#131D31;--sc-roof:#0B111E;--sc-wood:#3A2A23;--sc-wall:#AEB6C6;--sc-stone:#3A4050;--sc-croof:#1F4540;--sc-verm:#C4503C;--sc-bamboo:#2F5236;--sc-water:#182A47;--sc-win:#F3D27A;--sc-sun:#EDE7CF;--sc-cloud:rgba(170,185,210,.3);--sc-rain:rgba(200,215,235,.4);--sc-gold:#E9B94F;
 }
 :root[data-theme="dark"] .scene{--sky1:#0B1526;--sky2:#2A416B}
@@ -303,6 +306,70 @@ button.tl-title:hover{text-decoration-color:currentColor}
 .save-state{margin-top:14px;font-size:.85rem;color:var(--ink2)}
 .save-state.bad{color:var(--verm)}
 
+/* cards and payments */
+.k-naver{--kc:var(--k-naver)}.k-haru{--kc:var(--k-haru)}.k-jcb{--kc:var(--k-jcb)}.k-lotte{--kc:var(--k-lotte)}.k-kb{--kc:var(--k-kb)}.k-cash{--kc:var(--k-cash)}
+.kchip{display:inline-block;font-size:.74rem;font-weight:700;padding:1px 8px;border-radius:6px;color:var(--surface);background:var(--kc);white-space:nowrap;vertical-align:1px}
+.pay-sum{margin-top:22px;display:flex;flex-wrap:wrap;gap:14px 36px;align-items:flex-end}
+.pay-sum p{font-size:.85rem;color:var(--ink2)}
+.pay-sum b{font-family:var(--display);font-size:1.5rem;font-variant-numeric:tabular-nums}
+.rate{margin-left:auto;font-size:.9rem;color:var(--ink2)}
+.rate input{width:4.4rem;padding:6px 8px;border-radius:8px;border:1.5px solid var(--line);background:var(--surface);text-align:right}
+.cardgrid{margin-top:18px;display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(192px,1fr))}
+.kcard{background:var(--surface);border-radius:14px;overflow:hidden;box-shadow:inset 0 0 0 1px var(--line)}
+.kcard header{padding:12px 16px;background:var(--kc);color:var(--surface)}
+.kcard h4{margin:0;font-family:var(--display);font-size:1.05rem}
+.kcard header p{font-size:.8rem;opacity:.92}
+.kc-body{padding:14px 16px 16px}
+.kc-big{font-family:var(--display);font-weight:700;font-size:1.35rem;font-variant-numeric:tabular-nums}
+.kc-big small{display:block;font-family:var(--sans);font-weight:400;font-size:.8rem;color:var(--ink2)}
+.kc-sub,.kc-next{font-size:.85rem;color:var(--ink2)}
+.kcard .bar{margin-top:8px}
+.kcard .bar i{background:var(--kc)}
+.ticks{margin-top:10px;display:grid;gap:4px;font-size:.88rem}
+.ticks li{padding-left:22px;position:relative;color:var(--ink2)}
+.ticks li::before{content:"";position:absolute;left:2px;top:.42em;width:11px;height:11px;border-radius:50%;box-shadow:inset 0 0 0 1.5px var(--rain)}
+.ticks li.ok{color:var(--ink);font-weight:500}
+.ticks li.ok::before{background:var(--kc);box-shadow:none}
+.ticks li.bad{color:var(--verm)}
+.jrows{margin-top:8px;font-size:.88rem}
+.jrows li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:0 10px;padding:6px 0;border-bottom:1px solid var(--line);color:var(--ink2);font-variant-numeric:tabular-nums}
+.jrows small{grid-column:1/-1;font-size:.78rem}
+.jrows b{text-align:right;color:var(--ink)}
+.jrows li.ok span:first-child{color:var(--ink);font-weight:600}
+.paycols{margin-top:36px;display:grid;gap:36px}
+@media (min-width:900px){.paycols{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px}}
+#cards h3{font-family:var(--display);font-weight:700;font-size:1.25rem}
+#cards .notes-h{margin-top:34px}
+.payform{margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.payform label{display:grid;gap:4px;font-size:.85rem;color:var(--ink2)}
+.payform .wide,.payform .btn,.payform .qp-state{grid-column:1/-1}
+.payform input,.payform select,.quickpay input,.quickpay select{padding:9px 10px;border-radius:10px;border:1.5px solid var(--line);background:var(--surface);min-width:0;width:100%}
+.pday{margin-top:18px}
+.pday h4{margin:0;font-size:.95rem}
+.pday h4 small{font-weight:400;color:var(--ink2);margin-left:6px}
+.pday li{display:grid;grid-template-columns:auto minmax(0,1fr) auto auto;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line)}
+.pday .del{background:none;border:0;color:var(--ink2);padding:2px 6px;border-radius:6px;font-size:.85rem}
+.pday .del:hover{background:var(--sunken);color:var(--verm)}
+.pl-name small,.pl-amt small{display:block;font-size:.78rem;color:var(--ink2)}
+.pl-amt{text-align:right;font-variant-numeric:tabular-nums}
+.gtabs{margin-top:12px;display:flex;flex-wrap:wrap;gap:6px}
+.gtabs button{padding:5px 12px;border-radius:999px;border:0;background:var(--sunken);font-size:.9rem}
+.gtabs button[aria-selected="true"]{background:var(--ink);color:var(--paper)}
+.ggrp h4{margin:18px 0 2px;font-size:.9rem;color:var(--ink2)}
+.grow{padding:10px 0;border-bottom:1px solid var(--line)}
+.gname{font-weight:600}
+.steps{margin-top:4px;display:grid;gap:4px;font-size:.9rem}
+.steps li{color:var(--ink2)}
+.steps li.cur{color:var(--ink);font-weight:600}
+.steps li.done{text-decoration:line-through;opacity:.55}
+.gnote{font-size:.84rem;color:var(--ink2);margin-top:4px}
+.tl-pay{font-size:.86rem;color:var(--ink2);margin-top:4px}
+.leg-pay{margin-left:8px;font-size:.8rem;font-weight:600;color:var(--k-haru);white-space:nowrap}
+.quickpay{margin-top:10px;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr) 4.6rem auto;gap:6px}
+.qp-state{font-size:.85rem;color:var(--ink2);margin-top:4px}
+.backup{margin-top:22px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.backup label{cursor:pointer}
+.paynotes{max-width:72ch}
 footer{padding-block:32px 48px;color:var(--ink2);font-size:.85rem;border-top:1px solid var(--line)}
 
 /* sheet */
@@ -354,6 +421,7 @@ dialog::backdrop{background:rgba(8,14,26,.55)}
   <div class="wrap"><ul>
     <li><button type="button" data-scroll="days">일정</button></li>
     <li><button type="button" data-scroll="issues">확인할 것<span class="count alert" id="navIssues"></span></button></li>
+    <li><button type="button" data-scroll="cards">카드</button></li>
     <li><button type="button" data-scroll="stays">숙소와 예약</button></li>
     <li><button type="button" data-scroll="lists">체크리스트<span class="count" id="navChecks"></span></button></li>
   </ul></div>
@@ -380,6 +448,45 @@ dialog::backdrop{background:rgba(8,14,26,.55)}
     <h2>떠나기 전에 확인할 것</h2>
     <p class="sec-lede">메모를 정리하면서 영업일과 동선을 대조해 봤어요. 그대로 가면 어긋나는 곳들입니다.</p>
     <div class="issues" id="issueList"></div>
+  </div></section>
+
+  <section id="cards"><div class="wrap">
+    <h2>카드와 결제</h2>
+    <p class="sec-lede">어디서 어떤 카드를 낼지와 지금까지 채운 실적을 한곳에서 봐요. 결제를 기록하면 일정에 붙은 카드 안내도 따라 바뀌어요.</p>
+    <div class="pay-sum" id="paySum"></div>
+    <div class="cardgrid" id="cardGrid"></div>
+    <div class="paycols">
+      <div>
+        <h3>결제 기록</h3>
+        <div class="payform">
+          <label>날짜<input type="date" id="pfDate" min="2026-09-17" max="2026-11-30"></label>
+          <label>카드<select id="pfCard"></select></label>
+          <label class="wide">매장 종류<select id="pfType"></select></label>
+          <label>금액<input type="number" id="pfAmt" inputmode="numeric" min="0" placeholder="0"></label>
+          <label>통화<select id="pfCur"><option value="JPY">엔</option><option value="KRW">원</option></select></label>
+          <label class="wide">메모<input type="text" id="pfMemo" maxlength="60" placeholder="가게 이름"></label>
+          <button type="button" class="btn" id="pfAdd">기록 추가</button>
+          <span class="qp-state" id="pfState" role="status"></span>
+        </div>
+        <div id="payList"></div>
+      </div>
+      <div>
+        <h3>어디서 어떤 카드</h3>
+        <div class="gtabs" id="guideTabs" role="tablist" aria-label="분류"></div>
+        <div id="guide"></div>
+      </div>
+    </div>
+    <h3 class="notes-h">알아 둘 것</h3>
+    <ul class="sh-list paynotes">
+      <li>줄이 그어진 단계는 이미 채운 것이고, 굵은 단계가 지금 낼 카드예요.</li>
+      <li>네이버 이벤트는 예산이 떨어지면 일찍 끝날 수 있어요. 정액 혜택 매장은 여행 초반에 결제하세요.</li>
+      <li>네이버 첫 결제는 3만원 이상인 오프라인 결제로 시작해야 1만원을 받아요.</li>
+      <li>Uber 코드는 신규 TSUKIMIRFT (50%, 최대 1,500엔, 1회), 기존 TSUKIMIERI (25%, 최대 500엔, 2회)이고 10월 18일까지예요.</li>
+      <li>Haru 누적 이벤트와 JCB 20%가 함께 적용되는지는 신한카드에 확인이 필요해요.</li>
+      <li>롯데 이벤트에 앱과 온라인 결제가 포함되는지, 네이버·롯데·KB의 상시 해외 적립률은 확인하지 못했어요.</li>
+      <li>환급액은 정리해 둔 이벤트 조건으로 계산한 예상치예요. 실제 지급은 카드사 기준을 따라요.</li>
+    </ul>
+    <div class="backup"><button type="button" class="btn ghost" id="bkExport">기록 백업 파일 받기</button><label class="btn ghost">백업 파일 불러오기<input type="file" id="bkImport" accept="application/json,.json" hidden></label><span class="qp-state" id="bkState" role="status"></span></div>
   </div></section>
 
   <section id="stays"><div class="wrap">
@@ -580,6 +687,15 @@ const P={
     area:'덴노지구 이쿠타마초',hours:'목–일 17:00–02:00',closed:'월요일–수요일',tel:'+81 6-6773-3080',rsv:{s:'done',when:'10월 9일 (금) 20:00',via:'월도프 아스토리아 컨시어지 전화 예약',change:'예약자 이름은 본인 이름이에요. 변경은 컨시어지에 요청하세요.'},
     tips:['월도프에서 택시로 20분 안팎. 19:30에 출발하면 돼요.']}
 };
+Object.entries({tsumugi:'general',otsuka:'general',unafuji:'general',masters:'general',katsuda:'general',itadaki:'general',okonomi:'general',bushido:'general',momiji:'general',drug:'general',conv:'cvs',donki:'donki',shopzone:'general',futaba:'general',lucua:'general',sushizen:'cash',kotoimo:'general',kiki:'general',inoda:'general',smart:'general',hilton:'hotel'}).forEach(([k,v])=>{if(P[k])P[k].pay=v});
+Object.entries({
+  unafuji:'다이마루 8층에 있는 식당이에요. 다이마루 백화점 실적으로 잡히는지는 확인하지 못했어요.',
+  shopzone:'BEAMS는 KB(패션 월 합산)가 먼저예요. 나머지 매장은 위 순서대로.',
+  futaba:'다카시마야는 네이버와 KB의 백화점 혜택 대상(한큐, 다이마루, 파르코)이 아니에요.',
+  lucua:'루쿠아는 대상 백화점이 아니에요. 바로 옆 한큐 우메다 본점은 Haru JCB 20%와 네이버 백화점 혜택 대상이에요.',
+  hilton:'7일 밤 숙박비를 현지에서 결제한다면 Haru 누적을 크게 채울 수 있어요.',
+  okonomi:'작은 가게라 카드가 되는지는 확인하지 못했어요. 현금도 챙기세요.'
+}).forEach(([k,v])=>{if(P[k])P[k].payNote=v});
 const RSV={need:['현장 예약 필요','need'],unk:['예약 여부 미입력','unk'],walk:['예약 없이 현장 대기','walk'],ok:['일정 있음','ok'],done:['예약 확정','ok']};
 
 /* ---------- days ---------- */
@@ -764,7 +880,8 @@ const Store=(()=>{
   const NS='kyoto-osaka-2026:';
   const get=(k,f)=>{try{const v=localStorage.getItem(NS+k);return v?JSON.parse(v):f}catch(e){return f}};
   const put=(k,v)=>{try{localStorage.setItem(NS+k,JSON.stringify(v))}catch(e){}};
-  const s={checks:get('checks',{}),notes:get('notes',{}),custom:get('custom',{}),ui:get('ui',{}),weather:get('weather',null)};
+  const s={checks:get('checks',{}),notes:get('notes',{}),custom:get('custom',{}),ui:get('ui',{}),weather:get('weather',null),pay:get('pay',null)};
+  if(!s.pay||!Array.isArray(s.pay.list)||!(s.pay.rate>0))s.pay={rate:9,list:[]};
   let db=null,failed=false;
   const dirty={checks:new Set(),notes:new Set(),custom:new Set(),gone:new Set()};
   const chain={};const subs=[];
@@ -804,9 +921,121 @@ const Store=(()=>{
     addCustom(list,label){const id='c'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);s.custom[id]={label,list,done:false};put('custom',s.custom);db?pushCustom(id):dirty.custom.add(id);emit()},
     checkCustom(id,v){if(!s.custom[id])return;s.custom[id]=Object.assign({},s.custom[id],{done:!!v});put('custom',s.custom);db?pushCustom(id):dirty.custom.add(id);emit()},
     delCustom(id){const n=Object.assign({},s.custom);delete n[id];s.custom=n;put('custom',n);dirty.custom.delete(id);db?pushGone(id):dirty.gone.add(id);emit()},
-    ui(patch){Object.assign(s.ui,patch);put('ui',s.ui)}
+    ui(patch){Object.assign(s.ui,patch);put('ui',s.ui)},
+    payAdd(e){s.pay.list.push(Object.assign({id:'p'+Date.now().toString(36)+Math.random().toString(36).slice(2,5),ts:Date.now()},e));put('pay',s.pay);emit()},
+    payDel(id){s.pay.list=s.pay.list.filter(x=>x.id!==id);put('pay',s.pay);emit()},
+    payRate(r){s.pay.rate=r;put('pay',s.pay);emit()},
+    dump(){return {v:1,checks:s.checks,notes:s.notes,custom:s.custom,pay:s.pay,ui:s.ui}},
+    load(o){if(!o||typeof o!=='object')return false;
+      ['checks','notes','custom','ui'].forEach(k=>{if(o[k]&&typeof o[k]==='object'){s[k]=o[k];put(k,s[k])}});
+      if(o.pay&&Array.isArray(o.pay.list)){s.pay={rate:+o.pay.rate>0?+o.pay.rate:9,list:o.pay.list};put('pay',s.pay)}
+      emit();return true}
   };
 })();
+
+/* ---------- cards and payments ---------- */
+const CARDS={naver:{n:'네이버페이 머니카드',s:'네이버'},haru:{n:'신한 Haru (JCB)',s:'Haru'},lotte:{n:'롯데 Mastercard',s:'롯데'},kb:{n:'KB국민 Visa',s:'KB'},cash:{n:'현금·기타',s:'현금'}};
+const PTYPE={general:'식당·카페·드럭스토어·일반 매장',cvs:'편의점 (세븐일레븐·패밀리마트·로손)',donki:'돈키호테',uniqlo:'유니클로',kbfashion:'GU·BAPE·CdG·BEAMS·HUMAN MADE·KAPITAL·STUSSY',dept:'다이마루·파르코·한큐 교토점',hankyu:'한큐 우메다 본점·한신 우메다·한큐맨즈',ichiran:'이치란라멘',sushiro:'스시로',komeda:'코메다커피',go:'택시앱 GO',uber:'Uber',hotel:'호텔 현지 결제',online:'온라인·앱 결제'};
+const OFFLINE=t=>!['go','uber','online'].includes(t);
+const won=n=>Math.round(n).toLocaleString('ko-KR')+'원';
+const man=n=>{n=Math.round(n);if(n>=10000){const m=n/10000;return (Number.isInteger(m)?m:m.toFixed(1))+'만원'}return won(n)};
+const yen=n=>Math.round(n).toLocaleString('ko-KR')+'엔';
+function payState(){
+  const rate=Store.s.pay.rate;
+  const L=Store.s.pay.list.filter(e=>e&&CARDS[e.card]&&PTYPE[e.type]&&Number.isFinite(e.amt)).map(e=>Object.assign({},e,{krw:e.cur==='KRW'?e.amt:Math.round(e.amt*rate),yen:e.cur==='KRW'?Math.round(e.amt/rate):e.amt}));
+  const by=c=>L.filter(e=>e.card===c),sum=a=>a.reduce((x,e)=>x+e.krw,0),ysum=a=>a.reduce((x,e)=>x+e.yen,0);
+  const nOff=by('naver').filter(e=>OFFLINE(e.type)).sort((a,b)=>a.date<b.date?-1:a.date>b.date?1:a.ts-b.ts);
+  const nTot=sum(nOff),nFirst=!nOff.length?'todo':nOff[0].krw>=30000?'done':'missed';
+  const nTier=nTot>=1500000?100000:nTot>=1000000?50000:nTot>=500000?20000:0;
+  const one=(a,ts,min)=>a.some(e=>ts.includes(e.type)&&e.krw>=min);
+  const nIch=one(nOff,['ichiran'],20000),nDon=one(nOff,['donki'],100000),nUni=one(nOff,['uniqlo'],50000),nDept=one(nOff,['dept','hankyu'],100000);
+  const nCvsSum=sum(nOff.filter(e=>e.type==='cvs')),nCvs=nCvsSum>=30000;
+  const nEarn=Math.min(200000,(nFirst==='done'?10000:0)+nTier+(nIch?10000:0)+(nCvs?10000:0)+(nDon?20000:0)+(nUni?20000:0)+(nDept?30000:0));
+  const h=by('haru'),hTot=sum(h),hTier=hTot>=1000000?100000:hTot>=500000?50000:0,hBase=Math.round(hTot*.035);
+  const j=(t,min,cap)=>{const y=ysum(h.filter(e=>e.type===t));return {y,min,cap,earn:y>=min?Math.min(cap,Math.floor(y*.2)):0}};
+  const jcb={sushiro:j('sushiro',4000,1000),komeda:j('komeda',2000,1000),go:j('go',3000,1000),donki:j('donki',15000,3000),hankyu:j('hankyu',15000,3000)};
+  const jYen=Object.values(jcb).reduce((x,o)=>x+o.earn,0);
+  const lTot=sum(by('lotte')),lTier=lTot>=400000?50000:lTot>=200000?30000:lTot>=100000?15000:0;
+  const k=by('kb'),kF=sum(k.filter(e=>e.type==='uniqlo'||e.type==='kbfashion')),kFt=kF>=1000000?200000:kF>=500000?70000:kF>=200000?20000:0;
+  const kD=sum(k.filter(e=>e.type==='dept'||e.type==='hankyu')),kDt=kD>=500000?100000:0,kDon=one(k,['donki'],100000);
+  const kEarn=kFt+kDt+(kDon?20000:0);
+  const total=sum(L),refund=nEarn+hTier+hBase+Math.round(jYen*rate)+lTier+kEarn;
+  return {L,rate,total,refund,nTot,nFirst,nTier,nIch,nDon,nUni,nDept,nCvs,nCvsSum,nEarn,hTot,hTier,hBase,jcb,jYen,lTot,lTier,kF,kFt,kD,kDt,kDon,kEarn};
+}
+function rec(type,S){
+  const left=(goal,cur)=>cur>=goal?'채움':man(goal-cur)+' 남음';
+  const gen=()=>[{card:'lotte',text:`20만원까지 (${left(200000,S.lTot)})`,done:S.lTot>=200000},{card:'haru',text:`100만원까지 (${left(1000000,S.hTot)})`,done:S.hTot>=1000000},{card:'naver',text:'그다음 누적용',done:false}];
+  const jd=o=>o.earn>=o.cap;
+  switch(type){
+    case 'cash':return [{card:'cash',text:'현금만 받는다는 후기가 있어요',done:false}];
+    case 'cvs':return [{card:'naver',text:`편의점 누적 3만원까지 (${left(30000,S.nCvsSum)})`,done:S.nCvs},...gen()];
+    case 'donki':return [{card:'haru',text:`15,000엔까지, JCB 20% (지금 ${yen(S.jcb.donki.y)})`,done:jd(S.jcb.donki)},{card:'naver',text:'한 번에 10만원 이상, 2만원',done:S.nDon},{card:'kb',text:'한 번에 10만원 이상, 2만원권',done:S.kDon},{card:'haru',text:'그 이상',done:false}];
+    case 'uniqlo':return [{card:'naver',text:'한 번에 5만원 이상, 2만원',done:S.nUni},{card:'kb',text:`초과분, 패션 합산 (지금 ${man(S.kF)})`,done:false}];
+    case 'kbfashion':return [{card:'kb',text:`패션 월 합산 20만원부터 (지금 ${man(S.kF)})`,done:false},{card:'naver',text:'누적용',done:false}];
+    case 'dept':return [{card:'naver',text:'한 번에 10만원 이상, 3만원',done:S.nDept},{card:'kb',text:`백화점 월 합산 50만원 이상일 때 (지금 ${man(S.kD)})`,done:S.kDt>0},...gen()];
+    case 'hankyu':return [{card:'haru',text:`15,000엔까지, JCB 20% (지금 ${yen(S.jcb.hankyu.y)})`,done:jd(S.jcb.hankyu)},{card:'naver',text:'한 번에 10만원 이상, 3만원',done:S.nDept},{card:'kb',text:`백화점 월 합산 50만원 이상일 때 (지금 ${man(S.kD)})`,done:S.kDt>0}];
+    case 'ichiran':return [{card:'naver',text:'한 번에 2만원 이상, 1만원',done:S.nIch},...gen()];
+    case 'sushiro':return [{card:'haru',text:`합계 4,000엔 이상, JCB 20% (지금 ${yen(S.jcb.sushiro.y)})`,done:jd(S.jcb.sushiro)},...gen()];
+    case 'komeda':return [{card:'haru',text:`합계 2,000엔 이상, JCB 20% (지금 ${yen(S.jcb.komeda.y)})`,done:jd(S.jcb.komeda)},...gen()];
+    case 'go':return [{card:'haru',text:`GO 앱에 Haru 등록, 합계 3,000엔 이상 JCB 20% (지금 ${yen(S.jcb.go.y)})`,done:jd(S.jcb.go)},...gen()];
+    case 'uber':return [{card:'lotte',text:'코드 입력 뒤 롯데카드로. 신규 TSUKIMIRFT, 기존 TSUKIMIERI',done:false}];
+    case 'hotel':case 'online':return gen().slice(0,2);
+    default:return gen();
+  }
+}
+const recNow=(type,S)=>{const r=rec(type,S);return r.find(x=>!x.done)||r[r.length-1]};
+const stepsHTML=r=>{let on=false;return `<ol class="steps">${r.map(x=>{const cur=!x.done&&!on;if(cur)on=true;return `<li class="${x.done?'done':cur?'cur':''}"><span class="kchip k-${x.card}">${CARDS[x.card].s}</span> ${esc(x.text)}</li>`}).join('')}</ol>`};
+const GUIDE=[
+  {g:'교통',rows:[['Uber','uber','신규는 50% (최대 1,500엔, 1회), 기존은 25% (최대 500엔, 2회). 10월 18일까지.'],['택시앱 GO','go','체크카드는 등록이 안 돼요. 상한 1,000엔.'],['일반 택시, 버스, 지하철, IC 충전','general','앱 결제는 네이버 누적에 안 잡혀요.']]},
+  {g:'식사',rows:[['이치란라멘','ichiran','1회, 50%.'],['스시로','sushiro','상한 1,000엔. 유니버설 시티워크 오사카점 등은 제외.'],['코메다커피','komeda','상한 1,000엔. 이온몰 교토점은 제외.'],['그 외 식당, 카페, 이자카야','general','']]},
+  {g:'편의점',rows:[['세븐일레븐, 패밀리마트, 로손','cvs','누적 3만원을 넘기면 1만원.'],['미니스톱 등 그 밖의 편의점','general','']]},
+  {g:'쇼핑',rows:[['돈키호테','donki','세 카드 모두 20% 안팎. Haru는 JCB 20%에 누적과 기본 3.5%가 더해져요.'],['유니클로','uniqlo','네이버 40%.'],['GU, BAPE, COMME des GARÇONS, BEAMS, HUMAN MADE, KAPITAL, STUSSY','kbfashion','KB 패션 월 합산 20만원 2만원권, 50만원 7만원권, 100만원 20만원권.'],['다이마루, 파르코, 한큐 교토점','dept','한큐 교토점은 JCB 대상이 아니에요.'],['한큐 우메다 본점, 한신 우메다 본점, 한큐맨즈 오사카','hankyu','JCB 상한 3,000엔. 한신의 무인양품과 로프트는 제외.'],['드럭스토어, 기념품, 그 외 패션','general','']]},
+  {g:'숙박과 온라인',rows:[['호텔 현지 결제','hotel','Haru 100만원을 채우는 가장 큰 결제예요.'],['해외 사이트 예약, 입장권 앱 결제','online','네이버는 오프라인 실물 결제만 인정돼요.']]}
+];
+let guideTab='전체';
+function renderPay(){
+  const S=payState();
+  const bar=(cur,goals,cls)=>{const g=goals.find(x=>cur<x)||goals[goals.length-1],pct=Math.min(100,Math.round(cur/g*100));
+    return `<div class="bar k-${cls}" aria-hidden="true"><i style="width:${pct}%"></i></div><p class="kc-next">${cur>=goals[goals.length-1]?'최고 구간을 채웠어요':`다음 구간 ${man(g)}까지 ${man(g-cur)}`}</p>`};
+  const tick=(ok,t,bad)=>`<li class="${ok?'ok':bad?'bad':''}">${esc(t)}</li>`;
+  const jr=(n,o)=>`<li class="${o.earn>=o.cap?'ok':''}"><span>${n}</span><b>${o.earn?yen(o.earn):'–'}</b><small>${yen(o.y)} 결제, ${yen(o.min)}부터 적용, 상한 ${yen(o.cap)}</small></li>`;
+  $('#paySum').innerHTML=`<div><p>지금까지 결제</p><b>${won(S.total)}</b></div><div><p>예상 환급</p><b>${won(S.refund)}</b></div><div><p>환급률</p><b>${S.total?(S.refund/S.total*100).toFixed(1)+'%':'–'}</b></div>
+    <label class="rate">엔당 <input type="number" id="payRate" inputmode="decimal" step="0.1" min="5" max="20" value="${S.rate}"> 원</label>`;
+  $('#cardGrid').innerHTML=`
+    <article class="kcard k-naver"><header><h4>네이버페이 머니카드</h4><p>10월 14일까지, 오프라인 실물 결제만</p></header><div class="kc-body">
+      <p class="kc-big">${won(S.nEarn)} <small>최대 20만원</small></p><p class="kc-sub">오프라인 누적 ${won(S.nTot)}</p>${bar(S.nTot,[500000,1000000,1500000],'naver')}
+      <ul class="ticks">${tick(S.nFirst==='done',S.nFirst==='missed'?'첫 결제가 3만원 미만이었어요':'첫 결제 3만원 이상, 1만원',S.nFirst==='missed')}${tick(S.nCvs,`편의점 누적 3만원, 1만원 (지금 ${man(S.nCvsSum)})`)}${tick(S.nIch,'이치란 2만원 이상, 1만원')}${tick(S.nDon,'돈키호테 10만원 이상, 2만원')}${tick(S.nUni,'유니클로 5만원 이상, 2만원')}${tick(S.nDept,'백화점 10만원 이상, 3만원')}</ul></div></article>
+    <article class="kcard k-haru"><header><h4>신한 Haru</h4><p>해외 결제 3.5%, 온라인도 인정</p></header><div class="kc-body">
+      <p class="kc-big">${won(S.hTier+S.hBase)} <small>누적 ${man(S.hTier)} + 기본 ${won(S.hBase)}</small></p><p class="kc-sub">해외 누적 ${won(S.hTot)}</p>${bar(S.hTot,[500000,1000000],'haru')}
+      <ul class="ticks">${tick(S.hTot>=500000,'50만원 이상, 5만원')}${tick(S.hTot>=1000000,'100만원 이상, 10만원 (5만원과 중복 안 됨)')}</ul></div></article>
+    <article class="kcard k-jcb"><header><h4>JCB 20% (Haru 실물 카드)</h4><p>엔화 실물 결제만, GO 앱은 예외</p></header><div class="kc-body">
+      <p class="kc-big">${yen(S.jYen)} <small>최대 9,000엔</small></p>
+      <ul class="jrows">${jr('돈키호테',S.jcb.donki)}${jr('한큐한신백화점',S.jcb.hankyu)}${jr('택시앱 GO',S.jcb.go)}${jr('스시로',S.jcb.sushiro)}${jr('코메다커피',S.jcb.komeda)}</ul></div></article>
+    <article class="kcard k-lotte"><header><h4>롯데 Mastercard</h4><p>10월 31일까지, 온라인도 인정</p></header><div class="kc-body">
+      <p class="kc-big">${won(S.lTier)} <small>네이버페이 포인트</small></p><p class="kc-sub">해외 누적 ${won(S.lTot)}</p>${bar(S.lTot,[100000,200000,400000],'lotte')}
+      <ul class="ticks">${tick(S.lTot>=100000,'10만원 이상, 1.5만')}${tick(S.lTot>=200000,'20만원 이상, 3만')}${tick(S.lTot>=400000,'40만원 이상, 5만')}</ul></div></article>
+    <article class="kcard k-kb"><header><h4>KB국민 Visa</h4><p>11월 30일까지, 신세계상품권</p></header><div class="kc-body">
+      <p class="kc-big">${won(S.kEarn)} <small>상품권</small></p><p class="kc-sub">패션 ${won(S.kF)}, 백화점 ${won(S.kD)}</p>
+      <ul class="ticks">${tick(S.kF>=200000,'패션 월 20만원, 2만원권')}${tick(S.kF>=500000,'패션 월 50만원, 7만원권')}${tick(S.kF>=1000000,'패션 월 100만원, 20만원권')}${tick(S.kDt>0,'백화점 월 50만원, 10만원권')}${tick(S.kDon,'돈키호테 10만원 이상, 2만원권')}</ul></div></article>`;
+  const tabs=['전체',...GUIDE.map(g=>g.g)];
+  $('#guideTabs').innerHTML=tabs.map(t=>`<button type="button" role="tab" aria-selected="${t===guideTab}" data-gtab="${t}">${t}</button>`).join('');
+  $('#guide').innerHTML=GUIDE.filter(g=>guideTab==='전체'||g.g===guideTab).map(g=>`<div class="ggrp"><h4>${g.g}</h4>${g.rows.map(([n,t,note])=>`<div class="grow"><p class="gname">${esc(n)}</p>${stepsHTML(rec(t,S))}${note?`<p class="gnote">${esc(note)}</p>`:''}</div>`).join('')}</div>`).join('');
+  const days={};S.L.slice().sort((a,b)=>a.date<b.date?1:a.date>b.date?-1:b.ts-a.ts).forEach(e=>(days[e.date]=days[e.date]||[]).push(e));
+  $('#payList').innerHTML=S.L.length?Object.keys(days).map(dt=>`<div class="pday"><h4>${+dt.slice(5,7)}월 ${+dt.slice(8,10)}일 <small>${won(days[dt].reduce((x,e)=>x+e.krw,0))}</small></h4><ul>${days[dt].map(e=>`<li><span class="kchip k-${e.card}">${CARDS[e.card].s}</span><span class="pl-name">${esc(e.memo||PTYPE[e.type])}<small>${esc(PTYPE[e.type])}</small></span><span class="pl-amt">${e.cur==='KRW'?won(e.krw):yen(e.yen)}<small>${e.cur==='KRW'?'':won(e.krw)}</small></span><button type="button" class="del" data-paydel="${e.id}" aria-label="${esc(e.memo||PTYPE[e.type])} 기록 삭제">삭제</button></li>`).join('')}</ul></div>`).join(''):'<p class="empty">아직 기록이 없어요. 결제할 때마다 적으면 위 카드 진행 상황과 일정의 카드 안내가 바뀌어요.</p>';
+}
+const cardOpts=sel=>Object.keys(CARDS).map(k=>`<option value="${k}"${k===sel?' selected':''}>${CARDS[k].n}</option>`).join('');
+const typeOpts=sel=>Object.keys(PTYPE).map(k=>`<option value="${k}"${k===sel?' selected':''}>${PTYPE[k]}</option>`).join('');
+function payBlock(id){
+  const p=P[id];if(!p||!p.pay)return '';
+  const S=payState(),type=p.pay==='cash'?'general':p.pay,r=rec(p.pay,S),now=recNow(p.pay,S);
+  return `<h3>결제 카드</h3>${stepsHTML(r)}${p.payNote?`<p class="gnote">${esc(p.payNote)}</p>`:''}
+    <div class="quickpay"><select id="qpCard" aria-label="카드">${cardOpts(now.card)}</select><input type="number" id="qpAmt" inputmode="numeric" min="0" placeholder="금액" aria-label="금액"><select id="qpCur" aria-label="통화"><option value="JPY">엔</option><option value="KRW">원</option></select><button type="button" class="btn" id="qpAdd" data-type="${type}">기록</button></div><p class="qp-state" id="qpState" role="status"></p>`;
+}
+function initPayForm(){
+  const n=nowJ(),d=n&&n.ix>=0?n.ix+4:4;
+  $('#pfDate').value=`2026-10-${String(d).padStart(2,'0')}`;
+  $('#pfCard').innerHTML=cardOpts('lotte');$('#pfType').innerHTML=typeOpts('general');
+}
 
 /* ---------- state ---------- */
 const START=new Date(2026,9,4), END=new Date(2026,9,11);
@@ -954,6 +1183,7 @@ function renderDay(){
   const d=DAYS[dayIx];
   const stay=d.stay?P[d.stay]:null;
   const keys=d.items.filter(it=>it.st==='rsv'&&it.c==='eat');
+  const S=payState();
   const todo=DAYTODO[d.dn]||[];
   $('#dayHead').innerHTML=`<p class="day-date">${d.md} ${d.dow}, ${esc(d.city)}</p><h2>${esc(d.title)}</h2>
     <div class="day-meta"><p>${esc(d.wx.area)} ${esc(d.wx.t)}C, ${esc(d.wx.s)}, 강수확률 ${esc(d.wx.pop)}${d.wx.mm!=null?`, 예상 강수량 ${d.wx.mm}mm`:''}</p>
@@ -967,14 +1197,16 @@ function renderDay(){
   $('#timeline').innerHTML=dayRows(d).map(r=>{
     if(r.leg){const L=r.leg;
       return `<li class="tl-leg${r.tight?' tight':''}"><span class="tl-time">${r.dep!=null?`${toHM(r.dep)}<small>출발</small>`:''}</span><span class="leg-ico">${icon(L.m)}</span>
-        <div class="leg-body">${MODE[L.m]} 약 ${L.min}분, 여유 ${L.buf}분 <a href="${gdir2(r.from,r.to,L.m)}" target="_blank" rel="noopener">길찾기</a>${r.tight?'<b class="leg-tight">앞 일정과 빠듯해요</b>':''}</div></li>`}
+        <div class="leg-body">${MODE[L.m]} 약 ${L.min}분, 여유 ${L.buf}분 <a href="${gdir2(r.from,r.to,L.m)}" target="_blank" rel="noopener">길찾기</a>${L.m==='taxi'&&S.jcb.go.earn<S.jcb.go.cap?'<span class="leg-pay">GO 앱은 Haru로</span>':''}${r.tight?'<b class="leg-tight">앞 일정과 빠듯해요</b>':''}</div></li>`}
     const it=r.it,c=it.c||'rest',key=doneKey(d,r.i),done=!!Store.s.checks[key];
     const title=it.p?`<button type="button" class="tl-title" data-place="${it.p}">${esc(it.title)}</button>`:`<span class="tl-title">${esc(it.title)}</span>`;
     const st=it.st?`<span class="st ${ST[it.st][1]}">${ST[it.st][0]}</span>`:'';
     const home=it.home?`<p class="tl-note">${esc(P[it.p].n)}</p>`:'';
+    const pp=it.p&&P[it.p]&&P[it.p].pay&&P[it.p].c!=='stay'&&!it.home&&!it.skip&&['eat','shop','cafe'].includes(c)?recNow(P[it.p].pay,S):null;
+    const payLine=pp?`<p class="tl-pay"><span class="kchip k-${pp.card}">${CARDS[pp.card].s}</span> ${esc(pp.text)}</p>`:'';
     const table=it.table?`<table class="tl-table"><tbody>${it.table.map(row=>`<tr>${row.map(x=>`<td>${esc(x)}</td>`).join('')}</tr>`).join('')}</tbody></table>`:'';
     return `<li class="tl-item${it.minor?' minor':''}${done?' done':''}" data-i="${r.i}"><span class="tl-time">${timeHTML(it)}</span><span class="tl-mark cat-${c}" title="${CAT[c]}">${icon(c)}</span>
-      <div class="tl-body">${title}${st}${home}${it.note?`<p class="tl-note">${esc(it.note)}</p>`:''}${table}${it.warn?`<p class="tl-warn">${it.warn}</p>`:''}</div>
+      <div class="tl-body">${title}${st}${home}${it.note?`<p class="tl-note">${esc(it.note)}</p>`:''}${payLine}${table}${it.warn?`<p class="tl-warn">${it.warn}</p>`:''}</div>
       <label class="tl-done"><input type="checkbox" data-check="${key}"${done?' checked':''} aria-label="${esc(it.title)} 완료"></label></li>`;
   }).join('');
   const old=$('#dayBlank');if(old)old.remove();
@@ -1128,7 +1360,7 @@ const PREP=[
   {g:'옷과 비 대비',items:[['cl-umb','접이식 우산 (4–6일 비 예보)'],['cl-shell','방수 자켓이나 바람막이'],['cl-shoes','젖어도 되는 편한 신발'],['cl-socks','여벌 양말'],['cl-layer','아침용 얇은 겉옷 (최저 15–18도)'],['cl-day','낮에 입을 반팔과 얇은 긴팔 (최고 23–28도)'],['cl-sleep','잠옷과 속옷']]},
   {g:'세면과 건강',items:[['hy-wash','세면도구와 스킨케어'],['hy-sun','선크림 (7일부터 맑음)'],['hy-med','상비약 (소화제, 진통제, 밴드)'],['hy-eye','안경이나 렌즈']]},
   {g:'쇼핑 대비',items:[['sh-bag','접이식 보조가방'],['sh-space','캐리어에 빈 공간 남기기'],['sh-weight','위탁 수하물 허용 무게 확인'],['sh-tax','면세용 여권 지참']]},
-  {g:'출발 전에 할 일',items:[['td-okonomi','오코노미야키 쇼 방문 예약 (7일 19:30)'],['td-haruka','하루카 표 미리 사 두기'],['td-airporter','Airporter 예약 확인 (8일, 힐튼에서 그란 레스파이어)'],['td-futaba','후타바 웹 예약 (선택, 5일 수령분은 4일 정오까지)'],['td-taxi','택시 앱 GO 설치'],['td-fx','환전']]}
+  {g:'출발 전에 할 일',items:[['td-okonomi','오코노미야키 쇼 방문 예약 (7일 19:30)'],['td-haruka','하루카 표 미리 사 두기'],['td-airporter','Airporter 예약 확인 (8일, 힐튼에서 그란 레스파이어)'],['td-futaba','후타바 웹 예약 (선택, 5일 수령분은 4일 정오까지)'],['td-taxi','GO 앱 설치하고 Haru(신용) 등록'],['td-uber','Uber 앱에 롯데카드 등록, 프로모션 코드 입력'],['td-harucard','Haru 실물 카드 챙기기'],['td-fx','환전']]}
 ];
 const SHOP=[
   {g:'드럭스토어',items:[['bu-kao','카오 화이트 비누'],['bu-laundrin','란도린 섬유유연제 향수']]},
@@ -1196,6 +1428,7 @@ function openSheet(id){
   if(p.stores)h+=`<h3>들를 매장</h3><ul class="sh-list">${p.stores.map(([n,q])=>`<li><a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}" target="_blank" rel="noopener">${esc(n)}</a></li>`).join('')}</ul>`;
   if(p.links)h+=`<h3>링크</h3><ul class="sh-list">${p.links.map(([n,u])=>`<li><a href="${u}" target="_blank" rel="noopener">${esc(n)}</a></li>`).join('')}</ul>`;
   if(p.tips)h+=`<h3>메모</h3><ul class="sh-list">${p.tips.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`;
+  h+=`<div id="payBlock">${payBlock(id)}</div>`;
   h+=`<h3><label for="memo">내 메모</label></h3><textarea id="memo" maxlength="2000" placeholder="예약번호, 예약자 이름, 좌석, 요청 사항">${esc(Store.s.notes[id]||'')}</textarea>
     <div class="sh-memo-row"><button type="button" class="btn ghost" id="memoSave">메모 저장</button><span id="memoState" role="status"></span></div>`;
   if(p.lat!=null||p.q)h+=`<div class="sh-actions"><a class="btn" href="${gmap(p)}" target="_blank" rel="noopener">Google 지도에서 열기</a><a class="btn ghost" href="${gdir(p)}" target="_blank" rel="noopener">여기로 길찾기</a></div>`;
@@ -1213,8 +1446,17 @@ function selectDay(i,scroll){
   if(scroll)$('#days').scrollIntoView({behavior:'smooth',block:'start'});
 }
 document.addEventListener('click',e=>{
-  const t=e.target.closest('[data-day],[data-place],[data-goto],[data-del],[data-addbtn],[data-scroll],#memoSave,#dayMemoSave');
+  const t=e.target.closest('[data-day],[data-place],[data-goto],[data-del],[data-addbtn],[data-scroll],[data-gtab],[data-paydel],#memoSave,#dayMemoSave,#pfAdd,#qpAdd,#bkExport');
   if(!t)return;
+  if(t.dataset.gtab){guideTab=t.dataset.gtab;renderPay();return}
+  if(t.dataset.paydel){Store.payDel(t.dataset.paydel);return}
+  if(t.id==='pfAdd'){const amt=+$('#pfAmt').value;if(!(amt>0)){$('#pfAmt').focus();return}
+    Store.payAdd({date:$('#pfDate').value||'2026-10-04',card:$('#pfCard').value,type:$('#pfType').value,cur:$('#pfCur').value,amt,memo:$('#pfMemo').value.trim().slice(0,60)});
+    $('#pfAmt').value='';$('#pfMemo').value='';$('#pfState').textContent='기록했어요';return}
+  if(t.id==='qpAdd'){const amt=+$('#qpAmt').value;if(!(amt>0)){$('#qpAmt').focus();return}
+    Store.payAdd({date:`2026-10-${String(DAYS[dayIx].dn).padStart(2,'0')}`,card:$('#qpCard').value,type:t.dataset.type,cur:$('#qpCur').value,amt,memo:P[sheetId].n});
+    $('#payBlock').innerHTML=payBlock(sheetId);$('#qpState').textContent='기록했어요';return}
+  if(t.id==='bkExport'){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(Store.dump(),null,1)],{type:'application/json'}));a.download='kyoto-osaka-backup.json';document.body.appendChild(a);a.click();a.remove();return}
   if(t.dataset.scroll){const el=document.getElementById(t.dataset.scroll);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});return}
   if(t.id==='dayMemoSave'){Store.note('day'+t.dataset.dn,$('#dayMemo').value.trim());$('#dayMemoState').textContent='메모를 저장했어요';return}
   if(t.id==='memoSave'){Store.note(sheetId,$('#memo').value.trim());$('#memoState').textContent='메모를 저장했어요';return}
@@ -1233,16 +1475,20 @@ document.addEventListener('keydown',e=>{
 });
 document.addEventListener('change',e=>{
   const t=e.target;
+  if(t.id==='payRate'){const r=+t.value;if(r>=5&&r<=20)Store.payRate(r);return}
+  if(t.id==='bkImport'){const fl=t.files&&t.files[0];if(!fl)return;fl.text().then(x=>{let ok=false;try{ok=Store.load(JSON.parse(x))}catch(e){}if(ok)location.reload();else $('#bkState').textContent='파일을 읽지 못했어요'});return}
   if(t.dataset.vary){const dn=+t.dataset.vary;variant[dn]=t.value;Store.ui({vary2:variant});DAYS=buildDays();renderDay();renderIssues();renderRsv();const r=$(`input[data-vary="${dn}"]:checked`);if(r)r.focus();return}
   if(t.dataset.check){Store.check(t.dataset.check,t.checked);const li=t.closest('.tl-item');if(li)li.classList.toggle('done',t.checked);return}
   if(t.dataset.custom){Store.checkCustom(t.dataset.custom,t.checked);return}
 });
 Store.on(renderLists);
+let payKey=JSON.stringify(Store.s.pay);
+Store.on(()=>{const k=JSON.stringify(Store.s.pay);if(k===payKey)return;payKey=k;renderPay();const m=$('#dayMemo'),v=m?m.value:null;renderDay();if(v!=null&&$('#dayMemo'))$('#dayMemo').value=v});
 let wxKey=JSON.stringify(Store.s.weather);
 Store.on(()=>{const k=JSON.stringify(Store.s.weather);if(k===wxKey)return;wxKey=k;DAYS=buildDays();renderRibbon();renderScene();renderDay();renderIssues()});
 
 /* ---------- boot ---------- */
-renderRibbon();renderScene();renderDay();renderIssues();renderStays();renderRsv();renderLists();
+renderRibbon();renderScene();renderDay();renderIssues();renderStays();renderRsv();renderLists();initPayForm();renderPay();
 loadLive();
 setInterval(loadLive,30*60*1000);
 setInterval(renderNow,30*1000);
