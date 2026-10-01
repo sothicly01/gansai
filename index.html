@@ -121,7 +121,8 @@ h1{font-family:var(--display);font-weight:800;font-size:clamp(1.5rem,4.2vw,2.5re
 /* per-day choice */
 .vary{margin-top:18px}
 .vary legend{font-weight:600;margin-bottom:8px;padding:0}
-.vary-opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.vary-opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.plan-hint.warn{color:var(--verm);font-weight:500}
 .plan-opt{position:relative;display:block;padding:12px 14px;border-radius:12px;background:var(--surface);box-shadow:inset 0 0 0 1.5px var(--line);cursor:pointer}
 .plan-opt input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
 .plan-opt strong{display:block;font-family:var(--display);font-weight:700;font-size:1.05rem}
@@ -155,7 +156,42 @@ h2{font-family:var(--display);font-weight:700;font-size:clamp(1.5rem,3.6vw,2.1re
 .linkbtn{background:none;border:0;padding:0;color:var(--indigo);font-weight:600;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;text-align:left}
 
 .tl{margin-top:24px}
-.tl-item{display:grid;grid-template-columns:3.9rem 30px minmax(0,1fr);column-gap:10px;position:relative;padding-bottom:18px}
+.tl-item{display:grid;grid-template-columns:3.9rem 30px minmax(0,1fr) auto;column-gap:10px;position:relative;padding-bottom:18px}
+.tl-leg{display:grid;grid-template-columns:3.9rem 30px minmax(0,1fr);column-gap:10px;position:relative;padding-bottom:16px;color:var(--ink2);font-size:.9rem}
+.tl-leg::before{content:"";position:absolute;left:calc(3.9rem + 10px + 14px);top:0;bottom:0;border-left:1.5px dashed var(--line)}
+.tl-leg .tl-time{font-size:.9rem;font-weight:600;color:var(--ink);padding-top:1px}
+.leg-ico{width:30px;height:24px;display:grid;place-items:center;z-index:1}
+.leg-ico svg{width:20px;height:20px;background:var(--paper);border-radius:50%}
+.leg-body{padding-top:1px}
+.leg-body a{margin-left:6px;font-weight:600}
+.leg-tight{display:block;color:var(--verm);font-weight:600}
+.st{display:inline-block;margin-left:8px;font-size:.74rem;font-weight:600;padding:1px 8px;border-radius:999px;vertical-align:2px;white-space:nowrap}
+.st.ok{background:var(--moss-soft);color:var(--moss)}.st.walk{background:var(--gold-soft);color:var(--ink)}.st.need{background:var(--verm-soft);color:var(--verm)}.st.est{background:var(--sunken);color:var(--ink2)}
+.tl-done{padding-top:3px}
+.tl-done input{width:22px;height:22px;margin:0;accent-color:var(--moss);cursor:pointer}
+.tl-item.minor .tl-done{display:none}
+.tl-item.done .tl-time,.tl-item.done .tl-body{opacity:.45}
+.tl-item.done .tl-title{text-decoration:line-through}
+.tl-item.cur .tl-mark{background:var(--ink);color:var(--paper);box-shadow:none}
+.tl-item.cur .tl-title{font-weight:700}
+.tl-table{margin-top:6px;border-collapse:collapse;font-size:.9rem;font-variant-numeric:tabular-nums}
+.tl-table td{padding:2px 14px 2px 0;color:var(--ink2)}
+.tl-table tr:first-child td{font-weight:600;color:var(--ink)}
+.now{margin-top:16px;padding:14px 16px;border-radius:14px;background:var(--ink);color:var(--paper);display:grid;gap:4px}
+.day-head .now p{color:inherit}
+.now-clock{font-size:.85rem;opacity:.75;font-variant-numeric:tabular-nums}
+.now-next{font-size:1.05rem}
+.now-leg.late{font-weight:700}
+.now .btn.light{background:var(--paper);color:var(--ink);justify-self:start;margin-top:6px}
+.keys{margin-top:16px}
+.day-head .keys>p{font-weight:600;color:var(--ink)}
+.keys ul{margin-top:6px;display:flex;flex-wrap:wrap;gap:6px 16px}
+.keys b{font-variant-numeric:tabular-nums}
+.todo{margin-top:18px}
+.todo legend{font-weight:600;padding:0}
+.daymemo{margin-top:26px}
+.daymemo label{font-weight:600}
+.daymemo textarea{width:100%;margin-top:6px;padding:10px 12px;border-radius:10px;border:1.5px solid var(--line);background:var(--surface);resize:vertical;min-height:72px}
 .tl-item::before{content:"";position:absolute;left:calc(3.9rem + 10px + 14px);top:30px;bottom:0;width:1.5px;background:var(--line)}
 .tl-item:last-child::before{display:none}
 .tl-time{font-weight:600;font-size:.98rem;padding-top:3px;text-align:right;font-variant-numeric:tabular-nums;line-height:1.3}
@@ -328,6 +364,7 @@ dialog::backdrop{background:rgba(8,14,26,.55)}
     <div>
       <div class="day-head" id="dayHead"></div>
       <ol class="tl" id="timeline"></ol>
+      <div id="dayFoot"></div>
     </div>
     <aside class="map-col" aria-label="이날의 동선">
       <div class="map-card">
@@ -393,7 +430,9 @@ const IC={
   move:'M6 3h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zM4 9.5h12M7 15l-1.4 2.4M13 15l1.4 2.4M7.5 12.3h.01M12.5 12.3h.01',
   stay:'M3 16V5.5M3 12.5h14V16M17 12.5V11a2.5 2.5 0 0 0-2.5-2.5H9v4M6 10.3h.01',
   todo:'M4 10.5l4 4 8-9',
-  rest:'M10 3a7 7 0 1 0 0 14 7 7 0 0 0 0-14zM10 6.5V10l2.5 1.6'
+  rest:'M10 3a7 7 0 1 0 0 14 7 7 0 0 0 0-14zM10 6.5V10l2.5 1.6',
+  walk:'M11.2 3.2a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8zM8.2 17l1.9-5-1.6-2.4L9.6 6.9l2.8 1.1 1.5 2.4M9.6 6.9L7 8.6l-.5 2.6M10.1 12l2.4 2 .6 3',
+  taxi:'M3.5 14v-2.4l1.6-4.1h9.8l1.6 4.1V14zM3.5 11.6h13M6 14v1.6M14 14v1.6M8.2 5.2h3.6v2.3H8.2z'
 };
 const icon=c=>`<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${IC[c]||IC.rest}"/></svg>`;
 const CAT={sight:'관광',eat:'식사',cafe:'카페·간식',shop:'쇼핑',move:'이동',stay:'숙소',todo:'할 일',rest:'쉬는 시간'};
@@ -426,13 +465,14 @@ const WMO=c=>c===0?['sun','맑음']:c===1?['sun','대체로 맑음']:c===2?['sun
 async function loadLive(){
   try{
     const get=async a=>{const [la,lo]=OM[a];
-      const r=await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${la}&longitude=${lo}&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=Asia%2FTokyo&start_date=2026-10-04&end_date=2026-10-11`);
+      const r=await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${la}&longitude=${lo}&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,precipitation_sum&timezone=Asia%2FTokyo&start_date=2026-10-04&end_date=2026-10-11`);
       if(!r.ok)throw new Error('weather');return (await r.json()).daily};
     const [ky,os]=await Promise.all([get('kyoto'),get('osaka')]);
     const pick=(d,dn,a)=>{const i=d.time.indexOf('2026-10-'+String(dn).padStart(2,'0'));if(i<0)return null;
       const code=d.weather_code[i],hi=d.temperature_2m_max[i],lo=d.temperature_2m_min[i],pop=d.precipitation_probability_max?d.precipitation_probability_max[i]:null;
       if(![code,hi,lo].every(Number.isFinite))return null;
-      const [k,sx]=WMO(code);return {a,k,s:sx,lo:Math.round(lo),hi:Math.round(hi),pop:Number.isFinite(pop)?Math.round(pop):null}};
+      const mm=d.precipitation_sum?d.precipitation_sum[i]:null;
+      const [k,sx]=WMO(code);return {a,k,s:sx,lo:Math.round(lo),hi:Math.round(hi),pop:Number.isFinite(pop)?Math.round(pop):null,mm:Number.isFinite(mm)?Math.round(mm*10)/10:null}};
     const days={};
     for(let dn=4;dn<=11;dn++){const a=WX0.days[dn].a;const v=pick(a==='osaka'?os:ky,dn,a);if(!v)continue;
       if(dn===8){const k=pick(ky,8,'kyoto');if(k)v.extra=`낮에 머무는 교토는 ${k.s}, ${k.lo}–${k.hi}°C${k.pop==null?'':', 강수확률 '+k.pop+'%'}.`}
@@ -451,14 +491,16 @@ function wxOf(dn){
       v={a:c.a==='osaka'||c.a==='kyoto'?c.a:base.a,k:c.k,s:c.s,lo:c.lo,hi:c.hi,pop:c.pop,extra:typeof c.extra==='string'?c.extra.slice(0,90):''};
       if(typeof o.issued==='string')issued=o.issued.slice(0,40)}}
   const ps=v.pop==null?'':v.pop+'%';
-  return {k:v.k,s:v.s,t:v.lo+'–'+v.hi+'°',pop:ps||'정보 없음',p:ps,n:v.pop==null?NaN:v.pop,area:v.a==='osaka'?'오사카':'교토',url:TENKI[v.a],extra:v.extra||'',issued,live,at:live?LIVE.at:null};
+  return {k:v.k,s:v.s,t:v.lo+'–'+v.hi+'°',pop:ps||'정보 없음',p:ps,n:v.pop==null?NaN:v.pop,area:v.a==='osaka'?'오사카':'교토',url:TENKI[v.a],extra:v.extra||'',issued,live,at:live?LIVE.at:null,mm:live&&v.mm!=null?v.mm:null};
 }
 
 /* ---------- places ---------- */
 const HRS='Google 지도 기준, 방문 전 다시 확인';
 const P={
   kix:{n:'간사이 국제공항',a:'関西国際空港 第2ターミナル',c:'move',q:'Kansai International Airport Terminal 2',
-    tips:['제주항공은 제2터미널을 써요. 역이 있는 에어로플라자까지 무료 셔틀버스로 7–10분.','교토로 가는 JR 특급 하루카는 16:43, 17:16, 17:46, 18:16에 출발해요 (평일 시각표 기준, 일요일은 몇 분 다를 수 있어요). 교토역까지 약 80분.','11일 귀국 때는 오사카역에서 하루카로 약 50분, 다시 셔틀버스로 제2터미널까지.']},
+    tips:['제주항공은 제2터미널을 써요. 역이 있는 에어로플라자까지 무료 셔틀버스로 7–10분.','교토로 가는 하루카는 17:44가 목표, 빠르면 17:14, 늦으면 18:15예요. 교토역까지 약 80분.','11일 귀국 때는 오사카역에서 하루카로 약 50분, 다시 셔틀버스로 제2터미널까지.']},
+  kyotosta:{n:'교토역',a:'京都駅',c:'move',lat:34.9858,lng:135.7588,q:'京都駅',tips:['택시 승강장은 가라스마 출구 쪽이에요.']},
+  hankyu:{n:'한큐 교토가와라마치역',a:'阪急 京都河原町駅',c:'move',lat:35.0037,lng:135.7687,q:'阪急 京都河原町駅',tips:['오사카우메다행 특급으로 약 45분.']},
   flightOut:{n:'제주항공 7C1327',a:'김포 → 간사이',c:'move',
     book:[['출발','10월 4일 (일) 13:55, 김포공항 국제선 터미널'],['도착','15:40, 간사이공항 제2터미널'],['운임','스탠다드'],['탑승객','2명'],['탑승구','미정']]},
   flightIn:{n:'제주항공 7C1328',a:'간사이 → 김포',c:'move',
@@ -471,11 +513,11 @@ const P={
   hilton:{n:'힐튼 교토',a:'Hilton Kyoto',c:'stay',city:'교토',lat:35.0098,lng:135.7691,q:'Hilton Kyoto',area:'가와라마치 산조 북쪽',
     stay:{in:'10월 6일 (화) 15:00',out:'10월 8일 (목) 11:00',nights:2,range:'10/6 – 10/8'},
     book:[['확인번호','3531964850 (6일 밤)'],['결제','6일 밤은 힐튼·더블트리 무료숙박권'],['확인번호','3100746738 (7일 밤)'],['결제','7일 밤은 61,291엔'],['인원','2명']],
-    tips:['1박짜리 예약 두 건이에요. 체크인할 때 두 예약을 이어서 같은 방을 쓰게 해 달라고 요청하세요.','6일 아침에 짐을 먼저 맡기고 움직여요. 솔라리아 니시테츠에서 걸어서 3–4분.','조식은 7일과 8일 아침 07:00–08:00으로 잡혀 있어요.','힐튼 아너스 다이아몬드라면 얼리 체크인과 레이트 체크아웃을 요청해 볼 만해요.','8일 체크아웃 뒤 겐닌지와 기온을 돌 동안 짐을 맡겨 두세요.']},
+    tips:['1박짜리 예약 두 건이에요. 체크인할 때 두 예약을 이어서 같은 방을 쓰게 해 달라고 요청하세요.','6일 아침에는 캐리어만 맡기고 체크인은 저녁에 해요. 솔라리아 니시테츠에서 걸어서 3–4분.','조식은 7일과 8일 아침 07:00–08:00으로 잡혀 있어요.','힐튼 아너스 다이아몬드라면 얼리 체크인과 레이트 체크아웃을 요청해 볼 만해요.','8일 아침에 캐리어를 프런트에 맡기면 Airporter가 그란 레스파이어로 보내요.']},
   granrespire:{n:'호텔 한큐 그란 레스파이어 오사카',a:'ホテル阪急グランレスパイア大阪',c:'stay',city:'오사카',lat:34.7041,lng:135.4941,q:'ホテル阪急グランレスパイア大阪',area:'우메다, 그랜드 그린 오사카',
     tel:'+81 6-6372-8506',stay:{in:'10월 8일 (목)',out:'10월 9일 (금)',nights:1,range:'10/8 – 10/9'},
     book:[['예약번호','500036662 (웹투어)'],['Booking No','1775139236'],['API No','2609160056-1'],['객실','코너 트윈룸, 2명, 식사 없음, 세금과 봉사료 포함'],['주소','GRAND GREEN OSAKA South Tower, 5-54 Ofuka-cho, Kita-ku'],['결제','포인트 204,326원과 카드 123,213원, 합계 327,539원']],
-    tips:['프런트에 웹투어 바우처를 보여 주세요. 보증금용 카드를 요구할 수 있지만 숙박료는 청구되지 않아요.','체크인에 문제가 생기면 바우처에 적힌 아고다 고객센터 +82 2-6022-2442로.','다음 숙소인 월도프 아스토리아와 같은 단지라 9일 이동은 걸어서 몇 분이에요.']},
+    tips:['프런트에 웹투어 바우처를 보여 주세요. 보증금용 카드를 요구할 수 있지만 숙박료는 청구되지 않아요.','체크인에 문제가 생기면 바우처에 적힌 아고다 고객센터 +82 2-6022-2442로.','8일 저녁에 Airporter로 보낸 캐리어가 도착했는지 확인하세요.','다음 숙소인 월도프 아스토리아와 같은 단지라 9일 이동은 걸어서 몇 분이에요.']},
   waldorf:{n:'월도프 아스토리아 오사카',a:'Waldorf Astoria Osaka',c:'stay',city:'오사카',lat:34.7052,lng:135.4926,q:'Waldorf Astoria Osaka',area:'우메다, 그랜드 그린 오사카',
     stay:{in:'10월 9일 (금) 15:00',out:'10월 11일 (일) 12:00',nights:2,range:'10/9 – 10/11'},
     book:[['확인번호','3514929765'],['결제','힐튼 무료숙박권'],['인원','2명']],
@@ -516,17 +558,17 @@ const P={
   smart:{n:'스마트 커피',a:'スマート珈琲店',c:'cafe',lat:35.0091,lng:135.7669,q:'スマート珈琲店',area:'데라마치 산조',tips:['아침에 시간이 남을 때만. 이노다 커피와 둘 중 하나.']},
   inoda:{n:'이노다 커피 본점',a:'イノダコーヒ 本店',c:'cafe',lat:35.0079,lng:135.7623,q:'イノダコーヒ本店',area:'사카이마치 산조'},
   kinkakuji:{n:'금각사',a:'金閣寺 (鹿苑寺)',c:'sight',lat:35.0394,lng:135.7292,q:'金閣寺',area:'기타구',hours:'09:00–17:00'},
-  futaba:{n:'데마치 후타바 (다카시마야)',a:'出町ふたば · 京都髙島屋 地階',c:'cafe',lat:35.0033,lng:135.7688,q:'京都高島屋',
-    area:'시조 가와라마치, 다카시마야 지하 1층',buy:['마메모치 (豆餅)'],
-    warn:'본점은 화요일과 넷째 수요일에 쉬어요. 다카시마야 지하 판매는 날짜가 정해져 있지 않아서 6일(화)에는 없을 가능성이 높아요.',
-    tips:['5일(월)이나 7일(수)로 옮기는 편이 확실해요.','본점은 데마치야나기에 있고 08:30–17:30 영업.']},
+  futaba:{n:'데마치 후타바 (다카시마야)',a:'出町ふたば · 京都髙島屋 地下1階 銘菓百選',c:'cafe',lat:35.0033,lng:135.7688,q:'京都高島屋',
+    area:'시조 가와라마치, 다카시마야 지하 1층',buy:['마메모치 (豆餅), 2개입 560엔부터'],
+    links:[['다카시마야 판매와 예약 안내','https://www.takashimaya.co.jp/kyoto/departmentstore/topics/13_1_20230208180556/']],
+    tips:['매주 화요일과 넷째 수요일에는 입하가 없어서 6일(화)에는 살 수 없어요.','그 밖의 날은 11:00와 14:00에 판매를 시작하고 수량이 한정돼 있어요.','웹 예약은 2개입과 3개입만, 수령 전날 정오까지. 수령은 11:30–18:00 또는 14:30–18:00.','본점은 데마치야나기에 있어요.']},
   donki:{n:'돈키호테',a:'ドン・キホーテ 京都四条河原町店',c:'shop',lat:35.0045,lng:135.7692,q:'ドン・キホーテ 京都四条河原町店',area:'시조 가와라마치',tips:['면세 받으려면 여권을 챙기세요.']},
   itadaki:{n:'나마호르몬 이타다키',a:'生ホルモンいただき 四条河原町店',c:'eat',lat:35.0047,lng:135.7701,pid:'ChIJx6HR-BIJAWARLdc_eLc_8Gs',q:'生ホルモンいただき 四条河原町店',
     area:'나카교구 가미야초, 니시키야마치 빌딩 1층',hours:'매일 17:00–03:00',tel:'+81 75-585-5160',rsv:{s:'done',when:'10월 6일 (화) 19:30'}},
   shoseien:{n:'쇼세이엔',a:'渉成園',c:'sight',lat:34.9912,lng:135.7633,q:'渉成園',area:'교토역 북동쪽',hours:'09:00 개원'},
-  katsuda:{n:'돈카츠 카츠다',a:'京都とんかつ かつ田',c:'eat',lat:35.0092,lng:135.7692,pid:'ChIJgxByuvMJAWARSS6PQ-NkB08',q:'京都とんかつ かつ田 三条河原町店',
-    area:'지점 세 곳: 산조 가와라마치, 시조 가와라마치, 시조 가라스마',hours:'매일 11:30–22:00 (세 지점 동일)',rsv:{s:'walk'},
-    tips:['지도 핀은 힐튼에서 가장 가까운 산조 가와라마치점이에요.','대기가 긴 편이라 11:30 개점 직후가 유리해요.']},
+  katsuda:{n:'돈카츠 카츠다 시조 가라스마점',a:'京都とんかつ かつ田 四条烏丸店',c:'eat',lat:35.0012535,lng:135.7594566,pid:'ChIJ-V8YiOUJAWARwBnLN25_I68',q:'京都とんかつ かつ田 四条烏丸店',
+    area:'시모교구 오만도코로초 673-1, 1층',hours:'매일 11:30–22:00',tel:'+81 75-371-5855',rsv:{s:'walk'},
+    tips:['11:30 개점 직후가 유리해요.','카운터 위주의 작은 가게라 대기가 있을 수 있어요.']},
   kenninji:{n:'겐닌지',a:'建仁寺',c:'sight',lat:35.0009,lng:135.7735,q:'建仁寺',area:'기온',hours:'10:00–17:00'},
   shirakawa:{n:'기온 시라카와',a:'祇園白川',c:'sight',lat:35.0058,lng:135.7743,q:'祇園白川 巽橋',area:'기온'},
   lucua:{n:'루쿠아 오사카',a:'LUCUA osaka',c:'shop',lat:34.7031,lng:135.4962,q:'LUCUA osaka',area:'JR 오사카역'},
@@ -534,145 +576,180 @@ const P={
     area:'기타구 니시텐마 6초메',hours:'매일 11:30–13:30, 17:00–24:00',tel:'+81 6-6360-9299',rsv:{s:'done',when:'10월 8일 (목) 20:30'}},
   momiji:{n:'모미지',a:'もみじ · Momiji',c:'eat',lat:34.6665,lng:135.5140,pid:'ChIJMddDt0XnAGARTOfGR4srmtw',q:'お好み焼き もみじ 生玉町',
     area:'덴노지구 이쿠타마초',hours:'목–일 17:00–02:00',closed:'월요일–수요일',tel:'+81 6-6773-3080',rsv:{s:'done',when:'10월 9일 (금) 20:00',via:'월도프 아스토리아 컨시어지 전화 예약',change:'예약자 이름은 본인 이름이에요. 변경은 컨시어지에 요청하세요.'},
-    tips:['이쿠타마초의 오코노미야키 모미지로 넣었어요. 다른 가게라면 알려 주세요.','우메다에서 지하철로 약 20–25분.']}
+    tips:['월도프에서 택시로 20분 안팎. 19:30에 출발하면 돼요.']}
 };
-const RSV={need:['예약 필요','need'],unk:['예약 여부 미입력','unk'],walk:['예약 없이 줄서기','walk'],ok:['일정 있음','ok'],done:['예약 완료','ok']};
+const RSV={need:['현장 예약 필요','need'],unk:['예약 여부 미입력','unk'],walk:['예약 없이 현장 대기','walk'],ok:['일정 있음','ok'],done:['예약 확정','ok']};
 
 /* ---------- days ---------- */
-const ARA=a5=>[
-  {t:'08:30',end:'11:30',title:'텐류지',p:'tenryuji',c:'sight',note:'정문, 소겐치 정원과 백화원, 북문 순서로.'},
-  {t:'',title:'치쿠린',p:'chikurin',c:'sight',minor:1},
-  {t:'',title:'가메야마 공원, 호즈강 전망',p:'kameyama',c:'sight',minor:1},
-  {t:'',title:'도게츠교',p:'togetsu',c:'sight',minor:1},
-  {t:'11:30',end:'12:00',title:'코토이모',p:'kotoimo',c:'cafe'},
-  {t:'',title:'TEA ROOM KIKI',p:'kiki',c:'cafe',minor:1},
-  a5?{t:'12:00',title:'스테이크 오츠카',p:'otsuka',c:'eat',note:'2명 예약 완료, 예약 ID GJ3YJP.'}
-    :{t:'12:00',title:'스테이크 오츠카',p:'otsuka',c:'eat',warn:'<b>확인 필요</b> 예약은 5일 12:00이에요. 6일에 가려면 예약을 변경해야 해요.'}
+const SHOPS='TNF KYOTO와 STANDARD, BEAMS, URBAN RESEARCH, mont-bell, SHIPS, Standard Products.';
+const FUJII='<b>확인 필요</b> 메모의 TNF 후지이 다이마루는 건물이 휴관 중이에요. THE NORTH FACE KYOTO나 전날 못 간 매장으로.';
+const FUTABA_TUE='<b>확인 필요</b> 화요일은 입하가 없어서 살 수 없어요. 7일(수)로 옮기세요.';
+const SHO_VISIT={title:'오코노미야키 쇼에 들러 예약',p:'okonomi',c:'todo',minor:1,skip:1,st:'onsite'};
+const ARA=ok=>[
+  {t:'08:30',end:'11:20',title:'텐류지',p:'tenryuji',c:'sight',mode:'taxi',note:'정문, 소겐치 정원과 백화원, 북문 순서로.'},
+  {t:'',title:'치쿠린',p:'chikurin',c:'sight',minor:1,noleg:1},
+  {t:'',title:'가메야마 공원, 호즈강 전망',p:'kameyama',c:'sight',minor:1,noleg:1},
+  {t:'',title:'도게츠교',p:'togetsu',c:'sight',minor:1,noleg:1},
+  {t:'11:25',end:'11:40',title:'코토이모, TEA ROOM KIKI',p:'kotoimo',c:'cafe',noleg:1,note:'오츠카 시간에 맞춰 짧게. KIKI는 오츠카 가는 길에 있어요.'},
+  ok?{t:'12:00',end:'13:15',title:'스테이크 오츠카',p:'otsuka',c:'eat',st:'rsv',note:'2명.'}
+    :{t:'12:00',end:'13:15',title:'스테이크 오츠카',p:'otsuka',c:'eat',warn:'<b>확인 필요</b> 예약은 5일 12:00이에요. 이날 가려면 예약을 변경해야 해요.'}
 ];
-const SHOP_EVE=[
-  {t:'17:00',title:'오코노미야키 쇼 방문 예약',p:'okonomi',c:'todo',note:'17:00 개점. 7일 19:30으로. 4일에 못 했을 때만.'},
-  {t:'18:30',title:'스미야키 우나후지',p:'unafuji',c:'eat',note:'2명, 테이블석 예약 완료.'},
-  {t:'20:30',title:'마스터즈 드림 하우스',p:'masters',c:'eat',note:'2명 예약 완료.'},
-  {t:'',title:'숙소로 일찍 들어가기',c:'rest',minor:1}
+const EVE5=[
+  Object.assign({t:'17:00',note:'17:00 개점. 7일 19:30으로. 4일에 못 했을 때만.'},SHO_VISIT),
+  {t:'18:30',end:'20:00',title:'스미야키 우나후지',p:'unafuji',c:'eat',st:'rsv',note:'2명, 테이블석.'},
+  {t:'20:30',end:'22:00',title:'마스터즈 드림 하우스',p:'masters',c:'eat',st:'rsv',note:'2명.'},
+  {t:'22:10',title:'숙소 귀환',p:'stay1',c:'stay',home:1}
 ];
+const DAYTODO={
+  4:[['여권, 모바일 탑승권'],['Visit Japan Web QR'],['하루카 표 (예약 화면)'],['엔화 현금'],['츠무기 예약 화면']],
+  5:[['우산, 젖어도 되는 신발'],['스테이크 오츠카 예약 화면'],['텐류지 입장료용 현금'],['우나후지, 마스터즈 드림 예약 화면']],
+  6:[['솔라리아 체크아웃'],['캐리어를 힐튼에 맡기기'],['면세용 여권'],['오코노미야키 쇼 7일 19:30 현장 예약'],['이타다키 예약 화면']],
+  7:[['스시젠용 현금'],['후타바 웹 예약 화면 (했다면)'],['오코노미야키 쇼 예약 확인']],
+  8:[['Airporter 접수 (힐튼 프런트)'],['힐튼 체크아웃 11:00'],['그란 레스파이어 바우처'],['저녁에 캐리어 도착 확인']],
+  9:[['그란 레스파이어 체크아웃'],['월도프에 짐 맡기기'],['19:30 택시 출발 (모미지 20:00)']],
+  11:[['여권'],['면세품과 액체류 정리'],['제주항공 모바일 체크인'],['12:00 체크아웃']]
+};
 function buildDays(){
-  const a5=variant[5]==='ara',a6=variant[6]==='ara';
-  const d1={md:'10월 4일',dow:'일요일',dw:'일',dn:4,city:'교토',title:'교토 도착',stay:'stay1',
-    wx:{k:'rain',t:'18–22°',s:'비',pop:'90%',p:'90%'},
+  const v5=variant[5],v6=variant[6],v7=variant[7];
+  const d1={md:'10월 4일',dow:'일요일',dw:'일',dn:4,city:'교토',title:'교토 도착',stay:'stay1',from:null,
     items:[
-      {t:'13:55',end:'15:40',title:'김포 출발, 제주항공 7C1327',p:'flightOut',c:'move',note:'김포공항 국제선 터미널에서 출발.'},
+      {t:'13:55',end:'15:40',title:'김포 출발, 제주항공 7C1327',p:'flightOut',c:'move',st:'rsv',note:'김포공항 국제선 터미널.'},
       {t:'15:40',title:'간사이공항 제2터미널 도착',p:'kix',c:'move'},
-      {t:'16:30',title:'입국 수속, 수하물 찾기',c:'move',note:'보통 착륙 후 40–75분. 16:20에서 16:55 사이에 나와요.'},
-      {t:'16:50',title:'셔틀버스로 역 이동, 하루카 표 발권',p:'kix',c:'move',note:'제2터미널에서 역까지 7–10분.'},
-      {t:'17:16',title:'하루카 탑승',p:'kix',c:'move',note:'놓치면 17:46 열차. 교토역까지 약 80분.'},
-      {t:'18:35',title:'교토역 도착, 택시로 숙소',c:'move',note:'택시로 15분쯤.'},
-      {t:'18:55',title:'솔라리아 니시테츠 체크인, 쉬기',p:'stay1',c:'stay'},
-      {t:'20:00',title:'드럭스토어',p:'drug',c:'shop',note:'카오 화이트 비누, 란도린 섬유유연제 향수.'},
-      {t:'',title:'오코노미야키 쇼에 들러 예약',p:'okonomi',c:'todo',minor:1,note:'21:00까지 영업. 츠무기 가는 길에 7일 19:30으로.'},
-      {t:'20:30',end:'22:00',title:'야키니쿠 츠무기',p:'tsumugi',c:'eat',note:'2명 예약 완료. 숙소에서 걸어서 5분 안팎.'},
-      {t:'22:30',title:'드럭스토어',p:'drug',c:'shop',note:'식사 전에 못 샀으면.'},
-      {t:'23:00',title:'편의점',p:'conv',c:'shop',note:'간식거리와 내일 아침 먹을 것.'},
-      {t:'01:00',title:'취침',c:'rest'}
+      {t:'16:50',end:'17:20',title:'입국심사, 수하물, 세관',c:'move',st:'est',note:'착륙 후 70–100분으로 잡았어요.'},
+      {t:'17:20',title:'무료 셔틀버스로 JR 간사이공항역',p:'kix',c:'move',st:'est',note:'하루카는 제2터미널에서 바로 못 타요. 셔틀로 에어로플라자까지 간 뒤 역에서 발권해요. 20–35분.'},
+      {t:'17:44',end:'19:04',title:'하루카로 교토역까지',p:'kix',c:'move',
+        table:[['목표','17:44 출발','19:04 도착'],['빠르면','17:14 출발','18:34쯤 도착'],['늦으면','18:15 출발','19:35쯤 도착']],
+        note:'제가 확인한 평일 시각표는 17:16, 17:46, 18:16이었어요. 1–2분 차이가 날 수 있으니 역 전광판을 따르세요.'},
+      {t:'19:04',title:'교토역 도착',p:'kyotosta',c:'move',noleg:1},
+      {t:'19:30',title:'솔라리아 니시테츠 체크인, 쉬기',p:'stay1',c:'stay',mode:'taxi',st:'est',note:'19:25–19:45 도착 예상.'},
+      Object.assign({t:'',note:'21:00까지 영업. 츠무기 가는 길에 7일 19:30으로.'},SHO_VISIT),
+      {t:'20:30',end:'22:00',title:'야키니쿠 츠무기',p:'tsumugi',c:'eat',st:'rsv',note:'2명.'},
+      {t:'22:30',title:'드럭스토어',p:'drug',c:'shop',near:1,note:'카오 화이트 비누, 란도린 섬유유연제 향수.'},
+      {t:'23:00',title:'편의점',p:'conv',c:'shop',near:1,note:'간식, 내일 아침거리, 음료.'},
+      {t:'23:30',title:'숙소 귀환',p:'stay1',c:'stay',home:1},
+      {t:'24:00',title:'취침',c:'rest'}
     ]};
-  const d2=a5?{md:'10월 5일',dow:'월요일',dw:'월',dn:5,city:'교토',title:'아라시야마, 오후에는 시내 쇼핑',stay:'stay1',
-    wx:{k:'raincloud',t:'18–23°',s:'비 뒤 흐림',pop:'90%',p:'90%'},
+  const d2=v5==='ara'?{md:'10월 5일',dow:'월요일',dw:'월',dn:5,city:'교토',title:'아라시야마, 오후에는 시내 쇼핑',stay:'stay1',from:'stay1',
     items:[
-      {t:'07:00',title:'기상, 8시까지 준비',c:'rest'},
-      {t:'08:00',title:'택시로 아라시야마',c:'move',note:'08:30 도착 목표.'},
+      {t:'07:00',title:'기상, 준비',c:'rest'},
       ...ARA(true),
-      {t:'14:00',title:'솔라리아 니시테츠로 돌아오기',p:'stay1',c:'stay'},
-      {t:'14:30',end:'18:30',title:'시내 쇼핑',p:'shopzone',c:'shop',note:'TNF KYOTO와 STANDARD, BEAMS, URBAN RESEARCH, mont-bell, SHIPS, Standard Products.'},
-      ...SHOP_EVE
-    ]}:{md:'10월 5일',dow:'월요일',dw:'월',dn:5,city:'교토',title:'하루 종일 쇼핑',stay:'stay1',
-    wx:{k:'raincloud',t:'18–23°',s:'비 뒤 흐림',pop:'90%',p:'90%'},
+      {t:'14:00',title:'솔라리아에서 잠깐 쉬기',p:'stay1',c:'stay',mode:'taxi'},
+      {t:'14:30',end:'18:15',title:'시내 쇼핑',p:'shopzone',c:'shop',note:SHOPS},
+      ...EVE5
+    ]}:{md:'10월 5일',dow:'월요일',dw:'월',dn:5,city:'교토',title:'하루 종일 쇼핑',stay:'stay1',from:'stay1',
     items:[
-      {t:'07:30',title:'기상, 8시 반까지 준비',c:'rest'},
-      {t:'',title:'시간이 남으면 스마트 커피',p:'smart',c:'cafe',minor:1,note:'또는 이노다 커피.'},
-      {t:'10:00',end:'11:45',title:'스시젠 오픈런',p:'sushizen',c:'eat'},
-      {t:'11:45',end:'12:30',title:'스타벅스',c:'cafe'},
-      {t:'13:00',end:'18:30',title:'시내 쇼핑',p:'shopzone',c:'shop',note:'TNF KYOTO와 STANDARD, BEAMS, URBAN RESEARCH, mont-bell, SHIPS, Standard Products.'},
-      ...SHOP_EVE
+      {t:'07:30',title:'기상, 준비',c:'rest'},
+      {t:'',title:'시간이 남으면 스마트 커피',p:'smart',c:'cafe',minor:1,skip:1,note:'또는 이노다 커피.'},
+      {t:'10:00',end:'11:45',title:'스시젠',p:'sushizen',c:'eat',st:'wait'},
+      {t:'11:45',end:'12:30',title:'스타벅스',c:'cafe',near:1},
+      {t:'13:00',end:'18:15',title:'시내 쇼핑',p:'shopzone',c:'shop',note:SHOPS},
+      ...EVE5
     ]};
-  const fujiiWarn='<b>확인 필요</b> 메모의 TNF 후지이 다이마루는 건물이 휴관 중이에요. THE NORTH FACE KYOTO나 전날 못 간 매장으로.';
-  const futabaWarn='<b>확인 필요</b> 화요일은 본점 휴무라 다카시마야에도 없을 가능성이 높아요.';
-  const d3=!a6?{md:'10월 6일',dow:'화요일',dw:'화',dn:6,city:'교토',title:'스시젠, 금각사, 힐튼으로 옮기기',stay:'hilton',
-    wx:{k:'clearing',t:'17–25°',s:'흐린 뒤 맑음',pop:'30%',p:'30%'},
-    items:[
-      {t:'08:00',title:'기상, 9시까지 준비',c:'rest'},
-      {t:'09:30',title:'힐튼 교토에 짐 맡기기',p:'hilton',c:'stay',note:'솔라리아 니시테츠 체크아웃 후 걸어서 3–4분.'},
-      {t:'10:00',end:'11:30',title:'스시젠 오픈런',p:'sushizen',c:'eat'},
-      {t:'11:30',end:'12:30',title:'스타벅스',c:'cafe'},
+  const d3base={md:'10월 6일',dow:'화요일',dw:'화',dn:6,city:'교토',stay:'hilton',from:'stay1'};
+  const d3=Object.assign(d3base,v6==='city'?{title:'스시젠, 금각사, 힐튼으로 옮기기',items:[
+      {t:'08:00',title:'기상, 준비, 솔라리아 체크아웃',c:'rest'},
+      {t:'09:20',title:'힐튼 교토에 캐리어 맡기기',p:'hilton',c:'stay',note:'체크인은 저녁에 해요. 지금은 짐만.'},
+      {t:'10:00',end:'11:30',title:'스시젠',p:'sushizen',c:'eat',st:'wait'},
+      {t:'11:30',end:'12:30',title:'스타벅스',c:'cafe',near:1},
       {t:'13:00',end:'14:30',title:'금각사',p:'kinkakuji',c:'sight'},
-      {t:'15:00',title:'택시로 다카시마야',c:'move'},
-      {t:'15:30',title:'데마치 후타바',p:'futaba',c:'cafe',warn:futabaWarn},
-      {t:'15:45',end:'16:45',title:'못 다 한 쇼핑',p:'shopzone',c:'shop',warn:fujiiWarn},
-      {t:'17:00',title:'오코노미야키 쇼 방문 예약',p:'okonomi',c:'todo',note:'7일 19:30으로.'},
-      {t:'19:30',title:'나마호르몬 이타다키',p:'itadaki',c:'eat',note:'예약 완료.'},
-      {t:'21:00',title:'돈키호테',p:'donki',c:'shop'}
-    ]}:{md:'10월 6일',dow:'화요일',dw:'화',dn:6,city:'교토',title:'아라시야마, 금각사, 힐튼으로 옮기기',stay:'hilton',
-    wx:{k:'clearing',t:'17–25°',s:'흐린 뒤 맑음',pop:'30%',p:'30%'},
-    items:[
-      {t:'06:30',title:'기상, 7시 반까지 준비',c:'rest'},
-      {t:'08:00',title:'힐튼 교토에 짐 맡기기',p:'hilton',c:'stay',note:'솔라리아 니시테츠 체크아웃 후 걸어서 3–4분.'},
-      {t:'',title:'택시로 아라시야마',c:'move',minor:1,note:'08:30 도착 목표.'},
+      {t:'15:10',title:'데마치 후타바',p:'futaba',c:'cafe',warn:FUTABA_TUE},
+      {t:'15:30',end:'19:10',title:'못 다 한 쇼핑',p:'shopzone',c:'shop',warn:FUJII},
+      Object.assign({t:'17:00',note:'7일 19:30으로.'},SHO_VISIT),
+      {t:'19:30',end:'21:00',title:'나마호르몬 이타다키',p:'itadaki',c:'eat',st:'rsv'},
+      {t:'21:10',end:'21:50',title:'돈키호테',p:'donki',c:'shop'},
+      {t:'22:05',title:'힐튼 교토 체크인',p:'hilton',c:'stay',home:1,note:'아침에 맡긴 캐리어를 받아요.'}
+    ]}:v6==='ara'?{title:'아라시야마, 금각사, 힐튼으로 옮기기',items:[
+      {t:'06:30',title:'기상, 준비, 솔라리아 체크아웃',c:'rest'},
+      {t:'07:35',title:'힐튼 교토에 캐리어 맡기기',p:'hilton',c:'stay',note:'체크인은 저녁에 해요. 지금은 짐만.'},
       ...ARA(false),
-      {t:'14:00',title:'힐튼 교토 체크인',p:'hilton',c:'stay',note:'아라시야마에서 금각사로 바로 가면 택시 한 번이 줄어요. 체크인은 저녁에 해도 돼요.'},
-      {t:'14:30',end:'15:30',title:'금각사',p:'kinkakuji',c:'sight',note:'택시로 이동.'},
-      {t:'16:00',title:'택시로 다카시마야',c:'move'},
-      {t:'16:30',title:'데마치 후타바',p:'futaba',c:'cafe',warn:futabaWarn},
-      {t:'17:00',title:'오코노미야키 쇼 방문 예약',p:'okonomi',c:'todo',note:'7일 19:30으로. 아직 못 했을 때만.'},
-      {t:'17:30',end:'19:00',title:'막간 쇼핑',p:'shopzone',c:'shop',warn:fujiiWarn},
-      {t:'19:30',title:'나마호르몬 이타다키',p:'itadaki',c:'eat',note:'예약 완료.'},
-      {t:'21:00',title:'돈키호테',p:'donki',c:'shop'}
-    ]};
-  const d4={md:'10월 7일',dow:'수요일',dw:'수',dn:7,city:'교토',title:'쇼세이엔과 느슨한 오후',stay:'hilton',
-    wx:{k:'sun',t:'16–25°',s:'맑음',pop:'40%',p:'40%'},
-    items:[
-      {t:'07:00',end:'08:00',title:'조식',p:'hilton',c:'eat'},
+      {t:'14:00',end:'15:00',title:'금각사',p:'kinkakuji',c:'sight',mode:'taxi',note:'아라시야마에서 바로 가요.'},
+      {t:'15:40',title:'데마치 후타바',p:'futaba',c:'cafe',warn:FUTABA_TUE},
+      {t:'16:00',end:'19:10',title:'막간 쇼핑',p:'shopzone',c:'shop',warn:FUJII},
+      Object.assign({t:'17:00',note:'7일 19:30으로. 아직 못 했을 때만.'},SHO_VISIT),
+      {t:'19:30',end:'21:00',title:'나마호르몬 이타다키',p:'itadaki',c:'eat',st:'rsv'},
+      {t:'21:10',end:'21:50',title:'돈키호테',p:'donki',c:'shop'},
+      {t:'22:05',title:'힐튼 교토 체크인',p:'hilton',c:'stay',home:1,note:'아침에 맡긴 캐리어를 받아요.'}
+    ]}:{title:'쇼세이엔, 시내 쇼핑, 힐튼으로 옮기기',items:[
+      {t:'08:00',title:'기상, 준비, 솔라리아 체크아웃',c:'rest'},
+      {t:'09:15',title:'힐튼 교토에 캐리어 맡기기',p:'hilton',c:'stay',note:'체크인은 저녁에 해요. 지금은 짐만.'},
+      {t:'10:00',end:'11:00',title:'쇼세이엔',p:'shoseien',c:'sight'},
+      {t:'11:30',end:'12:35',title:'돈카츠 카츠다 시조 가라스마점',p:'katsuda',c:'eat',st:'wait',note:'11:30 개점. 점심 후보.'},
+      {t:'13:00',end:'16:00',title:'시내 쇼핑',p:'shopzone',c:'shop',note:SHOPS},
+      {t:'16:10',end:'16:40',title:'돈키호테',p:'donki',c:'shop',note:'면세용 여권.'},
+      {t:'17:00',end:'19:10',title:'힐튼 교토 체크인, 쉬기',p:'hilton',c:'stay',note:'아침에 맡긴 캐리어를 받아요.'},
+      Object.assign({t:'',note:'이타다키와 같은 골목이에요. 들어가기 전에 7일 19:30으로.'},SHO_VISIT),
+      {t:'19:30',end:'21:00',title:'나마호르몬 이타다키',p:'itadaki',c:'eat',st:'rsv'},
+      {t:'21:15',title:'숙소 귀환',p:'hilton',c:'stay',home:1}
+    ]});
+  const d4base={md:'10월 7일',dow:'수요일',dw:'수',dn:7,city:'교토',stay:'hilton',from:'hilton'};
+  const d4=Object.assign(d4base,v7==='slow'?{title:'쇼세이엔과 느슨한 오후',items:[
+      {t:'07:00',end:'08:00',title:'힐튼 조식',p:'hilton',c:'eat'},
       {t:'08:00',end:'09:00',title:'씻고 준비',c:'rest'},
-      {t:'09:30',end:'10:30',title:'쇼세이엔',p:'shoseien',c:'sight',note:'택시로 이동.'},
-      {t:'10:30',end:'12:00',title:'쇼핑',p:'shopzone',c:'shop'},
-      {t:'12:00',end:'13:30',title:'돈카츠 카츠다',p:'katsuda',c:'eat'},
-      {t:'14:30',title:'이노다 커피',p:'inoda',c:'cafe'},
-      {t:'',title:'숙소에서 쉬거나 겐닌지',p:'kenninji',c:'sight',minor:1},
-      {t:'19:30',title:'오코노미야키 쇼',p:'okonomi',c:'eat',warn:'<b>예약 필요</b> 직접 가서 예약해야 해요.'}
-    ]};
-  const d5={md:'10월 8일',dow:'목요일',dw:'목',dn:8,city:'교토에서 오사카로',title:'기온을 걷고 오사카로',stay:'granrespire',
-    wx:{k:'sun',t:'16–25°',s:'맑음',pop:'교토 40%, 오사카 10%',p:'10–40%'},
+      {t:'09:30',end:'10:30',title:'쇼세이엔',p:'shoseien',c:'sight'},
+      {t:'10:50',end:'11:40',title:'쇼핑',p:'shopzone',c:'shop'},
+      {t:'12:00',end:'13:30',title:'돈카츠 카츠다 시조 가라스마점',p:'katsuda',c:'eat',st:'wait'},
+      {t:'14:30',end:'15:30',title:'이노다 커피',p:'inoda',c:'cafe'},
+      {t:'',title:'숙소에서 쉬거나 겐닌지',p:'kenninji',c:'sight',minor:1,skip:1},
+      {t:'19:30',end:'21:00',title:'오코노미야키 쇼',p:'okonomi',c:'eat',st:'onsite'},
+      {t:'21:15',title:'숙소 귀환',p:'hilton',c:'stay',home:1}
+    ]}:{title:'스시젠, 금각사, 후타바',items:[
+      {t:'07:00',end:'08:00',title:'힐튼 조식',p:'hilton',c:'eat',note:'10시에 스시젠이 있으니 가볍게.'},
+      {t:'10:00',end:'11:30',title:'스시젠',p:'sushizen',c:'eat',st:'wait'},
+      {t:'11:30',end:'12:30',title:'스타벅스',c:'cafe',near:1},
+      {t:'13:00',end:'14:30',title:'금각사',p:'kinkakuji',c:'sight'},
+      {t:'15:10',title:'데마치 후타바',p:'futaba',c:'cafe',note:'14:00 판매분, 수량 한정. 예약했다면 14:30–18:00에 수령.'},
+      {t:'15:30',end:'17:30',title:'못 다 한 쇼핑',p:'shopzone',c:'shop'},
+      {t:'17:45',end:'19:10',title:'힐튼에서 쉬기',p:'hilton',c:'stay'},
+      {t:'19:30',end:'21:00',title:'오코노미야키 쇼',p:'okonomi',c:'eat',st:'onsite'},
+      {t:'21:15',title:'숙소 귀환',p:'hilton',c:'stay',home:1}
+    ]});
+  const d5={md:'10월 8일',dow:'목요일',dw:'목',dn:8,city:'교토에서 오사카로',title:'기온을 걷고 오사카로',stay:'granrespire',from:'hilton',
     items:[
-      {t:'07:00',end:'08:00',title:'조식',p:'hilton',c:'eat'},
+      {t:'07:00',end:'08:00',title:'힐튼 조식',p:'hilton',c:'eat'},
       {t:'08:00',end:'09:00',title:'씻고 준비',c:'rest'},
-      {t:'11:00',title:'힐튼 교토 체크아웃',p:'hilton',c:'stay',note:'짐은 맡겨 두고 나가요.'},
-      {t:'11:30',title:'점심',c:'eat',note:'가게 미정.'},
+      {t:'10:45',title:'캐리어를 프런트에 맡기기',p:'hilton',c:'todo',warn:'<b>확인 필요</b> Airporter로 그란 레스파이어까지 보내요. 접수 마감과 수령 시각은 예약 내역으로 확인하세요.'},
+      {t:'11:00',title:'힐튼 교토 체크아웃',p:'hilton',c:'stay'},
+      {t:'11:30',end:'12:15',title:'점심',c:'eat',note:'가게 미정.'},
       {t:'12:30',end:'13:30',title:'겐닌지',p:'kenninji',c:'sight',note:'시간이 없으면 건너뛰어요.'},
       {t:'14:00',end:'14:45',title:'기온 시라카와',p:'shirakawa',c:'sight'},
-      {t:'14:45',end:'15:45',title:'오사카로 이동',c:'move',note:'힐튼에서 짐을 찾은 뒤 한큐 교토가와라마치역에서 오사카우메다역까지 특급으로 약 45분.'},
-      {t:'16:30',title:'그란 레스파이어 체크인',p:'granrespire',c:'stay'},
-      {t:'17:00',end:'20:00',title:'루쿠아 쇼핑',p:'lucua',c:'shop'},
-      {t:'20:30',title:'야키니쿠 부시도우',p:'bushido',c:'eat',note:'예약 완료.'}
+      {t:'15:00',end:'15:50',title:'한큐 특급으로 오사카우메다',p:'hankyu',c:'move',note:'교토가와라마치역에서 약 45분. 캐리어는 따로 가니 빈손이에요.'},
+      {t:'16:30',title:'그란 레스파이어 체크인',p:'granrespire',c:'stay',noleg:1,note:'오사카우메다역에서 걸어서 10분쯤.'},
+      {t:'17:00',end:'20:05',title:'루쿠아 쇼핑',p:'lucua',c:'shop'},
+      {t:'',title:'캐리어 도착 확인',c:'todo',minor:1,note:'Airporter 수령은 저녁 이후예요.'},
+      {t:'20:30',end:'22:00',title:'야키니쿠 부시도우',p:'bushido',c:'eat',st:'rsv'},
+      {t:'22:20',title:'숙소 귀환',p:'granrespire',c:'stay',home:1}
     ]};
-  const d6={md:'10월 9일',dow:'금요일',dw:'금',dn:9,city:'오사카',title:'월도프로 옮기는 날',stay:'waldorf',wx:{k:'unknown',t:'',s:'예보 미입력',pop:''},
+  const d6={md:'10월 9일',dow:'금요일',dw:'금',dn:9,city:'오사카',title:'월도프로 옮기는 날',stay:'waldorf',from:'granrespire',
     blank:'낮 일정은 아직 비어 있어요. 정해지면 알려 주세요.',
     items:[
-      {t:'',title:'그란 레스파이어 체크아웃',p:'granrespire',c:'stay',note:'시간 미정.'},
-      {t:'15:00',title:'월도프 아스토리아 체크인',p:'waldorf',c:'stay',note:'짐은 오전에 먼저 맡겨요.'},
-      {t:'20:00',title:'모미지',p:'momiji',c:'eat',note:'컨시어지를 통해 예약 완료.'}
+      {t:'11:00',title:'그란 레스파이어 체크아웃',p:'granrespire',c:'stay',st:'est',note:'체크아웃 시각은 바우처에 없어요. 프런트에서 확인하세요.'},
+      {t:'11:15',title:'월도프 아스토리아에 짐 맡기기',p:'waldorf',c:'stay',note:'같은 단지예요.'},
+      {t:'15:00',title:'월도프 아스토리아 체크인',p:'waldorf',c:'stay'},
+      {t:'20:00',end:'21:30',title:'모미지',p:'momiji',c:'eat',st:'rsv',mode:'taxi',note:'2명. 월도프 컨시어지가 잡아 준 예약.'},
+      {t:'22:00',title:'숙소 귀환',p:'waldorf',c:'stay',home:1,mode:'taxi'}
     ]};
-  const d7={md:'10월 10일',dow:'토요일',dw:'토',dn:10,city:'오사카',title:'아직 비어 있는 하루',stay:'waldorf',wx:{k:'unknown',t:'',s:'예보 미입력',pop:''},
+  const d7={md:'10월 10일',dow:'토요일',dw:'토',dn:10,city:'오사카',title:'아직 비어 있는 하루',stay:'waldorf',from:'waldorf',
     blank:'이날 일정은 아직 정해지지 않았어요. 가고 싶은 곳을 알려 주시면 타임라인과 지도에 넣을게요.',items:[]};
-  const d8={md:'10월 11일',dow:'일요일',dw:'일',dn:11,city:'오사카',title:'집으로',stay:null,wx:{k:'unknown',t:'',s:'예보 미입력',pop:''},
+  const d8={md:'10월 11일',dow:'일요일',dw:'일',dn:11,city:'오사카',title:'집으로',stay:null,from:'waldorf',
     blank:'오전 일정은 아직 비어 있어요.',
     items:[
-      {t:'12:00',title:'월도프 아스토리아 체크아웃',p:'waldorf',c:'stay'},
-      {t:'13:00',title:'호텔 출발, 오사카역에서 하루카',p:'kix',c:'move',note:'간사이공항역까지 약 50분. 13:00–13:30 사이 열차를 타면 돼요. 시각표는 전날 확인하세요.'},
-      {t:'14:15',title:'간사이공항역 도착, 셔틀버스로 제2터미널',p:'kix',c:'move',note:'7–10분.'},
+      {t:'12:00',title:'월도프 아스토리아 체크아웃',p:'waldorf',c:'stay',note:'캐리어는 직접 들고 가요.'},
+      {t:'13:00',title:'호텔 출발, 오사카역에서 하루카',p:'kix',c:'move',st:'est',note:'간사이공항역까지 약 50분. 13:00–13:30 사이 열차를 타면 돼요. 시각표는 전날 확인하세요.'},
+      {t:'14:15',title:'간사이공항역 도착, 셔틀버스로 제2터미널',p:'kix',c:'move',st:'est',note:'7–10분.'},
       {t:'14:30',title:'제주항공 체크인, 수하물 위탁',p:'flightIn',c:'move',note:'출발 2시간 전.'},
-      {t:'16:30',end:'18:15',title:'간사이 출발, 제주항공 7C1328',p:'flightIn',c:'move',note:'김포공항 국제선 터미널 도착.'}
+      {t:'16:30',end:'18:15',title:'간사이 출발, 제주항공 7C1328',p:'flightIn',c:'move',st:'rsv',note:'김포공항 국제선 터미널 도착.'}
     ]};
-  const hint=a5&&a6?'5일과 6일 모두 아라시야마로 골랐어요.':!a5&&!a6?'아라시야마가 빠졌어요. 5일이나 6일 중 하루에 넣으세요.':'';
-  d2.opts=[{id:'ara',label:'아라시야마',sub:'스테이크 오츠카 12:00 예약이 이날이에요.'},{id:'shop',label:'하루 종일 쇼핑',sub:'스시젠 오픈런으로 시작. 오츠카 예약은 옮기거나 취소해야 해요.'}];d2.sel=variant[5];d2.hint=hint;
-  d3.opts=[{id:'city',label:'스시젠과 금각사',sub:'아라시야마를 5일에 다녀올 때.'},{id:'ara',label:'아라시야마와 금각사',sub:'오츠카 예약을 6일로 바꿔야 해요.'}];d3.sel=variant[6];d3.hint=hint;
-  return [d1,d2,d3,d4,d5,d6,d7,d8].map(d=>{d.wx=wxOf(d.dn);return d});
+  d2.opts=[{id:'ara',label:'아라시야마',sub:'스테이크 오츠카 12:00 예약이 이날이에요.'},{id:'shop',label:'하루 종일 쇼핑',sub:'스시젠으로 시작. 오츠카 예약은 옮기거나 취소해야 해요.'}];d2.sel=v5;
+  d3.opts=[{id:'town',label:'쇼세이엔과 시내 쇼핑',sub:'돈키호테 뒤에 힐튼 체크인, 저녁은 이타다키.'},{id:'city',label:'스시젠과 금각사',sub:'처음 메모의 6일 일정.'},{id:'ara',label:'아라시야마와 금각사',sub:'오츠카 예약을 6일로 바꿔야 해요.'}];d3.sel=v6;
+  d4.opts=[{id:'kinkaku',label:'스시젠, 금각사, 후타바',sub:'맑은 날 금각사. 후타바도 수요일에는 들어와요.'},{id:'slow',label:'쇼세이엔과 느슨한 오후',sub:'처음 메모의 7일 일정.'}];d4.sel=v7;
+  const all=[d1,d2,d3,d4,d5,d6,d7,d8];
+  const KEYP={tenryuji:'아라시야마',shoseien:'쇼세이엔',kinkakuji:'금각사',sushizen:'스시젠',katsuda:'카츠다'};
+  const where={};Object.keys(KEYP).forEach(k=>where[k]=all.filter(d=>d.items.some(it=>it.p===k)).map(d=>d.dn));
+  [d2,d3,d4].forEach(d=>{const h=[];
+    Object.keys(KEYP).forEach(k=>{if(where[k].length>1&&where[k].includes(d.dn))h.push(`${KEYP[k]} 일정이 ${where[k].join('일과 ')}일에 모두 들어 있어요.`)});
+    if(!where.tenryuji.length&&d.dn<7)h.push('아라시야마가 빠졌어요. 5일이나 6일 중 하루에 넣으세요.');
+    d.hint=h.join(' ')});
+  return all.map(d=>{d.wx=wxOf(d.dn);return d});
 }
 
 /* ---------- storage ---------- */
@@ -728,10 +805,11 @@ const Store=(()=>{
 const START=new Date(2026,9,4), END=new Date(2026,9,11);
 const today=(()=>{const d=new Date();return new Date(d.getFullYear(),d.getMonth(),d.getDate())})();
 const dayDiff=(a,b)=>Math.round((a-b)/864e5);
-const uv=Store.s.ui.vary||{};
-const variant={5:uv[5]==='shop'?'shop':'ara',6:uv[6]==='ara'?'ara':'city'};
+const uv=Store.s.ui.vary2||{};
+const variant={5:uv[5]==='shop'?'shop':'ara',6:['town','city','ara'].includes(uv[6])?uv[6]:'town',7:uv[7]==='slow'?'slow':'kinkaku'};
 let dayIx=Number.isInteger(Store.s.ui.day)?Store.s.ui.day:0;
-if(today>=START&&today<=END&&Store.s.ui.pinnedOn!==today.toDateString()) dayIx=dayDiff(today,START);
+const pinKey=()=>{const n=nowJ();return n&&n.ix>=0?'d'+n.ix:''};
+if(pinKey()&&Store.s.ui.pinnedOn!==pinKey())dayIx=nowJ().ix;
 dayIx=Math.max(0,Math.min(7,dayIx));
 let DAYS=buildDays();
 
@@ -825,7 +903,37 @@ function renderScene(){
 }
 
 /* ---------- day ---------- */
+const toMin=t=>{if(!t)return null;const a=t.split(':');return (+a[0])*60+(+a[1])};
+const toHM=m=>String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0');
+const MODE={walk:'도보',taxi:'택시'};
+const ST={rsv:['예약 확정','ok'],wait:['예약 없이 현장 대기','walk'],onsite:['현장 예약 필요','need'],est:['예상','est']};
+function legOf(a,b,mode){
+  const d=Math.hypot((a.lng-b.lng)*91200,(a.lat-b.lat)*111000);
+  const m=mode||(d<=1200?'walk':'taxi');
+  const min=m==='walk'?Math.max(2,Math.round(d*1.3/75)):Math.round(d*1.35/417+3);
+  return {m,min,buf:m==='taxi'?10:(min>=8?5:3)};
+}
+function dayRows(d){
+  const rows=[];let prev=d.from&&P[d.from]&&P[d.from].lat!=null?d.from:null,gap=false,lastEnd=null;
+  d.items.forEach((it,i)=>{
+    const loc=it.p&&P[it.p]&&P[it.p].lat!=null;
+    if(loc&&!it.skip){
+      if(prev&&prev!==it.p&&!it.noleg&&!gap){
+        const L=legOf(P[prev],P[it.p],it.mode),t=toMin(it.t);
+        const dep=t!=null&&!it.home?t-L.min-L.buf:null;
+        rows.push({leg:L,from:prev,to:it.p,dep,tight:dep!=null&&lastEnd!=null&&lastEnd>dep,before:i});
+      }
+      prev=it.p;gap=false;
+    }else if(!loc&&it.t&&!it.minor&&!it.near&&it.c!=='rest'&&it.c!=='todo')gap=true;
+    rows.push({it,i});
+    const e=toMin(it.end||it.t);if(e!=null&&!it.skip&&!it.minor)lastEnd=e;
+  });
+  return rows;
+}
+const gq2=p=>encodeURIComponent(p.q||p.a||p.n);
+const gdir2=(a,b,m)=>'https://www.google.com/maps/dir/?api=1&origin='+gq2(P[a])+(P[a].pid?'&origin_place_id='+P[a].pid:'')+'&destination='+gq2(P[b])+(P[b].pid?'&destination_place_id='+P[b].pid:'')+'&travelmode='+(m==='walk'?'walking':'driving');
 function timeHTML(it){return it.t?`${it.t}${it.end?`<small>– ${it.end}</small>`:''}`:''}
+const doneKey=(d,i)=>`tl-${d.dn}-${d.sel||'x'}-${i}`;
 function dayPins(d){
   const seen=new Map();const pins=[];
   d.items.forEach(it=>{const p=P[it.p];if(!p||p.lat==null)return;
@@ -838,22 +946,65 @@ function dayPins(d){
 function renderDay(){
   const d=DAYS[dayIx];
   const stay=d.stay?P[d.stay]:null;
+  const keys=d.items.filter(it=>it.st==='rsv'&&it.c==='eat');
+  const todo=DAYTODO[d.dn]||[];
   $('#dayHead').innerHTML=`<p class="day-date">${d.md} ${d.dow}, ${esc(d.city)}</p><h2>${esc(d.title)}</h2>
-    <div class="day-meta"><p>${esc(d.wx.area)} ${esc(d.wx.t)}C, ${esc(d.wx.s)}, 강수확률 ${esc(d.wx.pop)}</p>
+    <div class="day-meta"><p>${esc(d.wx.area)} ${esc(d.wx.t)}C, ${esc(d.wx.s)}, 강수확률 ${esc(d.wx.pop)}${d.wx.mm!=null?`, 예상 강수량 ${d.wx.mm}mm`:''}</p>
     ${stay?`<p>오늘 밤은 <button type="button" class="linkbtn" data-place="${d.stay}">${esc(stay.n)}</button></p>`:''}</div>
     ${d.wx.extra?`<p class="wx-extra">${esc(d.wx.extra)}</p>`:''}
-    <p class="wx-src">${d.wx.live?`Open-Meteo 실시간 예보예요. ${d.wx.at.getMonth()+1}월 ${d.wx.at.getDate()}일 ${String(d.wx.at.getHours()).padStart(2,'0')}:${String(d.wx.at.getMinutes()).padStart(2,'0')}에 불러왔어요.`:`tenki.jp ${esc(d.wx.issued)} 발표 예보예요. 실시간 예보를 불러오면 바뀌어요.`} <a href="${d.wx.url}" target="_blank" rel="noopener">tenki.jp에서 지금 예보 보기</a></p>
-    ${d.opts?`<fieldset class="vary"><legend>이날 일정 고르기</legend><div class="vary-opts">${d.opts.map(o=>`<label class="plan-opt"><input type="radio" name="vary-${d.dn}" data-vary="${d.dn}" value="${o.id}"${o.id===d.sel?' checked':''}><strong>${esc(o.label)}</strong><span>${esc(o.sub)}</span></label>`).join('')}</div>${d.hint?`<p class="plan-hint">${esc(d.hint)}</p>`:''}</fieldset>`:''}`;
-  let h=d.items.map(it=>{
-    const c=it.c||'rest';
+    <p class="wx-src">${d.wx.live?`Open-Meteo 실시간 예보예요. ${d.wx.at.getMonth()+1}월 ${d.wx.at.getDate()}일 ${String(d.wx.at.getHours()).padStart(2,'0')}:${String(d.wx.at.getMinutes()).padStart(2,'0')}에 불러왔고 30분마다 새로 고쳐요.`:`tenki.jp ${esc(d.wx.issued)} 발표 예보예요. 실시간 예보를 불러오면 바뀌어요.`} <a href="${d.wx.url}" target="_blank" rel="noopener">tenki.jp에서 지금 예보 보기</a></p>
+    <div id="nowCard"></div>
+    ${keys.length?`<div class="keys"><p>오늘 예약</p><ul>${keys.map(it=>`<li><b>${it.t}</b> <button type="button" class="linkbtn" data-place="${it.p}">${esc(it.title)}</button></li>`).join('')}</ul></div>`:''}
+    ${d.opts?`<fieldset class="vary"><legend>이날 일정 고르기</legend><div class="vary-opts">${d.opts.map(o=>`<label class="plan-opt"><input type="radio" name="vary-${d.dn}" data-vary="${d.dn}" value="${o.id}"${o.id===d.sel?' checked':''}><strong>${esc(o.label)}</strong><span>${esc(o.sub)}</span></label>`).join('')}</div>${d.hint?`<p class="plan-hint warn">${esc(d.hint)}</p>`:''}</fieldset>`:''}
+    ${todo.length?`<fieldset class="todo"><legend>오늘 챙길 것</legend><ul>${todo.map(([label],k)=>{const id=`d${d.dn}-${k}`;return `<li class="ck"><input type="checkbox" id="ck-${id}" data-check="${id}"${Store.s.checks[id]?' checked':''}><label for="ck-${id}">${esc(label)}</label><span></span></li>`}).join('')}</ul></fieldset>`:''}`;
+  $('#timeline').innerHTML=dayRows(d).map(r=>{
+    if(r.leg){const L=r.leg;
+      return `<li class="tl-leg${r.tight?' tight':''}"><span class="tl-time">${r.dep!=null?`${toHM(r.dep)}<small>출발</small>`:''}</span><span class="leg-ico">${icon(L.m)}</span>
+        <div class="leg-body">${MODE[L.m]} 약 ${L.min}분, 여유 ${L.buf}분 <a href="${gdir2(r.from,r.to,L.m)}" target="_blank" rel="noopener">길찾기</a>${r.tight?'<b class="leg-tight">앞 일정과 빠듯해요</b>':''}</div></li>`}
+    const it=r.it,c=it.c||'rest',key=doneKey(d,r.i),done=!!Store.s.checks[key];
     const title=it.p?`<button type="button" class="tl-title" data-place="${it.p}">${esc(it.title)}</button>`:`<span class="tl-title">${esc(it.title)}</span>`;
-    return `<li class="tl-item${it.minor?' minor':''}"><span class="tl-time">${timeHTML(it)}</span><span class="tl-mark cat-${c}" title="${CAT[c]}">${icon(c)}</span>
-      <div class="tl-body">${title}${it.note?`<p class="tl-note">${esc(it.note)}</p>`:''}${it.warn?`<p class="tl-warn">${it.warn}</p>`:''}</div></li>`;
+    const st=it.st?`<span class="st ${ST[it.st][1]}">${ST[it.st][0]}</span>`:'';
+    const home=it.home?`<p class="tl-note">${esc(P[it.p].n)}</p>`:'';
+    const table=it.table?`<table class="tl-table"><tbody>${it.table.map(row=>`<tr>${row.map(x=>`<td>${esc(x)}</td>`).join('')}</tr>`).join('')}</tbody></table>`:'';
+    return `<li class="tl-item${it.minor?' minor':''}${done?' done':''}" data-i="${r.i}"><span class="tl-time">${timeHTML(it)}</span><span class="tl-mark cat-${c}" title="${CAT[c]}">${icon(c)}</span>
+      <div class="tl-body">${title}${st}${home}${it.note?`<p class="tl-note">${esc(it.note)}</p>`:''}${table}${it.warn?`<p class="tl-warn">${it.warn}</p>`:''}</div>
+      <label class="tl-done"><input type="checkbox" data-check="${key}"${done?' checked':''} aria-label="${esc(it.title)} 완료"></label></li>`;
   }).join('');
-  $('#timeline').innerHTML=h;
   const old=$('#dayBlank');if(old)old.remove();
   if(d.blank){const p=document.createElement('p');p.id='dayBlank';p.className='empty';p.textContent=d.blank;$('#timeline').after(p)}
+  $('#dayFoot').innerHTML=`<div class="daymemo"><label for="dayMemo">이날 메모</label><textarea id="dayMemo" maxlength="2000" placeholder="택시 요금, 바뀐 계획, 기억해 둘 것">${esc(Store.s.notes['day'+d.dn]||'')}</textarea>
+    <div class="sh-memo-row"><button type="button" class="btn ghost" id="dayMemoSave" data-dn="${d.dn}">메모 저장</button><span id="dayMemoState" role="status"></span></div></div>`;
+  renderNow();
   renderMap(d);
+}
+/* now / next: which item is on, what comes next, when to leave */
+function nowJ(){
+  const q=new URLSearchParams(location.search).get('now');const dt=q?new Date(q):new Date();
+  if(isNaN(dt))return null;
+  const f={};new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(dt).forEach(p=>f[p.type]=+p.value);
+  return {ix:f.year===2026&&f.month===10&&f.day>=4&&f.day<=11?f.day-4:-1,min:f.hour*60+f.minute};
+}
+const span=m=>m>=60?`${Math.floor(m/60)}시간${m%60?' '+m%60+'분':''}`:`${m}분`;
+function renderNow(){
+  const el=$('#nowCard');if(!el)return;
+  document.querySelectorAll('.tl-item.cur').forEach(x=>x.classList.remove('cur'));
+  const n=nowJ();if(!n||n.ix<0){el.innerHTML='';return}
+  if(n.ix!==dayIx){el.innerHTML=`<div class="now"><p>오늘은 ${DAYS[n.ix].md}이에요.</p><button type="button" class="btn light" data-goto="${n.ix}">오늘 일정 보기</button></div>`;return}
+  const d=DAYS[dayIx],rows=dayRows(d);
+  const timed=rows.filter(r=>r.it&&r.it.t&&!r.it.skip&&!r.it.minor).map(r=>({it:r.it,i:r.i,s:toMin(r.it.t),e:toMin(r.it.end)}));
+  let cur=null,next=null;
+  for(const x of timed){if(x.s<=n.min)cur=x;else{next=x;break}}
+  if(cur&&cur.e!=null&&cur.e<=n.min)cur=null;
+  const leg=next?rows.find(r=>r.leg&&r.before===next.i):null;
+  let h=`<div class="now"><p class="now-clock">지금 ${toHM(n.min)}</p>`;
+  if(cur)h+=`<p class="now-cur">${esc(cur.it.title)}${cur.e!=null?`, ${toHM(cur.e)}까지`:''}</p>`;
+  if(next){
+    h+=`<p class="now-next">다음은 <b>${next.it.t} ${esc(next.it.title)}</b>, ${span(next.s-n.min)} 뒤</p>`;
+    if(leg){const late=leg.dep!=null&&n.min>leg.dep;
+      h+=`<p class="now-leg${late?' late':''}">${leg.dep!=null?(late?'지금 바로 출발해야 해요. ':`${toHM(leg.dep)}에 출발하세요. `):''}${MODE[leg.leg.m]} 약 ${leg.leg.min}분.</p><a class="btn light" href="${gdir2(leg.from,leg.to,leg.leg.m)}" target="_blank" rel="noopener">길찾기</a>`}
+  }else h+=`<p class="now-next">오늘 일정은 끝났어요.</p>`;
+  el.innerHTML=h+'</div>';
+  const mark=cur||next;if(mark){const li=$(`.tl-item[data-i="${mark.i}"]`);if(li)li.classList.add('cur')}
 }
 
 /* ---------- map ---------- */
@@ -923,17 +1074,21 @@ function renderMap(d){
 
 /* ---------- issues ---------- */
 function issues(){
-  const sd=DAYS.findIndex(d=>d.items.some(it=>it.p==='sushizen'));
+  const find=p=>DAYS.findIndex(d=>d.items.some(it=>it.p===p&&!it.skip));
+  const sd=find('sushizen'),fd=find('futaba'),od=find('okonomi');
   const w5=DAYS[1].wx,w6=DAYS[2].wx,w7=DAYS[3].wx;
-  const wet=w5.n>=60&&w6.n>=60&&w7.n<=40;
+  const wet=w5.n>=60&&w6.n>=60&&w7.n<=40&&DAYS[1].items.some(it=>it.p==='tenryuji');
+  const TAKA='https://www.takashimaya.co.jp/kyoto/departmentstore/topics/13_1_20230208180556/';
   return [
-    ...(wet?[{day:3,t:'5일과 6일 모두 비 예보예요',b:`예보로는 비 올 확률이 5일 ${w5.pop}, 6일 ${w6.pop}이고 7일은 ${w7.s}, ${w7.pop}예요. 스테이크 오츠카 예약이 5일 12:00이라 지금은 5일에 가는 일정이에요. 비를 피하려면 오츠카 예약을 7일로 변경할 수 있는지 먼저 확인하세요.`}]:[]),
-    {day:2,t:'데마치 후타바는 화요일에 쉬어요',b:'본점 정기휴일이 화요일과 넷째 수요일이고, 다카시마야 지하 판매는 날짜가 정해져 있지 않아요. 6일(화) 대신 5일(월)이나 7일(수)에 들르는 편이 확실해요.'},
-    {day:2,t:'후지이 다이마루는 휴관 중이에요',b:'본관이 재건축으로 2026년 5월 6일부터 문을 닫았고 2030년 재개가 목표예요. TNF는 THE NORTH FACE KYOTO와 STANDARD KYOTO 매장으로 대신하세요.'},
-    {day:3,t:'오코노미야키 쇼는 직접 가서 예약해야 해요',b:'전화번호가 없는 가게예요. 매일 17:00–21:00 영업이고 6–8석이라 자리가 금방 차요. 이타다키와 같은 골목이니 4일 밤이나 5일, 6일 저녁에 들러 7일 19:30으로 잡으세요.'},
-    {day:sd<0?null:sd,soft:1,t:'스시젠은 현금을 챙기세요',b:'평일 10:00–18:00 영업이고 토요일과 일요일에 쉬어요. 현금 결제만 된다는 후기가 있어요.'},
-    {day:0,soft:1,t:'하루카는 17:16 열차 기준으로 잡았어요',b:'15:40 착륙이면 17:16 열차가 유력하고, 늦어져도 17:46이에요. 어느 쪽이든 20:30 츠무기 예약 전에 드럭스토어까지 들를 수 있어요. 표는 미리 사 두고 좌석은 도착해서 다음 열차로 잡으세요.'},
+    ...(wet?[{day:1,t:'아라시야마 가는 5일에 비 예보예요',b:`예보로는 비 올 확률이 5일 ${w5.pop}, 6일 ${w6.pop}이고 7일은 ${w7.s}, ${w7.pop}예요. 스테이크 오츠카 예약이 5일 12:00이라 5일에 가는 일정이에요. 비를 피하려면 오츠카 예약을 7일로 바꿀 수 있는지 먼저 확인하세요.`}]:[]),
+    ...(fd>=0&&DAYS[fd].dn===6?[{day:fd,href:TAKA,link:'다카시마야 판매 안내',t:'후타바는 화요일에 살 수 없어요',b:'다카시마야에는 매주 화요일과 넷째 수요일에 입하가 없어요. 6일(화) 대신 7일(수)에 들르세요.'}]:[]),
+    {day:od<0?null:od,t:'오코노미야키 쇼는 직접 가서 예약해야 해요',b:'전화번호가 없는 가게예요. 매일 17:00–21:00 영업이고 6–8석이라 자리가 금방 차요. 이타다키와 같은 골목이니 4일 밤이나 5일, 6일 저녁에 들러 7일 19:30으로 잡으세요.'},
+    {day:4,t:'8일 Airporter 접수 시간을 확인하세요',b:'힐튼 교토에서 그란 레스파이어로 캐리어를 보내는 날이에요. 프런트 접수 마감과 오사카 호텔 수령 시각을 예약 내역에서 확인해 두세요. 지금은 10:45 접수, 저녁 수령으로 넣어 뒀어요.'},
+    ...(fd>=0&&DAYS[fd].dn!==6?[{day:fd,soft:1,href:TAKA,link:'다카시마야 판매 안내',t:'후타바는 14:00 판매분을 노려요',b:'다카시마야 지하 1층에서 매일 11:00와 14:00에 판매를 시작하고 수량이 한정돼 있어요. 웹 예약은 2개입과 3개입만, 수령 전날 정오까지예요.'}]:[]),
+    {day:0,soft:1,t:'하루카는 17:44 열차가 목표예요',b:'빠르면 17:14, 늦으면 18:15 열차예요. 18:15 열차를 타도 19:35쯤 교토역에 도착해서 20:30 츠무기 예약에 맞출 수 있어요. 표는 미리 사 두고 좌석은 도착해서 다음 열차로 잡으세요.'},
     {day:2,soft:1,t:'힐튼 교토는 1박 예약 두 건이에요',b:'6일 밤과 7일 밤이 따로 예약돼 있어요. 체크인할 때 두 예약을 이어서 같은 방을 쓰게 해 달라고 요청하면 7일에 방을 옮기지 않아도 돼요.'},
+    {day:sd<0?null:sd,soft:1,t:'스시젠은 현금을 챙기세요',b:'예약 없이 10:00부터 현장에서 기다려요. 평일 10:00–18:00 영업이고 현금 결제만 된다는 후기가 있어요.'},
+    {day:null,soft:1,t:'후지이 다이마루는 휴관 중이에요',b:'본관이 재건축으로 2026년 5월 6일부터 문을 닫았고 2030년 재개가 목표예요. TNF는 THE NORTH FACE KYOTO와 STANDARD KYOTO 매장으로 대신하세요.'},
     {day:null,soft:1,href:'https://tenki.jp/bousai/typhoon/',link:'tenki.jp 태풍 정보 보기',t:'태풍 27호 소식을 확인하세요',b:'tenki.jp 해설에 태풍 27호가 발달하며 북상한다는 기사가 올라와 있어요. 간사이에 영향이 있을지는 아직 알 수 없으니 출발 전에 한 번 보세요.'},
     {day:null,soft:1,t:'아직 비어 있는 정보',b:'9일 낮과 10일, 11일 오전 오사카 일정. 알려 주시면 채워 넣을게요.'}
   ];
@@ -966,7 +1121,7 @@ const PREP=[
   {g:'옷과 비 대비',items:[['cl-umb','접이식 우산 (4–6일 비 예보)'],['cl-shell','방수 자켓이나 바람막이'],['cl-shoes','젖어도 되는 편한 신발'],['cl-socks','여벌 양말'],['cl-layer','아침용 얇은 겉옷 (최저 15–18도)'],['cl-day','낮에 입을 반팔과 얇은 긴팔 (최고 23–28도)'],['cl-sleep','잠옷과 속옷']]},
   {g:'세면과 건강',items:[['hy-wash','세면도구와 스킨케어'],['hy-sun','선크림 (7일부터 맑음)'],['hy-med','상비약 (소화제, 진통제, 밴드)'],['hy-eye','안경이나 렌즈']]},
   {g:'쇼핑 대비',items:[['sh-bag','접이식 보조가방'],['sh-space','캐리어에 빈 공간 남기기'],['sh-weight','위탁 수하물 허용 무게 확인'],['sh-tax','면세용 여권 지참']]},
-  {g:'출발 전에 할 일',items:[['td-okonomi','오코노미야키 쇼 방문 예약 (7일 19:30)'],['td-haruka','하루카 표 미리 사 두기'],['td-taxi','택시 앱 GO 설치'],['td-fx','환전']]}
+  {g:'출발 전에 할 일',items:[['td-okonomi','오코노미야키 쇼 방문 예약 (7일 19:30)'],['td-haruka','하루카 표 미리 사 두기'],['td-airporter','Airporter 예약 확인 (8일, 힐튼에서 그란 레스파이어)'],['td-futaba','후타바 웹 예약 (7일 수령분은 6일 정오까지)'],['td-taxi','택시 앱 GO 설치'],['td-fx','환전']]}
 ];
 const SHOP=[
   {g:'드럭스토어',items:[['bu-kao','카오 화이트 비누'],['bu-laundrin','란도린 섬유유연제 향수']]},
@@ -1032,6 +1187,7 @@ function openSheet(id){
   h+='</dl>';
   if(p.buy)h+=`<h3>여기서 살 것</h3><ul class="sh-list">${p.buy.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`;
   if(p.stores)h+=`<h3>들를 매장</h3><ul class="sh-list">${p.stores.map(([n,q])=>`<li><a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}" target="_blank" rel="noopener">${esc(n)}</a></li>`).join('')}</ul>`;
+  if(p.links)h+=`<h3>링크</h3><ul class="sh-list">${p.links.map(([n,u])=>`<li><a href="${u}" target="_blank" rel="noopener">${esc(n)}</a></li>`).join('')}</ul>`;
   if(p.tips)h+=`<h3>메모</h3><ul class="sh-list">${p.tips.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`;
   h+=`<h3><label for="memo">내 메모</label></h3><textarea id="memo" maxlength="2000" placeholder="예약번호, 예약자 이름, 좌석, 요청 사항">${esc(Store.s.notes[id]||'')}</textarea>
     <div class="sh-memo-row"><button type="button" class="btn ghost" id="memoSave">메모 저장</button><span id="memoState" role="status"></span></div>`;
@@ -1045,14 +1201,15 @@ sheet.addEventListener('click',e=>{if(e.target===sheet)sheet.close()});
 
 /* ---------- events ---------- */
 function selectDay(i,scroll){
-  dayIx=Math.max(0,Math.min(7,i));Store.ui({day:dayIx,pinnedOn:today.toDateString()});
+  dayIx=Math.max(0,Math.min(7,i));Store.ui({day:dayIx,pinnedOn:pinKey()});
   renderRibbon();renderScene();renderDay();
   if(scroll)$('#days').scrollIntoView({behavior:'smooth',block:'start'});
 }
 document.addEventListener('click',e=>{
-  const t=e.target.closest('[data-day],[data-place],[data-goto],[data-del],[data-addbtn],[data-scroll],#memoSave');
+  const t=e.target.closest('[data-day],[data-place],[data-goto],[data-del],[data-addbtn],[data-scroll],#memoSave,#dayMemoSave');
   if(!t)return;
   if(t.dataset.scroll){const el=document.getElementById(t.dataset.scroll);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});return}
+  if(t.id==='dayMemoSave'){Store.note('day'+t.dataset.dn,$('#dayMemo').value.trim());$('#dayMemoState').textContent='메모를 저장했어요';return}
   if(t.id==='memoSave'){Store.note(sheetId,$('#memo').value.trim());$('#memoState').textContent='메모를 저장했어요';return}
   if(t.dataset.day!=null){selectDay(+t.dataset.day,false);return}
   if(t.dataset.goto!=null){selectDay(+t.dataset.goto,true);return}
@@ -1069,8 +1226,8 @@ document.addEventListener('keydown',e=>{
 });
 document.addEventListener('change',e=>{
   const t=e.target;
-  if(t.dataset.vary){const dn=+t.dataset.vary;variant[dn]=t.value;Store.ui({vary:variant});DAYS=buildDays();renderDay();renderIssues();renderRsv();const r=$(`input[data-vary="${dn}"]:checked`);if(r)r.focus();return}
-  if(t.dataset.check){Store.check(t.dataset.check,t.checked);return}
+  if(t.dataset.vary){const dn=+t.dataset.vary;variant[dn]=t.value;Store.ui({vary2:variant});DAYS=buildDays();renderDay();renderIssues();renderRsv();const r=$(`input[data-vary="${dn}"]:checked`);if(r)r.focus();return}
+  if(t.dataset.check){Store.check(t.dataset.check,t.checked);const li=t.closest('.tl-item');if(li)li.classList.toggle('done',t.checked);return}
   if(t.dataset.custom){Store.checkCustom(t.dataset.custom,t.checked);return}
 });
 Store.on(renderLists);
@@ -1080,6 +1237,8 @@ Store.on(()=>{const k=JSON.stringify(Store.s.weather);if(k===wxKey)return;wxKey=
 /* ---------- boot ---------- */
 renderRibbon();renderScene();renderDay();renderIssues();renderStays();renderRsv();renderLists();
 loadLive();
+setInterval(loadLive,30*60*1000);
+setInterval(renderNow,30*1000);
 })();
 </script>
 </body>
