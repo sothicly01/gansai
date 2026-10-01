@@ -22,6 +22,7 @@
   --c-eat:#A9590C; --c-cafe:#8B5570; --c-sight:#4F6F3A; --c-shop:#27457A;
   --c-move:#5E6E85; --c-stay:#16233B; --c-todo:#B93A25; --c-rest:#8492A6;
   --pin-ink:#FFFFFF;
+  --sc-ink:#16233B;--sc-kfar:#A9C3AC;--sc-kmid:#74986F;--sc-knear:#456B4A;--sc-ofar:#B3C0D1;--sc-omid:#8496AE;--sc-onear:#4C5F7A;--sc-roof:#2C3648;--sc-wood:#7A5340;--sc-wall:#F5F2EA;--sc-stone:#9A9EA6;--sc-croof:#3F7A6E;--sc-verm:#D2452D;--sc-bamboo:#5E9A55;--sc-water:#86A9C8;--sc-win:rgba(255,255,255,.45);--sc-sun:#F7C948;--sc-cloud:rgba(255,255,255,.88);--sc-rain:rgba(255,255,255,.6);--sc-gold:#E3A220;
   --display:"Hahmlet","Nanum Myeongjo","AppleMyungjo",serif;
   --sans:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",system-ui,sans-serif;
 }
@@ -36,7 +37,9 @@
     --c-eat:#E9A95B; --c-cafe:#D3A0B9; --c-sight:#A3C487; --c-shop:#9DB9EE;
     --c-move:#9AA8BF; --c-stay:#E8EDF5; --c-todo:#F08A75; --c-rest:#7C8AA3;
     --pin-ink:#0E1625;
+    --sc-ink:#F2F5FA;--sc-kfar:#2B4239;--sc-kmid:#1F3229;--sc-knear:#14231C;--sc-ofar:#2B3A58;--sc-omid:#1F2C47;--sc-onear:#131D31;--sc-roof:#0B111E;--sc-wood:#3A2A23;--sc-wall:#AEB6C6;--sc-stone:#3A4050;--sc-croof:#1F4540;--sc-verm:#C4503C;--sc-bamboo:#2F5236;--sc-water:#182A47;--sc-win:#F3D27A;--sc-sun:#EDE7CF;--sc-cloud:rgba(170,185,210,.3);--sc-rain:rgba(200,215,235,.4);--sc-gold:#E9B94F;
   }
+  :root:not([data-theme="light"]) .scene{--sky1:#0B1526;--sky2:#2A416B}
 }
 :root[data-theme="dark"]{
   --paper:#0E1625; --surface:#172238; --sunken:#111B2D;
@@ -48,7 +51,9 @@
   --c-eat:#E9A95B; --c-cafe:#D3A0B9; --c-sight:#A3C487; --c-shop:#9DB9EE;
   --c-move:#9AA8BF; --c-stay:#E8EDF5; --c-todo:#F08A75; --c-rest:#7C8AA3;
   --pin-ink:#0E1625;
+  --sc-ink:#F2F5FA;--sc-kfar:#2B4239;--sc-kmid:#1F3229;--sc-knear:#14231C;--sc-ofar:#2B3A58;--sc-omid:#1F2C47;--sc-onear:#131D31;--sc-roof:#0B111E;--sc-wood:#3A2A23;--sc-wall:#AEB6C6;--sc-stone:#3A4050;--sc-croof:#1F4540;--sc-verm:#C4503C;--sc-bamboo:#2F5236;--sc-water:#182A47;--sc-win:#F3D27A;--sc-sun:#EDE7CF;--sc-cloud:rgba(170,185,210,.3);--sc-rain:rgba(200,215,235,.4);--sc-gold:#E9B94F;
 }
+:root[data-theme="dark"] .scene{--sky1:#0B1526;--sky2:#2A416B}
 *,*::before,*::after{box-sizing:inherit}
 html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 64px);-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;word-break:keep-all;overflow-wrap:anywhere}
@@ -63,19 +68,19 @@ fieldset{border:0;min-width:0}
 .tnum{font-variant-numeric:tabular-nums}
 
 /* hero */
-.hero{padding-top:clamp(28px,6vw,64px)}
+.hero{padding-top:clamp(20px,4vw,44px)}
 .hero-top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px 32px}
-h1{font-family:var(--display);font-weight:800;font-size:clamp(2.1rem,7.4vw,4.4rem);line-height:1.12;letter-spacing:-0.025em}
-.hero-sub{margin-top:14px;color:var(--ink2);font-size:1.05rem}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(1.5rem,4.2vw,2.5rem);line-height:1.2;letter-spacing:-0.02em}
+.hero-sub{margin-top:8px;color:var(--ink2);font-size:1rem}
 .dday{font-family:var(--display);font-weight:700;font-size:1.15rem;padding:10px 16px;border:1.5px solid var(--ink);border-radius:999px;white-space:nowrap}
 
 /* city band + ribbon */
-.cityband{display:grid;grid-template-columns:repeat(16,1fr);gap:0;margin-top:clamp(24px,5vw,44px);font-size:.85rem;font-weight:600;color:var(--ink2)}
+.cityband{display:grid;grid-template-columns:repeat(16,1fr);gap:0;margin-top:clamp(16px,2.6vw,24px);font-size:.85rem;font-weight:600;color:var(--ink2)}
 .cityband span{padding:0 2px 6px;border-bottom:2px solid currentColor}
 .cb-kyoto{grid-column:1/10;color:var(--moss)}
 .cb-osaka{grid-column:10/17;color:var(--indigo);text-align:right}
 .ribbon{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:4px;margin-top:8px}
-.rb{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;padding:10px 10px 12px;border:0;border-radius:10px;background:var(--surface);min-height:132px;position:relative}
+.rb{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;padding:10px 10px 12px;border:0;border-radius:10px;background:var(--surface);min-height:118px;position:relative}
 .rb-dow{font-size:.85rem;color:var(--ink2);font-weight:500}
 .rb-date{font-family:var(--display);font-weight:800;font-size:clamp(1.4rem,3.4vw,2.2rem);line-height:1}
 .rb-ico{margin-top:auto;width:26px;height:26px;color:var(--ink)}
@@ -97,10 +102,26 @@ h1{font-family:var(--display);font-weight:800;font-size:clamp(2.1rem,7.4vw,4.4re
   .rb-ico{width:22px;height:22px}
 }
 
-/* plan switch */
-.plan{margin-top:28px}
-.plan legend{font-weight:600;margin-bottom:8px}
-.plan-opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+/* city scene */
+.scene{position:relative;margin:clamp(16px,2.8vw,26px) 0 0;border-radius:18px;overflow:hidden;height:clamp(178px,31vw,350px);background:var(--sky2);--sky1:#93BEE2;--sky2:#F3E6C4}
+.scene.sk-rain,.scene.sk-raincloud{--sky1:#8598AE;--sky2:#C6D1DC}
+.scene.sk-cloud{--sky1:#A4B3C3;--sky2:#DDE4EA}
+.scene.sk-sun{--sky1:#6FB1E8;--sky2:#FBE6A8}
+.scene.sk-rain .land,.scene.sk-raincloud .land,.scene.sk-cloud .land{filter:saturate(.62) brightness(.97)}
+.scene svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.scene-cap{position:absolute;left:clamp(14px,3vw,34px);top:clamp(12px,2.6vw,28px);color:var(--sc-ink)}
+.scene-cap p{margin:0}
+.scene-date{font-weight:600;font-size:clamp(.88rem,1.5vw,1.1rem)}
+.scene-city{font-family:var(--display);font-weight:800;font-size:clamp(2.3rem,6.6vw,4.8rem);line-height:1.08;letter-spacing:-.02em}
+.scene-city.long{font-size:clamp(1.35rem,3.9vw,2.9rem);line-height:1.2;margin-top:4px}
+.scene-wx{margin-top:4px;font-size:clamp(.82rem,1.4vw,1.02rem);font-weight:500}
+@media (max-width:640px){.scene-wx{display:none}}
+.scene.swap svg,.scene.swap .scene-cap{animation:scenein .35s ease both}
+@keyframes scenein{from{opacity:0}to{opacity:1}}
+/* per-day choice */
+.vary{margin-top:18px}
+.vary legend{font-weight:600;margin-bottom:8px;padding:0}
+.vary-opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .plan-opt{position:relative;display:block;padding:12px 14px;border-radius:12px;background:var(--surface);box-shadow:inset 0 0 0 1.5px var(--line);cursor:pointer}
 .plan-opt input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
 .plan-opt strong{display:block;font-family:var(--display);font-weight:700;font-size:1.05rem}
@@ -113,8 +134,8 @@ h1{font-family:var(--display);font-weight:800;font-size:clamp(2.1rem,7.4vw,4.4re
 .nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;margin-top:28px;background:color-mix(in srgb,var(--paper) 90%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-block:1px solid var(--line)}
 .nav ul{display:flex;gap:4px;overflow-x:auto;padding-block:8px;scrollbar-width:none}
 .nav ul::-webkit-scrollbar{display:none}
-.nav a{display:block;padding:6px 12px;border-radius:999px;text-decoration:none;color:var(--ink);font-weight:500;font-size:.95rem;white-space:nowrap}
-.nav a:hover{background:var(--sunken)}
+.nav button{display:block;padding:6px 12px;border:0;border-radius:999px;background:none;color:var(--ink);font-weight:500;font-size:.95rem;white-space:nowrap}
+.nav button:hover{background:var(--sunken)}
 .nav .count{margin-left:6px;font-size:.8rem;color:var(--ink2)}
 .nav .count.alert{color:var(--verm);font-weight:600}
 
@@ -275,7 +296,7 @@ dialog::backdrop{background:rgba(8,14,26,.55)}
 .sh-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
 .sh-actions .btn{flex:1 1 180px}
 
-@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
@@ -288,25 +309,17 @@ dialog::backdrop{background:rgba(8,14,26,.55)}
     </div>
     <p class="dday" id="dday"></p>
   </div>
+  <figure class="scene" id="scene"></figure>
   <div class="cityband" aria-hidden="true"><span class="cb-kyoto">교토 4박</span><span class="cb-osaka">오사카 3박</span></div>
   <div class="ribbon" id="ribbon" role="tablist" aria-label="날짜 선택"></div>
-
-  <fieldset class="plan">
-    <legend>아라시야마는 언제 갈까요?</legend>
-    <div class="plan-opts">
-      <label class="plan-opt"><input type="radio" name="plan" value="ara5"><strong>5일 월요일</strong><span id="planTxt5"></span></label>
-      <label class="plan-opt"><input type="radio" name="plan" value="ara6"><strong>6일 화요일</strong><span id="planTxt6"></span></label>
-    </div>
-    <p class="plan-hint" id="planHint"></p>
-  </fieldset>
 </header>
 
 <nav class="nav" aria-label="페이지 안에서 이동">
   <div class="wrap"><ul>
-    <li><a href="#days">일정</a></li>
-    <li><a href="#issues">확인할 것<span class="count alert" id="navIssues"></span></a></li>
-    <li><a href="#stays">숙소와 예약</a></li>
-    <li><a href="#lists">체크리스트<span class="count" id="navChecks"></span></a></li>
+    <li><button type="button" data-scroll="days">일정</button></li>
+    <li><button type="button" data-scroll="issues">확인할 것<span class="count alert" id="navIssues"></span></button></li>
+    <li><button type="button" data-scroll="stays">숙소와 예약</button></li>
+    <li><button type="button" data-scroll="lists">체크리스트<span class="count" id="navChecks"></span></button></li>
   </ul></div>
 </nav>
 
@@ -426,7 +439,7 @@ async function loadLive(){
       days[dn]=v}
     if(!Object.keys(days).length)return;
     LIVE={days,at:new Date()};
-    DAYS=buildDays(plan);renderRibbon();renderDay();renderPlanText();renderIssues();
+    DAYS=buildDays();renderRibbon();renderScene();renderDay();renderIssues();
   }catch(e){}
 }
 function wxOf(dn){
@@ -542,8 +555,8 @@ const SHOP_EVE=[
   {t:'20:30',title:'마스터즈 드림 하우스',p:'masters',c:'eat',note:'2명 예약 완료.'},
   {t:'',title:'숙소로 일찍 들어가기',c:'rest',minor:1}
 ];
-function buildDays(plan){
-  const a5=plan==='ara5';
+function buildDays(){
+  const a5=variant[5]==='ara',a6=variant[6]==='ara';
   const d1={md:'10월 4일',dow:'일요일',dw:'일',dn:4,city:'교토',title:'교토 도착',stay:'stay1',
     wx:{k:'rain',t:'18–22°',s:'비',pop:'90%',p:'90%'},
     items:[
@@ -582,7 +595,7 @@ function buildDays(plan){
     ]};
   const fujiiWarn='<b>확인 필요</b> 메모의 TNF 후지이 다이마루는 건물이 휴관 중이에요. THE NORTH FACE KYOTO나 전날 못 간 매장으로.';
   const futabaWarn='<b>확인 필요</b> 화요일은 본점 휴무라 다카시마야에도 없을 가능성이 높아요.';
-  const d3=a5?{md:'10월 6일',dow:'화요일',dw:'화',dn:6,city:'교토',title:'스시젠, 금각사, 힐튼으로 옮기기',stay:'hilton',
+  const d3=!a6?{md:'10월 6일',dow:'화요일',dw:'화',dn:6,city:'교토',title:'스시젠, 금각사, 힐튼으로 옮기기',stay:'hilton',
     wx:{k:'clearing',t:'17–25°',s:'흐린 뒤 맑음',pop:'30%',p:'30%'},
     items:[
       {t:'08:00',title:'기상, 9시까지 준비',c:'rest'},
@@ -656,6 +669,9 @@ function buildDays(plan){
       {t:'14:30',title:'제주항공 체크인, 수하물 위탁',p:'flightIn',c:'move',note:'출발 2시간 전.'},
       {t:'16:30',end:'18:15',title:'간사이 출발, 제주항공 7C1328',p:'flightIn',c:'move',note:'김포공항 국제선 터미널 도착.'}
     ]};
+  const hint=a5&&a6?'5일과 6일 모두 아라시야마로 골랐어요.':!a5&&!a6?'아라시야마가 빠졌어요. 5일이나 6일 중 하루에 넣으세요.':'';
+  d2.opts=[{id:'ara',label:'아라시야마',sub:'스테이크 오츠카 12:00 예약이 이날이에요.'},{id:'shop',label:'하루 종일 쇼핑',sub:'스시젠 오픈런으로 시작. 오츠카 예약은 옮기거나 취소해야 해요.'}];d2.sel=variant[5];d2.hint=hint;
+  d3.opts=[{id:'city',label:'스시젠과 금각사',sub:'아라시야마를 5일에 다녀올 때.'},{id:'ara',label:'아라시야마와 금각사',sub:'오츠카 예약을 6일로 바꿔야 해요.'}];d3.sel=variant[6];d3.hint=hint;
   return [d1,d2,d3,d4,d5,d6,d7,d8].map(d=>{d.wx=wxOf(d.dn);return d});
 }
 
@@ -712,11 +728,12 @@ const Store=(()=>{
 const START=new Date(2026,9,4), END=new Date(2026,9,11);
 const today=(()=>{const d=new Date();return new Date(d.getFullYear(),d.getMonth(),d.getDate())})();
 const dayDiff=(a,b)=>Math.round((a-b)/864e5);
-let plan=Store.s.ui.plan2==='ara6'?'ara6':'ara5';
+const uv=Store.s.ui.vary||{};
+const variant={5:uv[5]==='shop'?'shop':'ara',6:uv[6]==='ara'?'ara':'city'};
 let dayIx=Number.isInteger(Store.s.ui.day)?Store.s.ui.day:0;
 if(today>=START&&today<=END&&Store.s.ui.pinnedOn!==today.toDateString()) dayIx=dayDiff(today,START);
 dayIx=Math.max(0,Math.min(7,dayIx));
-let DAYS=buildDays(plan);
+let DAYS=buildDays();
 
 /* ---------- hero ---------- */
 (function(){
@@ -732,6 +749,79 @@ function renderRibbon(){
     <span class="rb-ico">${wxIcon(d.wx.k)}</span>
     <span class="rb-temp">${d.wx.t||'&nbsp;'}</span><span class="rb-pop">${d.wx.k==='unknown'?'예보 없음':esc(d.wx.s)+(d.wx.p?' '+d.wx.p:'')}</span>
   </button>`).join('');
+}
+
+/* ---------- city scene ---------- */
+const G=372;
+const f1=n=>(+n).toFixed(1);
+function roof(cx,y,W,TW,h,s,fill){return `<path fill="${fill}" d="M${f1(cx-W)} ${f1(y-3*s)}Q${f1(cx)} ${f1(y+4*s)} ${f1(cx+W)} ${f1(y-3*s)}Q${f1(cx+W*.55)} ${f1(y-2*s)} ${f1(cx+TW)} ${f1(y-h)}L${f1(cx-TW)} ${f1(y-h)}Q${f1(cx-W*.55)} ${f1(y-2*s)} ${f1(cx-W)} ${f1(y-3*s)}Z"/>`}
+function pagoda(cx,by,s){
+  let o=`<rect x="${f1(cx-46*s)}" y="${f1(by-8*s)}" width="${f1(92*s)}" height="${f1(8*s)}" fill="var(--sc-stone)"/>`,y=by-8*s;
+  for(let i=0;i<5;i++){const k=1-i*.11,W=66*s*k,BW=30*s*k,bh=(i?17:25)*s,h=17*s*k;
+    o+=`<rect x="${f1(cx-BW)}" y="${f1(y-bh)}" width="${f1(BW*2)}" height="${f1(bh)}" fill="var(--sc-wood)"/>`;y-=bh;
+    o+=roof(cx,y,W,BW*.82,h,s,'var(--sc-roof)');y-=h}
+  o+=`<rect x="${f1(cx-1.6*s)}" y="${f1(y-46*s)}" width="${f1(3.2*s)}" height="${f1(48*s)}" fill="var(--sc-roof)"/>`;
+  for(let i=0;i<4;i++)o+=`<rect x="${f1(cx-(8-i*1.6)*s)}" y="${f1(y-9*s-i*8*s)}" width="${f1((16-i*3.2)*s)}" height="${f1(2.6*s)}" rx="1" fill="var(--sc-roof)"/>`;
+  return o}
+function torii(cx,by,s){const H=122*s,g=46*s,pw=10*s;
+  return `<g fill="var(--sc-verm)"><polygon points="${f1(cx-g-pw/2)},${by} ${f1(cx-g+pw/2)},${by} ${f1(cx-g+pw/2+3*s)},${f1(by-H)} ${f1(cx-g-pw/2+3*s)},${f1(by-H)}"/><polygon points="${f1(cx+g-pw/2)},${by} ${f1(cx+g+pw/2)},${by} ${f1(cx+g+pw/2-3*s)},${f1(by-H)} ${f1(cx+g-pw/2-3*s)},${f1(by-H)}"/><rect x="${f1(cx-g-15*s)}" y="${f1(by-H+28*s)}" width="${f1((g+15*s)*2)}" height="${f1(8*s)}"/><path d="M${f1(cx-g-30*s)} ${f1(by-H-5*s)}Q${cx} ${f1(by-H+7*s)} ${f1(cx+g+30*s)} ${f1(by-H-5*s)}L${f1(cx+g+26*s)} ${f1(by-H+9*s)}Q${cx} ${f1(by-H+18*s)} ${f1(cx-g-26*s)} ${f1(by-H+9*s)}Z"/></g><path fill="var(--sc-roof)" d="M${f1(cx-g-34*s)} ${f1(by-H-12*s)}Q${cx} ${f1(by-H+1*s)} ${f1(cx+g+34*s)} ${f1(by-H-12*s)}L${f1(cx+g+31*s)} ${f1(by-H-4*s)}Q${cx} ${f1(by-H+8*s)} ${f1(cx-g-31*s)} ${f1(by-H-4*s)}Z"/>`}
+function houses(x,by,ws){let o='';ws.forEach(([w,h])=>{
+  o+=`<rect x="${x}" y="${by-h}" width="${w}" height="${h}" fill="var(--sc-wood)"/><rect x="${x+6}" y="${by-h+8}" width="${w-12}" height="${Math.max(6,h-16)}" fill="url(#winp)"/><path fill="var(--sc-roof)" d="M${x-5} ${by-h+2}L${x+7} ${by-h-13}H${x+w-7}L${x+w+5} ${by-h+2}Z"/>`;x+=w+4});return o}
+function bamboo(x,by){let o='';[[0,250],[16,300],[30,220],[46,275],[60,235]].forEach(([dx,h],i)=>{const X=x+dx,t=by-h;
+  o+=`<line x1="${X}" y1="${by}" x2="${X+(i%2?4:-3)}" y2="${t}" stroke="var(--sc-bamboo)" stroke-width="6" stroke-linecap="round"/>`;
+  for(let y=by-34;y>t+10;y-=38)o+=`<rect x="${X-4}" y="${y}" width="8" height="2" fill="var(--sc-knear)"/>`;
+  o+=`<g fill="var(--sc-bamboo)" transform="translate(${X+(i%2?4:-3)} ${t+8})"><path d="M0 0q16-12 34-6q-16 10-34 6z"/><path d="M0 4q-16-10-32-2q16 8 32 2z"/><path d="M0-4q8-16 24-20q-6 16-24 20z"/></g>`});return o}
+function tree(x,by,r){return `<rect x="${x-3}" y="${by-r*1.1}" width="6" height="${r*1.1}" fill="var(--sc-wood)"/><circle cx="${x}" cy="${by-r*1.5}" r="${r}" fill="var(--sc-knear)"/><circle cx="${x-r*.7}" cy="${by-r*1.05}" r="${r*.75}" fill="var(--sc-knear)"/><circle cx="${x+r*.7}" cy="${by-r*1.05}" r="${r*.75}" fill="var(--sc-knear)"/>`}
+function skyBuilding(cx,by){const t=by-232;
+  return `<path fill="var(--sc-onear)" fill-rule="evenodd" d="M${cx-62} ${by}V${t}H${cx+62}V${by}H${cx+24}V${t+42}H${cx-24}V${by}ZM${cx-13} ${t+21}a13 13 0 1 0 26 0a13 13 0 1 0-26 0Z"/><rect x="${cx-58}" y="${t+46}" width="30" height="${by-t-50}" fill="url(#winp)"/><rect x="${cx+28}" y="${t+46}" width="30" height="${by-t-50}" fill="url(#winp)"/>`}
+function ferris(cx,by){const r=62,cy=by-128;let o=`<rect x="${cx-66}" y="${by-78}" width="132" height="78" fill="var(--sc-omid)"/><rect x="${cx-60}" y="${by-70}" width="120" height="66" fill="url(#winp)"/><g stroke="var(--sc-verm)" fill="none"><circle cx="${cx}" cy="${cy}" r="${r}" stroke-width="5"/><circle cx="${cx}" cy="${cy}" r="${r-12}" stroke-width="1.5"/>`;
+  for(let i=0;i<12;i++){const a=i*Math.PI/6;o+=`<line x1="${cx}" y1="${cy}" x2="${f1(cx+Math.cos(a)*r)}" y2="${f1(cy+Math.sin(a)*r)}" stroke-width="1.5"/>`}
+  o+='</g>';for(let i=0;i<12;i++){const a=i*Math.PI/6;o+=`<circle cx="${f1(cx+Math.cos(a)*r)}" cy="${f1(cy+Math.sin(a)*r)}" r="5" fill="var(--sc-verm)"/>`}
+  return o+`<circle cx="${cx}" cy="${cy}" r="7" fill="var(--sc-verm)"/>`}
+function castle(cx,by,s){
+  let o=`<polygon fill="var(--sc-stone)" points="${f1(cx-98*s)},${by} ${f1(cx+98*s)},${by} ${f1(cx+80*s)},${f1(by-48*s)} ${f1(cx-80*s)},${f1(by-48*s)}"/>`,y=by-48*s;
+  const T=[[76,30],[58,26],[42,24],[28,22]];
+  T.forEach(([bw,bh],i)=>{const BW=bw*s,BH=bh*s,last=i===T.length-1;
+    o+=`<rect x="${f1(cx-BW)}" y="${f1(y-BH)}" width="${f1(BW*2)}" height="${f1(BH)}" fill="var(--sc-wall)"/><rect x="${f1(cx-BW)}" y="${f1(y-BH*.42)}" width="${f1(BW*2)}" height="${f1(2.5*s)}" fill="var(--sc-gold)" opacity=".8"/>`;y-=BH;
+    o+=roof(cx,y,BW+17*s,last?3*s:T[i+1][0]*s+3*s,(last?30:15)*s,s,'var(--sc-croof)');y-=(last?30:15)*s});
+  return o+`<circle cx="${f1(cx-9*s)}" cy="${f1(y+7*s)}" r="${f1(2.6*s)}" fill="var(--sc-gold)"/><circle cx="${f1(cx+9*s)}" cy="${f1(y+7*s)}" r="${f1(2.6*s)}" fill="var(--sc-gold)"/>`}
+function tsutenkaku(cx,by,s){const p=(a,b)=>f1(cx+a*s)+' '+f1(by-b*s);
+  return `<g fill="var(--sc-onear)"><path d="M${p(-32,0)}L${p(-12,74)}H${f1(cx+12*s)}L${p(32,0)}H${f1(cx+19*s)}L${p(6,52)}H${f1(cx-6*s)}L${p(-19,0)}Z"/><rect x="${f1(cx-10*s)}" y="${f1(by-152*s)}" width="${f1(20*s)}" height="${f1(80*s)}"/><rect x="${f1(cx-21*s)}" y="${f1(by-178*s)}" width="${f1(42*s)}" height="${f1(26*s)}" rx="3"/><rect x="${f1(cx-8*s)}" y="${f1(by-204*s)}" width="${f1(16*s)}" height="${f1(26*s)}"/><rect x="${f1(cx-1.5*s)}" y="${f1(by-244*s)}" width="${f1(3*s)}" height="${f1(40*s)}"/></g><rect x="${f1(cx-17*s)}" y="${f1(by-172*s)}" width="${f1(34*s)}" height="${f1(12*s)}" fill="url(#winp)"/><circle cx="${cx}" cy="${f1(by-128*s)}" r="${f1(5*s)}" fill="var(--sc-gold)"/>`}
+function skyline(arr,fill,win,x0){return arr.filter(([x])=>x>=x0).map(([x,w,h])=>`<rect x="${x}" y="${G-h}" width="${w}" height="${h}" fill="${fill}"/>`+(win?`<rect x="${x+4}" y="${G-h+6}" width="${w-8}" height="${h-10}" fill="url(#winp)"/>`:'')).join('')}
+const SKY_FAR=[[0,70,96],[78,52,132],[136,84,104],[228,58,150],[294,92,112],[396,52,168],[456,72,124],[536,62,142],[606,92,108],[706,52,160],[766,82,128],[856,62,148],[926,92,112],[1026,62,166],[1096,104,122]];
+const SKY_MID=[[20,56,72],[110,44,92],[190,70,64],[300,50,98],[380,66,76],[480,48,104],[560,74,70],[670,46,96],[740,70,78],[850,50,102],[930,72,68],[1040,48,94],[1120,80,74]];
+function cloud(x,y,s){return `<g transform="translate(${x} ${y}) scale(${s})" fill="var(--sc-cloud)"><ellipse cx="0" cy="4" rx="54" ry="18"/><ellipse cx="-26" cy="-4" rx="26" ry="18"/><ellipse cx="14" cy="-12" rx="30" ry="22"/><ellipse cx="46" cy="2" rx="24" ry="14"/></g>`}
+function plane(x,y,rot){return `<g transform="translate(${x} ${y}) rotate(${rot})" fill="var(--sc-wall)"><path d="M-36 0c0-4 10-6 30-6h24c12 0 20 3 20 6s-8 6-20 6h-24c-20 0-30-2-30-6z"/><path d="M0-5l-16-22h9l22 22zM0 5l-16 22h9l22-22zM-30-4l-7-13h6l9 13z"/></g>`}
+function train(x,by){let o=`<rect x="${x-20}" y="${by-3}" width="330" height="3" fill="var(--sc-roof)" opacity=".6"/>`;
+  [0,148].forEach(dx=>{o+=`<rect x="${x+dx}" y="${by-34}" width="142" height="30" rx="6" fill="#6B1F2A"/><rect x="${x+dx}" y="${by-36}" width="142" height="5" rx="2.5" fill="#E9E2CF"/>`;
+    for(let i=0;i<5;i++)o+=`<rect x="${x+dx+10+i*26}" y="${by-27}" width="18" height="11" rx="2" fill="#F1E7C8"/>`});return o}
+function kyotoFront(b){return torii(118,G,1)+tree(214,G,17)+houses(242,G,[[52,26],[46,30]])+pagoda(408,G,1.08)+houses(482,G,[[50,28],[44,24]])+tree(596,G,20)+(b?bamboo(612,G):'')}
+function osakaFront(){return tsutenkaku(72,G,.8)+skyBuilding(214,G)+ferris(382,G)+castle(566,G,.9)}
+const HILL_FAR='M0 300C120 250 240 240 360 270S560 300 680 262S900 232 1010 262S1140 290 1200 268V420H0Z';
+const HILL_MID='M0 334C150 304 300 320 430 302S700 332 860 306S1100 300 1200 324V420H0Z';
+function sceneSVG(d){
+  const k=d.wx.k,dn=d.dn,type=dn<=7?'kyoto':dn===8?'both':'osaka',wet=k==='rain'||k==='raincloud';
+  let o=`<svg viewBox="0 0 1200 420" preserveAspectRatio="${type==='both'?'xMidYMax':'xMaxYMax'} slice" aria-hidden="true" focusable="false"><defs><linearGradient id="skyg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--sky1)"/><stop offset="1" style="stop-color:var(--sky2)"/></linearGradient><pattern id="rainp" width="${k==='rain'?22:40}" height="48" patternUnits="userSpaceOnUse" patternTransform="rotate(14)"><line x1="2" y1="0" x2="2" y2="24" stroke="var(--sc-rain)" stroke-width="2" stroke-linecap="round"/></pattern><pattern id="winp" width="13" height="15" patternUnits="userSpaceOnUse"><rect x="4" y="4" width="4" height="6" fill="var(--sc-win)"/></pattern></defs><rect width="1200" height="420" fill="url(#skyg)"/>`;
+  if(['sun','suncloud','clearing','unknown'].includes(k))o+=`<circle cx="1090" cy="88" r="44" fill="var(--sc-sun)"/>`;
+  if(k==='sun')o+=cloud(760,70,.7);
+  else if(k==='suncloud'||k==='clearing'||k==='unknown')o+=cloud(1040,112,1)+cloud(700,64,.8)+cloud(880,150,.6);
+  else o+=cloud(1040,84,1.2)+cloud(760,60,1)+cloud(900,140,.8)+cloud(580,110,.7)+cloud(1160,150,.9);
+  if(dn===4)o+=plane(830,52,8);
+  if(dn===11)o+=plane(830,56,-12);
+  o+='<g class="land">';
+  if(type==='kyoto')o+=`<path d="${HILL_FAR}" fill="var(--sc-kfar)"/><path d="${HILL_MID}" fill="var(--sc-kmid)"/><g transform="translate(490 0)">${kyotoFront(true)}</g><rect y="${G}" width="1200" height="48" fill="var(--sc-knear)"/>`;
+  else if(type==='osaka')o+=skyline(SKY_FAR,'var(--sc-ofar)',false,0)+skyline(SKY_MID,'var(--sc-omid)',true,0)+`<g transform="translate(520 0)">${osakaFront()}</g><rect y="${G}" width="1200" height="48" fill="var(--sc-water)"/><g stroke="var(--sc-wall)" stroke-opacity=".35" stroke-width="2"><line x1="60" y1="388" x2="260" y2="388"/><line x1="420" y1="400" x2="700" y2="400"/><line x1="820" y1="390" x2="1120" y2="390"/></g>`;
+  else{const sc=.78,ty=f1(G*(1-sc));
+    o+=`<path d="${HILL_FAR}" fill="var(--sc-kfar)"/><path d="${HILL_MID}" fill="var(--sc-kmid)"/>`+`<rect x="806" y="${G-124}" width="394" height="124" fill="var(--sc-ofar)"/>`+skyline(SKY_FAR,'var(--sc-ofar)',false,700)+skyline(SKY_MID,'var(--sc-omid)',true,730)
+      +`<g transform="translate(200 ${ty}) scale(${sc})">${kyotoFront(false)}</g><g transform="translate(686 ${ty}) scale(${sc})">${osakaFront()}</g><rect y="${G}" width="1200" height="48" fill="var(--sc-knear)"/><rect x="700" y="${G}" width="500" height="48" fill="var(--sc-water)"/>`+train(540,G+30)}
+  o+='</g>';
+  if(wet)o+=`<rect width="1200" height="420" fill="url(#rainp)"/>`;
+  return o+'</svg>'}
+function renderScene(){
+  const d=DAYS[dayIx],el=$('#scene');
+  el.className='scene sk-'+d.wx.k;
+  el.innerHTML=sceneSVG(d)+`<figcaption class="scene-cap"><p class="scene-date">${d.md} ${d.dow}</p><p class="scene-city${d.dn===8?' long':''}">${esc(d.city)}</p><p class="scene-wx">${esc(d.wx.t)}C, ${esc(d.wx.s)}${d.wx.p?', 비 올 확률 '+d.wx.p:''}</p></figcaption>`;
+  void el.offsetWidth;el.classList.add('swap');
 }
 
 /* ---------- day ---------- */
@@ -752,7 +842,8 @@ function renderDay(){
     <div class="day-meta"><p>${esc(d.wx.area)} ${esc(d.wx.t)}C, ${esc(d.wx.s)}, 강수확률 ${esc(d.wx.pop)}</p>
     ${stay?`<p>오늘 밤은 <button type="button" class="linkbtn" data-place="${d.stay}">${esc(stay.n)}</button></p>`:''}</div>
     ${d.wx.extra?`<p class="wx-extra">${esc(d.wx.extra)}</p>`:''}
-    <p class="wx-src">${d.wx.live?`Open-Meteo 실시간 예보예요. ${d.wx.at.getMonth()+1}월 ${d.wx.at.getDate()}일 ${String(d.wx.at.getHours()).padStart(2,'0')}:${String(d.wx.at.getMinutes()).padStart(2,'0')}에 불러왔어요.`:`tenki.jp ${esc(d.wx.issued)} 발표 예보예요. 실시간 예보를 불러오면 바뀌어요.`} <a href="${d.wx.url}" target="_blank" rel="noopener">tenki.jp에서 지금 예보 보기</a></p>`;
+    <p class="wx-src">${d.wx.live?`Open-Meteo 실시간 예보예요. ${d.wx.at.getMonth()+1}월 ${d.wx.at.getDate()}일 ${String(d.wx.at.getHours()).padStart(2,'0')}:${String(d.wx.at.getMinutes()).padStart(2,'0')}에 불러왔어요.`:`tenki.jp ${esc(d.wx.issued)} 발표 예보예요. 실시간 예보를 불러오면 바뀌어요.`} <a href="${d.wx.url}" target="_blank" rel="noopener">tenki.jp에서 지금 예보 보기</a></p>
+    ${d.opts?`<fieldset class="vary"><legend>이날 일정 고르기</legend><div class="vary-opts">${d.opts.map(o=>`<label class="plan-opt"><input type="radio" name="vary-${d.dn}" data-vary="${d.dn}" value="${o.id}"${o.id===d.sel?' checked':''}><strong>${esc(o.label)}</strong><span>${esc(o.sub)}</span></label>`).join('')}</div>${d.hint?`<p class="plan-hint">${esc(d.hint)}</p>`:''}</fieldset>`:''}`;
   let h=d.items.map(it=>{
     const c=it.c||'rest';
     const title=it.p?`<button type="button" class="tl-title" data-place="${it.p}">${esc(it.title)}</button>`:`<span class="tl-title">${esc(it.title)}</span>`;
@@ -832,7 +923,7 @@ function renderMap(d){
 
 /* ---------- issues ---------- */
 function issues(){
-  const a5=plan==='ara5';
+  const sd=DAYS.findIndex(d=>d.items.some(it=>it.p==='sushizen'));
   const w5=DAYS[1].wx,w6=DAYS[2].wx,w7=DAYS[3].wx;
   const wet=w5.n>=60&&w6.n>=60&&w7.n<=40;
   return [
@@ -840,7 +931,7 @@ function issues(){
     {day:2,t:'데마치 후타바는 화요일에 쉬어요',b:'본점 정기휴일이 화요일과 넷째 수요일이고, 다카시마야 지하 판매는 날짜가 정해져 있지 않아요. 6일(화) 대신 5일(월)이나 7일(수)에 들르는 편이 확실해요.'},
     {day:2,t:'후지이 다이마루는 휴관 중이에요',b:'본관이 재건축으로 2026년 5월 6일부터 문을 닫았고 2030년 재개가 목표예요. TNF는 THE NORTH FACE KYOTO와 STANDARD KYOTO 매장으로 대신하세요.'},
     {day:3,t:'오코노미야키 쇼는 직접 가서 예약해야 해요',b:'전화번호가 없는 가게예요. 매일 17:00–21:00 영업이고 6–8석이라 자리가 금방 차요. 이타다키와 같은 골목이니 4일 밤이나 5일, 6일 저녁에 들러 7일 19:30으로 잡으세요.'},
-    {day:a5?2:1,soft:1,t:'스시젠은 현금을 챙기세요',b:'평일 10:00–18:00 영업이고 토요일과 일요일에 쉬어요. 현금 결제만 된다는 후기가 있어요.'},
+    {day:sd<0?null:sd,soft:1,t:'스시젠은 현금을 챙기세요',b:'평일 10:00–18:00 영업이고 토요일과 일요일에 쉬어요. 현금 결제만 된다는 후기가 있어요.'},
     {day:0,soft:1,t:'하루카는 17:16 열차 기준으로 잡았어요',b:'15:40 착륙이면 17:16 열차가 유력하고, 늦어져도 17:46이에요. 어느 쪽이든 20:30 츠무기 예약 전에 드럭스토어까지 들를 수 있어요. 표는 미리 사 두고 좌석은 도착해서 다음 열차로 잡으세요.'},
     {day:2,soft:1,t:'힐튼 교토는 1박 예약 두 건이에요',b:'6일 밤과 7일 밤이 따로 예약돼 있어요. 체크인할 때 두 예약을 이어서 같은 방을 쓰게 해 달라고 요청하면 7일에 방을 옮기지 않아도 돼요.'},
     {day:null,soft:1,href:'https://tenki.jp/bousai/typhoon/',link:'tenki.jp 태풍 정보 보기',t:'태풍 27호 소식을 확인하세요',b:'tenki.jp 해설에 태풍 27호가 발달하며 북상한다는 기사가 올라와 있어요. 간사이에 영향이 있을지는 아직 알 수 없으니 출발 전에 한 번 보세요.'},
@@ -955,17 +1046,13 @@ sheet.addEventListener('click',e=>{if(e.target===sheet)sheet.close()});
 /* ---------- events ---------- */
 function selectDay(i,scroll){
   dayIx=Math.max(0,Math.min(7,i));Store.ui({day:dayIx,pinnedOn:today.toDateString()});
-  renderRibbon();renderDay();
+  renderRibbon();renderScene();renderDay();
   if(scroll)$('#days').scrollIntoView({behavior:'smooth',block:'start'});
 }
-function setPlan(v){
-  plan=v==='ara6'?'ara6':'ara5';Store.ui({plan2:plan});DAYS=buildDays(plan);
-  document.querySelectorAll('input[name="plan"]').forEach(r=>r.checked=r.value===plan);
-  renderRibbon();renderDay();renderIssues();renderRsv();
-}
 document.addEventListener('click',e=>{
-  const t=e.target.closest('[data-day],[data-place],[data-goto],[data-del],[data-addbtn],#memoSave');
+  const t=e.target.closest('[data-day],[data-place],[data-goto],[data-del],[data-addbtn],[data-scroll],#memoSave');
   if(!t)return;
+  if(t.dataset.scroll){const el=document.getElementById(t.dataset.scroll);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});return}
   if(t.id==='memoSave'){Store.note(sheetId,$('#memo').value.trim());$('#memoState').textContent='메모를 저장했어요';return}
   if(t.dataset.day!=null){selectDay(+t.dataset.day,false);return}
   if(t.dataset.goto!=null){selectDay(+t.dataset.goto,true);return}
@@ -982,23 +1069,16 @@ document.addEventListener('keydown',e=>{
 });
 document.addEventListener('change',e=>{
   const t=e.target;
-  if(t.name==='plan'){setPlan(t.value);return}
+  if(t.dataset.vary){const dn=+t.dataset.vary;variant[dn]=t.value;Store.ui({vary:variant});DAYS=buildDays();renderDay();renderIssues();renderRsv();const r=$(`input[data-vary="${dn}"]:checked`);if(r)r.focus();return}
   if(t.dataset.check){Store.check(t.dataset.check,t.checked);return}
   if(t.dataset.custom){Store.checkCustom(t.dataset.custom,t.checked);return}
 });
 Store.on(renderLists);
-function renderPlanText(){
-  const w5=DAYS[1].wx,w6=DAYS[2].wx,w7=DAYS[3].wx;
-  $('#planTxt5').textContent=`비 올 확률 ${w5.pop}, ${w5.s}. 스테이크 오츠카 12:00 예약이 이날이에요.`;
-  $('#planTxt6').textContent=`비 올 확률 ${w6.pop}, ${w6.s}. 오츠카 예약을 6일로 바꿔야 해요.`;
-  $('#planHint').textContent='고르면 5·6·7일 일정과 예약 날짜가 함께 바뀌어요.'+(w7.n<w5.n&&w7.n<w6.n?` 예보로는 7일(${w7.s}, ${w7.pop})이 가장 좋아요.`:'');
-}
 let wxKey=JSON.stringify(Store.s.weather);
-Store.on(()=>{const k=JSON.stringify(Store.s.weather);if(k===wxKey)return;wxKey=k;DAYS=buildDays(plan);renderRibbon();renderDay();renderPlanText();renderIssues()});
+Store.on(()=>{const k=JSON.stringify(Store.s.weather);if(k===wxKey)return;wxKey=k;DAYS=buildDays();renderRibbon();renderScene();renderDay();renderIssues()});
 
 /* ---------- boot ---------- */
-document.querySelectorAll('input[name="plan"]').forEach(r=>r.checked=r.value===plan);
-renderRibbon();renderDay();renderPlanText();renderIssues();renderStays();renderRsv();renderLists();
+renderRibbon();renderScene();renderDay();renderIssues();renderStays();renderRsv();renderLists();
 loadLive();
 })();
 </script>
