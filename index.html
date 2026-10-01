@@ -498,8 +498,10 @@ function wxOf(dn){
 const HRS='Google 지도 기준, 방문 전 다시 확인';
 const P={
   kix:{n:'간사이 국제공항',a:'関西国際空港 第2ターミナル',c:'move',q:'Kansai International Airport Terminal 2',
-    tips:['제주항공은 제2터미널을 써요. 역이 있는 에어로플라자까지 무료 셔틀버스로 7–10분.','교토로 가는 하루카는 17:44가 목표, 빠르면 17:14, 늦으면 18:15예요. 교토역까지 약 80분.','11일 귀국 때는 오사카역에서 하루카로 약 50분, 다시 셔틀버스로 제2터미널까지.']},
+    tips:['제주항공은 제2터미널을 써요. 역이 있는 에어로플라자까지 무료 셔틀버스로 7–10분.','교토로 가는 하루카는 17:44가 목표, 빠르면 17:14, 늦으면 18:15예요. 교토역까지 약 80분.','11일 귀국 때는 우메다에서 리무진버스를 타면 제2터미널까지 바로 가요.']},
   kyotosta:{n:'교토역',a:'京都駅',c:'move',lat:34.9858,lng:135.7588,q:'京都駅',tips:['택시 승강장은 가라스마 출구 쪽이에요.']},
+  limo:{n:'공항 리무진버스 승차장 (우메다)',a:'阪急三番街 · ハービス大阪',c:'move',lat:34.7065,lng:135.4985,q:'関西空港リムジンバス 阪急三番街 のりば',area:'한큐 산반가이, 하비스 오사카 두 곳',
+    tips:['버스는 하비스 오사카, 한큐 산반가이, 제1터미널, 제2터미널 순서로 서요.','월도프에서는 한큐 산반가이 쪽이 더 가까워 보여요. 핀은 그 근처를 대략 찍은 거예요.','공항까지 50분에서 1시간쯤, 제2터미널은 조금 더 걸려요. 요금과 시각표는 타기 전에 확인하세요.']},
   hankyu:{n:'한큐 교토가와라마치역',a:'阪急 京都河原町駅',c:'move',lat:35.0037,lng:135.7687,q:'阪急 京都河原町駅',tips:['오사카우메다행 특급으로 약 45분.']},
   flightOut:{n:'제주항공 7C1327',a:'김포 → 간사이',c:'move',
     book:[['출발','10월 4일 (일) 13:55, 김포공항 국제선 터미널'],['도착','15:40, 간사이공항 제2터미널'],['운임','스탠다드'],['탑승객','2명'],['탑승구','미정']]},
@@ -521,7 +523,7 @@ const P={
   waldorf:{n:'월도프 아스토리아 오사카',a:'Waldorf Astoria Osaka',c:'stay',city:'오사카',lat:34.7052,lng:135.4926,q:'Waldorf Astoria Osaka',area:'우메다, 그랜드 그린 오사카',
     stay:{in:'10월 9일 (금) 15:00',out:'10월 11일 (일) 12:00',nights:2,range:'10/9 – 10/11'},
     book:[['확인번호','3514929765'],['결제','힐튼 무료숙박권'],['인원','2명']],
-    tips:['9일 오전에 그란 레스파이어에서 체크아웃한 뒤 짐부터 맡기세요.','힐튼 아너스 다이아몬드 혜택(조식, 업그레이드, 레이트 체크아웃)을 체크인 때 확인하세요.','9일 모미지 예약은 이 호텔 컨시어지가 잡아 줬어요. 변경도 컨시어지에 요청하세요.','11일은 16:30 비행기라 13:00쯤 출발하면 돼요.']},
+    tips:['9일 오전에 그란 레스파이어에서 체크아웃한 뒤 짐부터 맡기세요.','힐튼 아너스 다이아몬드 혜택(조식, 업그레이드, 레이트 체크아웃)을 체크인 때 확인하세요.','9일 모미지 예약은 이 호텔 컨시어지가 잡아 줬어요. 변경도 컨시어지에 요청하세요.','10일과 11일 아침은 다이아몬드 혜택으로 호텔 조식.','11일은 12:00 체크아웃 뒤 우메다에서 리무진버스를 타요.']},
   drug:{n:'드럭스토어',a:'마츠모토키요시 등',c:'shop',q:'マツモトキヨシ 京都 河原町',
     buy:['카오 화이트 비누','란도린 섬유유연제 향수'],
     tips:['4일 밤 식사 전에 못 사면 22:30에 다시 들러요.']},
@@ -602,12 +604,13 @@ const EVE5=[
 ];
 const DAYTODO={
   4:[['여권, 모바일 탑승권'],['Visit Japan Web QR'],['하루카 표 (예약 화면)'],['엔화 현금'],['츠무기 예약 화면']],
-  5:[['우산, 젖어도 되는 신발'],['스테이크 오츠카 예약 화면'],['텐류지 입장료용 현금'],['우나후지, 마스터즈 드림 예약 화면']],
+  5:[['우산, 젖어도 되는 신발'],['스테이크 오츠카 예약 화면'],['후타바 예약 화면 (했다면)'],['텐류지 입장료용 현금'],['우나후지, 마스터즈 드림 예약 화면']],
   6:[['솔라리아 체크아웃'],['캐리어를 힐튼에 맡기기'],['면세용 여권'],['오코노미야키 쇼 7일 19:30 현장 예약'],['이타다키 예약 화면']],
-  7:[['스시젠용 현금'],['후타바 웹 예약 화면 (했다면)'],['오코노미야키 쇼 예약 확인']],
+  7:[['스시젠용 현금'],['오코노미야키 쇼 예약 확인']],
   8:[['Airporter 접수 (힐튼 프런트)'],['힐튼 체크아웃 11:00'],['그란 레스파이어 바우처'],['저녁에 캐리어 도착 확인']],
   9:[['그란 레스파이어 체크아웃'],['월도프에 짐 맡기기'],['19:30 택시 출발 (모미지 20:00)']],
-  11:[['여권'],['면세품과 액체류 정리'],['제주항공 모바일 체크인'],['12:00 체크아웃']]
+  10:[['월도프 조식']],
+  11:[['여권'],['면세품과 액체류 정리'],['제주항공 모바일 체크인'],['리무진버스 시각표 확인'],['12:00 체크아웃']]
 };
 function buildDays(){
   const v5=variant[5],v6=variant[6],v7=variant[7];
@@ -633,8 +636,9 @@ function buildDays(){
     items:[
       {t:'07:00',title:'기상, 준비',c:'rest'},
       ...ARA(true),
-      {t:'14:00',title:'솔라리아에서 잠깐 쉬기',p:'stay1',c:'stay',mode:'taxi'},
-      {t:'14:30',end:'18:15',title:'시내 쇼핑',p:'shopzone',c:'shop',note:SHOPS},
+      {t:'14:00',end:'14:15',title:'데마치 후타바',p:'futaba',c:'cafe',mode:'taxi',note:'오츠카에서 택시로 다카시마야까지 바로 가요. 14:00 판매분, 수량 한정.'},
+      {t:'14:35',end:'14:45',title:'솔라리아에서 잠깐 쉬기',p:'stay1',c:'stay',note:'마메모치는 여기서 먹어요.'},
+      {t:'15:05',end:'18:15',title:'시내 쇼핑',p:'shopzone',c:'shop',note:SHOPS},
       ...EVE5
     ]}:{md:'10월 5일',dow:'월요일',dw:'월',dn:5,city:'교토',title:'하루 종일 쇼핑',stay:'stay1',from:'stay1',
     items:[
@@ -643,6 +647,7 @@ function buildDays(){
       {t:'10:00',end:'11:45',title:'스시젠',p:'sushizen',c:'eat',st:'wait'},
       {t:'11:45',end:'12:30',title:'스타벅스',c:'cafe',near:1},
       {t:'13:00',end:'18:15',title:'시내 쇼핑',p:'shopzone',c:'shop',note:SHOPS},
+      {t:'14:00',title:'데마치 후타바',p:'futaba',c:'cafe',skip:1,note:'쇼핑 중에 다카시마야 지하로. 14:00 판매분, 수량 한정.'},
       ...EVE5
     ]};
   const d3base={md:'10월 6일',dow:'화요일',dw:'화',dn:6,city:'교토',stay:'hilton',from:'stay1'};
@@ -652,8 +657,7 @@ function buildDays(){
       {t:'10:00',end:'11:30',title:'스시젠',p:'sushizen',c:'eat',st:'wait'},
       {t:'11:30',end:'12:30',title:'스타벅스',c:'cafe',near:1},
       {t:'13:00',end:'14:30',title:'금각사',p:'kinkakuji',c:'sight'},
-      {t:'15:10',title:'데마치 후타바',p:'futaba',c:'cafe',warn:FUTABA_TUE},
-      {t:'15:30',end:'19:10',title:'못 다 한 쇼핑',p:'shopzone',c:'shop',warn:FUJII},
+      {t:'15:10',end:'19:10',title:'못 다 한 쇼핑',p:'shopzone',c:'shop',warn:FUJII},
       Object.assign({t:'17:00',note:'7일 19:30으로.'},SHO_VISIT),
       {t:'19:30',end:'21:00',title:'나마호르몬 이타다키',p:'itadaki',c:'eat',st:'rsv'},
       {t:'21:10',end:'21:50',title:'돈키호테',p:'donki',c:'shop'},
@@ -663,8 +667,7 @@ function buildDays(){
       {t:'07:35',title:'힐튼 교토에 캐리어 맡기기',p:'hilton',c:'stay',note:'체크인은 저녁에 해요. 지금은 짐만.'},
       ...ARA(false),
       {t:'14:00',end:'15:00',title:'금각사',p:'kinkakuji',c:'sight',mode:'taxi',note:'아라시야마에서 바로 가요.'},
-      {t:'15:40',title:'데마치 후타바',p:'futaba',c:'cafe',warn:FUTABA_TUE},
-      {t:'16:00',end:'19:10',title:'막간 쇼핑',p:'shopzone',c:'shop',warn:FUJII},
+      {t:'15:40',end:'19:10',title:'막간 쇼핑',p:'shopzone',c:'shop',warn:FUJII},
       Object.assign({t:'17:00',note:'7일 19:30으로. 아직 못 했을 때만.'},SHO_VISIT),
       {t:'19:30',end:'21:00',title:'나마호르몬 이타다키',p:'itadaki',c:'eat',st:'rsv'},
       {t:'21:10',end:'21:50',title:'돈키호테',p:'donki',c:'shop'},
@@ -692,13 +695,13 @@ function buildDays(){
       {t:'',title:'숙소에서 쉬거나 겐닌지',p:'kenninji',c:'sight',minor:1,skip:1},
       {t:'19:30',end:'21:00',title:'오코노미야키 쇼',p:'okonomi',c:'eat',st:'onsite'},
       {t:'21:15',title:'숙소 귀환',p:'hilton',c:'stay',home:1}
-    ]}:{title:'스시젠, 금각사, 후타바',items:[
+    ]}:{title:'스시젠과 금각사',items:[
       {t:'07:00',end:'08:00',title:'힐튼 조식',p:'hilton',c:'eat',note:'10시에 스시젠이 있으니 가볍게.'},
       {t:'10:00',end:'11:30',title:'스시젠',p:'sushizen',c:'eat',st:'wait'},
       {t:'11:30',end:'12:30',title:'스타벅스',c:'cafe',near:1},
       {t:'13:00',end:'14:30',title:'금각사',p:'kinkakuji',c:'sight'},
-      {t:'15:10',title:'데마치 후타바',p:'futaba',c:'cafe',note:'14:00 판매분, 수량 한정. 예약했다면 14:30–18:00에 수령.'},
-      {t:'15:30',end:'17:30',title:'못 다 한 쇼핑',p:'shopzone',c:'shop'},
+      {t:'15:10',end:'17:30',title:'못 다 한 쇼핑',p:'shopzone',c:'shop'},
+      {t:'',title:'데마치 후타바',p:'futaba',c:'cafe',minor:1,skip:1,note:'5일에 못 샀을 때만. 14:00 판매분.'},
       {t:'17:45',end:'19:10',title:'힐튼에서 쉬기',p:'hilton',c:'stay'},
       {t:'19:30',end:'21:00',title:'오코노미야키 쇼',p:'okonomi',c:'eat',st:'onsite'},
       {t:'21:15',title:'숙소 귀환',p:'hilton',c:'stay',home:1}
@@ -729,19 +732,23 @@ function buildDays(){
       {t:'22:00',title:'숙소 귀환',p:'waldorf',c:'stay',home:1,mode:'taxi'}
     ]};
   const d7={md:'10월 10일',dow:'토요일',dw:'토',dn:10,city:'오사카',title:'아직 비어 있는 하루',stay:'waldorf',from:'waldorf',
-    blank:'이날 일정은 아직 정해지지 않았어요. 가고 싶은 곳을 알려 주시면 타임라인과 지도에 넣을게요.',items:[]};
-  const d8={md:'10월 11일',dow:'일요일',dw:'일',dn:11,city:'오사카',title:'집으로',stay:null,from:'waldorf',
-    blank:'오전 일정은 아직 비어 있어요.',
+    blank:'조식 뒤 일정은 아직 정해지지 않았어요. 가고 싶은 곳을 알려 주시면 타임라인과 지도에 넣을게요.',
     items:[
+      {t:'09:00',title:'월도프 아스토리아 조식',p:'waldorf',c:'eat',note:'힐튼 다이아몬드 혜택.'}
+    ]};
+  const d8={md:'10월 11일',dow:'일요일',dw:'일',dn:11,city:'오사카',title:'집으로',stay:null,from:'waldorf',
+    blank:'',
+    items:[
+      {t:'09:00',title:'월도프 아스토리아 조식',p:'waldorf',c:'eat',note:'힐튼 다이아몬드 혜택.'},
       {t:'12:00',title:'월도프 아스토리아 체크아웃',p:'waldorf',c:'stay',note:'캐리어는 직접 들고 가요.'},
-      {t:'13:00',title:'호텔 출발, 오사카역에서 하루카',p:'kix',c:'move',st:'est',note:'간사이공항역까지 약 50분. 13:00–13:30 사이 열차를 타면 돼요. 시각표는 전날 확인하세요.'},
-      {t:'14:15',title:'간사이공항역 도착, 셔틀버스로 제2터미널',p:'kix',c:'move',st:'est',note:'7–10분.'},
+      {t:'12:30',title:'우메다 리무진버스 승차장',p:'limo',c:'move',st:'est',note:'한큐 산반가이 또는 하비스 오사카에서 타요. 12:40–13:00 사이 버스가 목표예요.'},
+      {t:'12:45',end:'14:05',title:'리무진버스로 간사이공항 제2터미널',p:'kix',c:'move',st:'est',note:'제1터미널을 거쳐 제2터미널까지 가요. 60–75분으로 잡았고, 일요일 오후 도로 사정에 따라 늘어날 수 있어요. 시각표는 전날 확인하세요.'},
       {t:'14:30',title:'제주항공 체크인, 수하물 위탁',p:'flightIn',c:'move',note:'출발 2시간 전.'},
       {t:'16:30',end:'18:15',title:'간사이 출발, 제주항공 7C1328',p:'flightIn',c:'move',st:'rsv',note:'김포공항 국제선 터미널 도착.'}
     ]};
   d2.opts=[{id:'ara',label:'아라시야마',sub:'스테이크 오츠카 12:00 예약이 이날이에요.'},{id:'shop',label:'하루 종일 쇼핑',sub:'스시젠으로 시작. 오츠카 예약은 옮기거나 취소해야 해요.'}];d2.sel=v5;
   d3.opts=[{id:'town',label:'쇼세이엔과 시내 쇼핑',sub:'돈키호테 뒤에 힐튼 체크인, 저녁은 이타다키.'},{id:'city',label:'스시젠과 금각사',sub:'처음 메모의 6일 일정.'},{id:'ara',label:'아라시야마와 금각사',sub:'오츠카 예약을 6일로 바꿔야 해요.'}];d3.sel=v6;
-  d4.opts=[{id:'kinkaku',label:'스시젠, 금각사, 후타바',sub:'맑은 날 금각사. 후타바도 수요일에는 들어와요.'},{id:'slow',label:'쇼세이엔과 느슨한 오후',sub:'처음 메모의 7일 일정.'}];d4.sel=v7;
+  d4.opts=[{id:'kinkaku',label:'스시젠과 금각사',sub:'맑은 날 금각사. 저녁은 오코노미야키 쇼.'},{id:'slow',label:'쇼세이엔과 느슨한 오후',sub:'처음 메모의 7일 일정.'}];d4.sel=v7;
   const all=[d1,d2,d3,d4,d5,d6,d7,d8];
   const KEYP={tenryuji:'아라시야마',shoseien:'쇼세이엔',kinkakuji:'금각사',sushizen:'스시젠',katsuda:'카츠다'};
   const where={};Object.keys(KEYP).forEach(k=>where[k]=all.filter(d=>d.items.some(it=>it.p===k)).map(d=>d.dn));
@@ -1075,7 +1082,7 @@ function renderMap(d){
 /* ---------- issues ---------- */
 function issues(){
   const find=p=>DAYS.findIndex(d=>d.items.some(it=>it.p===p&&!it.skip));
-  const sd=find('sushizen'),fd=find('futaba'),od=find('okonomi');
+  const sd=find('sushizen'),od=find('okonomi'),fd=DAYS.findIndex(d=>d.items.some(it=>it.p==='futaba'&&!it.minor));
   const w5=DAYS[1].wx,w6=DAYS[2].wx,w7=DAYS[3].wx;
   const wet=w5.n>=60&&w6.n>=60&&w7.n<=40&&DAYS[1].items.some(it=>it.p==='tenryuji');
   const TAKA='https://www.takashimaya.co.jp/kyoto/departmentstore/topics/13_1_20230208180556/';
@@ -1084,7 +1091,7 @@ function issues(){
     ...(fd>=0&&DAYS[fd].dn===6?[{day:fd,href:TAKA,link:'다카시마야 판매 안내',t:'후타바는 화요일에 살 수 없어요',b:'다카시마야에는 매주 화요일과 넷째 수요일에 입하가 없어요. 6일(화) 대신 7일(수)에 들르세요.'}]:[]),
     {day:od<0?null:od,t:'오코노미야키 쇼는 직접 가서 예약해야 해요',b:'전화번호가 없는 가게예요. 매일 17:00–21:00 영업이고 6–8석이라 자리가 금방 차요. 이타다키와 같은 골목이니 4일 밤이나 5일, 6일 저녁에 들러 7일 19:30으로 잡으세요.'},
     {day:4,t:'8일 Airporter 접수 시간을 확인하세요',b:'힐튼 교토에서 그란 레스파이어로 캐리어를 보내는 날이에요. 프런트 접수 마감과 오사카 호텔 수령 시각을 예약 내역에서 확인해 두세요. 지금은 10:45 접수, 저녁 수령으로 넣어 뒀어요.'},
-    ...(fd>=0&&DAYS[fd].dn!==6?[{day:fd,soft:1,href:TAKA,link:'다카시마야 판매 안내',t:'후타바는 14:00 판매분을 노려요',b:'다카시마야 지하 1층에서 매일 11:00와 14:00에 판매를 시작하고 수량이 한정돼 있어요. 웹 예약은 2개입과 3개입만, 수령 전날 정오까지예요.'}]:[]),
+    ...(fd>=0&&DAYS[fd].dn!==6?[{day:fd,soft:1,href:TAKA,link:'다카시마야 판매 안내',t:'후타바는 14:00 판매분을 노려요',b:'다카시마야 지하 1층에서 11:00와 14:00에 판매를 시작하고 수량이 한정돼 있어요. 웹 예약을 하면 18:00까지 받을 수 있는데, 5일 수령분은 4일 정오까지라 출발 전에 해야 해요.'}]:[]),
     {day:0,soft:1,t:'하루카는 17:44 열차가 목표예요',b:'빠르면 17:14, 늦으면 18:15 열차예요. 18:15 열차를 타도 19:35쯤 교토역에 도착해서 20:30 츠무기 예약에 맞출 수 있어요. 표는 미리 사 두고 좌석은 도착해서 다음 열차로 잡으세요.'},
     {day:2,soft:1,t:'힐튼 교토는 1박 예약 두 건이에요',b:'6일 밤과 7일 밤이 따로 예약돼 있어요. 체크인할 때 두 예약을 이어서 같은 방을 쓰게 해 달라고 요청하면 7일에 방을 옮기지 않아도 돼요.'},
     {day:sd<0?null:sd,soft:1,t:'스시젠은 현금을 챙기세요',b:'예약 없이 10:00부터 현장에서 기다려요. 평일 10:00–18:00 영업이고 현금 결제만 된다는 후기가 있어요.'},
@@ -1121,7 +1128,7 @@ const PREP=[
   {g:'옷과 비 대비',items:[['cl-umb','접이식 우산 (4–6일 비 예보)'],['cl-shell','방수 자켓이나 바람막이'],['cl-shoes','젖어도 되는 편한 신발'],['cl-socks','여벌 양말'],['cl-layer','아침용 얇은 겉옷 (최저 15–18도)'],['cl-day','낮에 입을 반팔과 얇은 긴팔 (최고 23–28도)'],['cl-sleep','잠옷과 속옷']]},
   {g:'세면과 건강',items:[['hy-wash','세면도구와 스킨케어'],['hy-sun','선크림 (7일부터 맑음)'],['hy-med','상비약 (소화제, 진통제, 밴드)'],['hy-eye','안경이나 렌즈']]},
   {g:'쇼핑 대비',items:[['sh-bag','접이식 보조가방'],['sh-space','캐리어에 빈 공간 남기기'],['sh-weight','위탁 수하물 허용 무게 확인'],['sh-tax','면세용 여권 지참']]},
-  {g:'출발 전에 할 일',items:[['td-okonomi','오코노미야키 쇼 방문 예약 (7일 19:30)'],['td-haruka','하루카 표 미리 사 두기'],['td-airporter','Airporter 예약 확인 (8일, 힐튼에서 그란 레스파이어)'],['td-futaba','후타바 웹 예약 (7일 수령분은 6일 정오까지)'],['td-taxi','택시 앱 GO 설치'],['td-fx','환전']]}
+  {g:'출발 전에 할 일',items:[['td-okonomi','오코노미야키 쇼 방문 예약 (7일 19:30)'],['td-haruka','하루카 표 미리 사 두기'],['td-airporter','Airporter 예약 확인 (8일, 힐튼에서 그란 레스파이어)'],['td-futaba','후타바 웹 예약 (선택, 5일 수령분은 4일 정오까지)'],['td-taxi','택시 앱 GO 설치'],['td-fx','환전']]}
 ];
 const SHOP=[
   {g:'드럭스토어',items:[['bu-kao','카오 화이트 비누'],['bu-laundrin','란도린 섬유유연제 향수']]},
