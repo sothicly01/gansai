@@ -312,7 +312,9 @@ button.tl-title:hover{text-decoration-color:currentColor}
 .pay-sum{margin-top:22px;display:flex;flex-wrap:wrap;gap:14px 36px;align-items:flex-end}
 .pay-sum p{font-size:.85rem;color:var(--ink2)}
 .pay-sum b{font-family:var(--display);font-size:1.5rem;font-variant-numeric:tabular-nums}
-.rate{margin-left:auto;font-size:.9rem;color:var(--ink2)}
+.rate{margin-left:auto;font-size:.9rem;color:var(--ink2);text-align:right}
+.pay-sum .rate-info{font-size:.8rem;margin-top:4px}
+.rate-info .linkbtn{font-size:.8rem}
 .rate input{width:4.4rem;padding:6px 8px;border-radius:8px;border:1.5px solid var(--line);background:var(--surface);text-align:right}
 .cardgrid{margin-top:18px;display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(192px,1fr))}
 .kcard{background:var(--surface);border-radius:14px;overflow:hidden;box-shadow:inset 0 0 0 1px var(--line)}
@@ -341,9 +343,15 @@ button.tl-title:hover{text-decoration-color:currentColor}
 #cards h3{font-family:var(--display);font-weight:700;font-size:1.25rem}
 #cards .notes-h{margin-top:34px}
 .payform{margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.payform label{display:grid;gap:4px;font-size:.85rem;color:var(--ink2)}
+.payform label{display:grid;gap:4px;font-size:.85rem;color:var(--ink2);min-width:0}
+@media (max-width:560px){.payform label{grid-column:1/-1}.payform label.half{grid-column:auto}}
 .payform .wide,.payform .btn,.payform .qp-state{grid-column:1/-1}
-.payform input,.payform select,.quickpay input,.quickpay select{padding:9px 10px;border-radius:10px;border:1.5px solid var(--line);background:var(--surface);min-width:0;width:100%}
+.payform input,.payform select,.quickpay input,.quickpay select{padding:9px 10px;border-radius:10px;border:1.5px solid var(--line);background-color:var(--surface);min-width:0;width:100%}
+.payform input,.payform select,.quickpay input,.quickpay select{box-sizing:border-box;height:44px;font-size:1rem;line-height:1.2;margin:0;-webkit-appearance:none;appearance:none;max-width:100%}
+.payform select,.quickpay select{background-image:linear-gradient(45deg,transparent 50%,var(--ink2) 50%),linear-gradient(135deg,var(--ink2) 50%,transparent 50%);background-position:calc(100% - 17px) 19px,calc(100% - 12px) 19px;background-size:5px 5px,5px 5px;background-repeat:no-repeat;padding-right:28px;text-overflow:ellipsis}
+.payform input[type="date"]{display:block;min-width:0;text-align:left}
+.payform input[type="date"]::-webkit-date-and-time-value{text-align:left;margin:0}
+.payform input[type="date"]::-webkit-calendar-picker-indicator{margin:0;padding:0}
 .pday{margin-top:18px}
 .pday h4{margin:0;font-size:.95rem}
 .pday h4 small{font-weight:400;color:var(--ink2);margin-left:6px}
@@ -365,7 +373,9 @@ button.tl-title:hover{text-decoration-color:currentColor}
 .gnote{font-size:.84rem;color:var(--ink2);margin-top:4px}
 .tl-pay{font-size:.86rem;color:var(--ink2);margin-top:4px}
 .leg-pay{margin-left:8px;font-size:.8rem;font-weight:600;color:var(--k-haru);white-space:nowrap}
-.quickpay{margin-top:10px;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr) 4.6rem auto;gap:6px}
+.quickpay{margin-top:10px;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr) 4.8rem auto;gap:6px}
+.quickpay .btn{height:44px;padding-block:0}
+@media (max-width:420px){.quickpay{grid-template-columns:minmax(0,1fr) 4.8rem auto}.quickpay #qpCard{grid-column:1/-1}}
 .qp-state{font-size:.85rem;color:var(--ink2);margin-top:4px}
 .backup{margin-top:22px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 .backup label{cursor:pointer}
@@ -462,8 +472,8 @@ dialog::backdrop{background:rgba(8,14,26,.55)}
           <label>날짜<input type="date" id="pfDate" min="2026-09-17" max="2026-11-30"></label>
           <label>카드<select id="pfCard"></select></label>
           <label class="wide">매장 종류<select id="pfType"></select></label>
-          <label>금액<input type="number" id="pfAmt" inputmode="numeric" min="0" placeholder="0"></label>
-          <label>통화<select id="pfCur"><option value="JPY">엔</option><option value="KRW">원</option></select></label>
+          <label class="half">금액<input type="number" id="pfAmt" inputmode="numeric" min="0" placeholder="0"></label>
+          <label class="half">통화<select id="pfCur"><option value="JPY">엔</option><option value="KRW">원</option></select></label>
           <label class="wide">메모<input type="text" id="pfMemo" maxlength="60" placeholder="가게 이름"></label>
           <button type="button" class="btn" id="pfAdd">기록 추가</button>
           <span class="qp-state" id="pfState" role="status"></span>
@@ -484,7 +494,8 @@ dialog::backdrop{background:rgba(8,14,26,.55)}
       <li>Uber 코드는 신규 TSUKIMIRFT (50%, 최대 1,500엔, 1회), 기존 TSUKIMIERI (25%, 최대 500엔, 2회)이고 10월 18일까지예요.</li>
       <li>Haru 누적 이벤트와 JCB 20%가 함께 적용되는지는 신한카드에 확인이 필요해요.</li>
       <li>롯데 이벤트에 앱과 온라인 결제가 포함되는지, 네이버·롯데·KB의 상시 해외 적립률은 확인하지 못했어요.</li>
-      <li>엔당 8.64원은 10월 1일 무렵의 시장 환율이에요. 카드 청구 금액은 해외 수수료 때문에 1–2% 높게 잡히니, 명세서가 나오면 위 칸을 고치세요.</li>
+      <li>환율은 페이지를 열 때 그날의 기준 환율을 불러와요. 하루에 한 번 바뀌는 값이고, 못 불러오면 10월 1일 환율 8.64원을 써요.</li>
+      <li>카드 청구 금액은 해외 수수료 때문에 기준 환율보다 1–2% 높게 잡혀요. 명세서를 보고 직접 고치면 그 값이 유지돼요.</li>
       <li>환급액은 정리해 둔 이벤트 조건으로 계산한 예상치예요. 실제 지급은 카드사 기준을 따라요.</li>
     </ul>
     <div class="backup"><button type="button" class="btn ghost" id="bkExport">기록 백업 파일 받기</button><label class="btn ghost">백업 파일 불러오기<input type="file" id="bkImport" accept="application/json,.json" hidden></label><span class="qp-state" id="bkState" role="status"></span></div>
@@ -928,6 +939,8 @@ const Store=(()=>{
     payAdd(e){s.pay.list.push(Object.assign({id:'p'+Date.now().toString(36)+Math.random().toString(36).slice(2,5),ts:Date.now()},e));put('pay',s.pay);emit()},
     payDel(id){s.pay.list=s.pay.list.filter(x=>x.id!==id);put('pay',s.pay);emit()},
     payRate(r){s.pay.rate=r;s.pay.rateUser=true;put('pay',s.pay);emit()},
+    payRateAuto(r){if(s.pay.rateUser||s.pay.rate===r)return;s.pay.rate=r;put('pay',s.pay);emit()},
+    payRateReset(r){s.pay.rateUser=false;s.pay.rate=r>0?r:RATE0;put('pay',s.pay);emit()},
     dump(){return {v:1,checks:s.checks,notes:s.notes,custom:s.custom,pay:s.pay,ui:s.ui}},
     load(o){if(!o||typeof o!=='object')return false;
       ['checks','notes','custom','ui'].forEach(k=>{if(o[k]&&typeof o[k]==='object'){s[k]=o[k];put(k,s[k])}});
@@ -996,6 +1009,20 @@ const GUIDE=[
   {g:'숙박과 온라인',rows:[['호텔 현지 결제','hotel','Haru 100만원을 채우는 가장 큰 결제예요.'],['해외 사이트 예약, 입장권 앱 결제','online','네이버는 오프라인 실물 결제만 인정돼요.']]}
 ];
 let guideTab='';
+let FX=null;
+async function loadRate(){
+  const pick=async(url,when)=>{const r=await fetch(url);if(!r.ok)throw new Error('fx');const d=await r.json();return {rate:d&&d.rates?d.rates.KRW:NaN,date:when(d)}};
+  const tries=[
+    ()=>pick('https://api.frankfurter.dev/v1/latest?base=JPY&symbols=KRW',d=>d.date),
+    ()=>pick('https://api.frankfurter.app/latest?base=JPY&symbols=KRW',d=>d.date),
+    ()=>pick('https://open.er-api.com/v6/latest/JPY',()=>'')
+  ];
+  let got=null;
+  for(const t of tries){try{const x=await t();if(x.rate>5&&x.rate<20){got=x;break}}catch(e){}}
+  if(!got)return;
+  FX={rate:Math.round(got.rate*100)/100,date:/^\d{4}-\d{2}-\d{2}$/.test(got.date||'')?`${+got.date.slice(5,7)}월 ${+got.date.slice(8,10)}일`:''};
+  if(Store.s.pay.rateUser||Store.s.pay.rate===FX.rate)renderPay();else Store.payRateAuto(FX.rate);
+}
 function renderPay(){
   const S=payState();
   const bar=(cur,goals,cls)=>{const g=goals.find(x=>cur<x)||goals[goals.length-1],pct=Math.min(100,Math.round(cur/g*100));
@@ -1003,7 +1030,8 @@ function renderPay(){
   const tick=(ok,t,bad)=>`<li class="${ok?'ok':bad?'bad':''}">${esc(t)}</li>`;
   const jr=(n,o)=>`<li class="${o.earn>=o.cap?'ok':''}"><span>${n}</span><b>${o.earn?yen(o.earn):'–'}</b><small>${yen(o.y)} 결제, ${yen(o.min)}부터 적용, 상한 ${yen(o.cap)}</small></li>`;
   $('#paySum').innerHTML=`<div><p>지금까지 결제</p><b>${won(S.total)}</b></div><div><p>예상 환급</p><b>${won(S.refund)}</b></div><div><p>환급률</p><b>${S.total?(S.refund/S.total*100).toFixed(1)+'%':'–'}</b></div>
-    <label class="rate">엔당 <input type="number" id="payRate" inputmode="decimal" step="0.01" min="5" max="20" value="${S.rate}"> 원</label>`;
+    <div class="rate"><label>엔당 <input type="number" id="payRate" inputmode="decimal" step="0.01" min="5" max="20" value="${S.rate}"> 원</label>
+      <p class="rate-info">${Store.s.pay.rateUser?`직접 입력한 값이에요. <button type="button" class="linkbtn" data-rateauto="1">자동 환율로</button>`:FX?`${FX.date?FX.date+' ':''}기준 환율을 불러왔어요.`:'10월 1일 환율이에요. 불러오면 바뀌어요.'}</p></div>`;
   $('#cardGrid').innerHTML=`
     <article class="kcard k-naver"><header><h4>네이버페이 머니카드</h4><p>10월 14일까지, 오프라인 실물 결제만</p></header><div class="kc-body">
       <p class="kc-big">${won(S.nEarn)} <small>최대 20만원</small></p><p class="kc-sub">오프라인 누적 ${won(S.nTot)}</p>${bar(S.nTot,[500000,1000000,1500000],'naver')}
@@ -1448,10 +1476,11 @@ function selectDay(i,scroll){
   if(scroll)$('#days').scrollIntoView({behavior:'smooth',block:'start'});
 }
 document.addEventListener('click',e=>{
-  const t=e.target.closest('[data-day],[data-place],[data-goto],[data-del],[data-addbtn],[data-scroll],[data-gtab],[data-paydel],#memoSave,#dayMemoSave,#pfAdd,#qpAdd,#bkExport');
+  const t=e.target.closest('[data-day],[data-place],[data-goto],[data-del],[data-addbtn],[data-scroll],[data-gtab],[data-paydel],[data-rateauto],#memoSave,#dayMemoSave,#pfAdd,#qpAdd,#bkExport');
   if(!t)return;
   if(t.dataset.gtab){guideTab=guideTab===t.dataset.gtab?'':t.dataset.gtab;renderPay();const b=$(`[data-gtab="${t.dataset.gtab}"]`);if(b)b.focus();return}
   if(t.dataset.paydel){Store.payDel(t.dataset.paydel);return}
+  if(t.dataset.rateauto){Store.payRateReset(FX?FX.rate:0);return}
   if(t.id==='pfAdd'){const amt=+$('#pfAmt').value;if(!(amt>0)){$('#pfAmt').focus();return}
     Store.payAdd({date:$('#pfDate').value||'2026-10-04',card:$('#pfCard').value,type:$('#pfType').value,cur:$('#pfCur').value,amt,memo:$('#pfMemo').value.trim().slice(0,60)});
     $('#pfAmt').value='';$('#pfMemo').value='';$('#pfState').textContent='기록했어요';return}
@@ -1492,6 +1521,8 @@ Store.on(()=>{const k=JSON.stringify(Store.s.weather);if(k===wxKey)return;wxKey=
 /* ---------- boot ---------- */
 renderRibbon();renderScene();renderDay();renderIssues();renderStays();renderRsv();renderLists();initPayForm();renderPay();
 loadLive();
+loadRate();
+setInterval(loadRate,6*60*60*1000);
 setInterval(loadLive,30*60*1000);
 setInterval(renderNow,30*1000);
 })();
