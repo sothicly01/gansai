@@ -71,11 +71,11 @@ fieldset{border:0;min-width:0}
 .tnum{font-variant-numeric:tabular-nums}
 
 /* hero */
-.hero{padding-top:clamp(20px,4vw,44px)}
-.hero-top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px 32px}
-h1{font-family:var(--display);font-weight:800;font-size:clamp(1.5rem,4.2vw,2.5rem);line-height:1.2;letter-spacing:-0.02em}
-.hero-sub{margin-top:8px;color:var(--ink2);font-size:1rem}
-.dday{font-family:var(--display);font-weight:700;font-size:1.15rem;padding:10px 16px;border:1.5px solid var(--ink);border-radius:999px;white-space:nowrap}
+.hero{padding-top:clamp(14px,2.4vw,26px)}
+.hero-top{display:flex;align-items:center;justify-content:space-between;gap:12px 24px}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(1.15rem,2.6vw,1.7rem);line-height:1.25;letter-spacing:-0.015em}
+.hero-sub{margin-top:2px;color:var(--ink2);font-size:.92rem}
+.dday{font-family:var(--display);font-weight:700;font-size:.95rem;padding:6px 14px;border:1.5px solid var(--ink);border-radius:999px;white-space:nowrap}
 
 /* city band + ribbon */
 .cityband{display:grid;grid-template-columns:repeat(16,1fr);gap:0;margin-top:clamp(16px,2.6vw,24px);font-size:.85rem;font-weight:600;color:var(--ink2)}
@@ -106,7 +106,7 @@ h1{font-family:var(--display);font-weight:800;font-size:clamp(1.5rem,4.2vw,2.5re
 }
 
 /* city scene */
-.scene{position:relative;margin:clamp(16px,2.8vw,26px) 0 0;border-radius:18px;overflow:hidden;height:clamp(178px,31vw,350px);background:var(--sky2);--sky1:#93BEE2;--sky2:#F3E6C4}
+.scene{position:relative;margin:0;border-radius:18px;overflow:hidden;height:clamp(150px,26vw,300px);background:var(--sky2);--sky1:#93BEE2;--sky2:#F3E6C4}
 .scene.sk-rain,.scene.sk-raincloud{--sky1:#8598AE;--sky2:#C6D1DC}
 .scene.sk-cloud{--sky1:#A4B3C3;--sky2:#DDE4EA}
 .scene.sk-sun{--sky1:#6FB1E8;--sky2:#FBE6A8}
@@ -134,22 +134,33 @@ h1{font-family:var(--display);font-weight:800;font-size:clamp(1.5rem,4.2vw,2.5re
 .plan-opt:has(input:focus-visible){outline:2.5px solid var(--indigo);outline-offset:2px}
 .plan-hint{margin-top:8px;font-size:.9rem;color:var(--ink2)}
 
-/* nav */
-.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;margin-top:28px;background:color-mix(in srgb,var(--paper) 90%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-block:1px solid var(--line)}
-.nav ul{display:flex;gap:4px;overflow-x:auto;padding-block:8px;scrollbar-width:none}
-.nav ul::-webkit-scrollbar{display:none}
-.nav button{display:block;padding:6px 12px;border:0;border-radius:999px;background:none;color:var(--ink);font-weight:500;font-size:.95rem;white-space:nowrap}
+/* menu */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;margin-top:14px;background:color-mix(in srgb,var(--paper) 92%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-block:1px solid var(--line)}
+.nav ul{display:flex;gap:4px;padding-block:8px}
+.nav button{display:block;padding:7px 14px;border:0;border-radius:999px;background:none;color:var(--ink);font-weight:600;font-size:.95rem;white-space:nowrap}
 .nav button:hover{background:var(--sunken)}
-.nav .count{margin-left:6px;font-size:.8rem;color:var(--ink2)}
-.nav .count.alert{color:var(--verm);font-weight:600}
+.nav button[aria-current="true"]{background:var(--ink);color:var(--paper)}
+.nav .count{margin-left:5px;font-size:.78rem;font-weight:500;opacity:.75}
+.nav .count.alert{color:var(--verm);opacity:1;font-weight:700}
+.nav button[aria-current="true"] .count.alert{color:inherit}
+.view[hidden]{display:none}
+@media (max-width:720px){
+  body{padding-bottom:calc(62px + env(safe-area-inset-bottom,0px))}
+  .hero-sub{display:none}
+  .nav{position:fixed;left:0;right:0;top:auto;bottom:0;margin:0;border-bottom:0;background:var(--paper);padding-bottom:env(safe-area-inset-bottom,0px)}
+  .nav .wrap{padding-inline:6px}
+  .nav ul{gap:2px;padding-block:6px}
+  .nav li{flex:1;min-width:0}
+  .nav button{width:100%;padding:10px 2px;font-size:.84rem;border-radius:12px;text-align:center}
+  .nav .count{margin-left:3px;font-size:.7rem}
+}
 
-section{padding-block:clamp(36px,6vw,64px)}
-section + section{border-top:1px solid var(--line)}
+section{padding-block:clamp(18px,3.4vw,36px)}
 h2{font-family:var(--display);font-weight:700;font-size:clamp(1.5rem,3.6vw,2.1rem);line-height:1.25;letter-spacing:-0.015em}
 .sec-lede{margin-top:8px;color:var(--ink2);max-width:62ch}
 
 /* day view */
-.day-grid{display:grid;gap:32px}
+.day-grid{display:grid;gap:22px;margin-top:22px}
 @media (min-width:920px){.day-grid{grid-template-columns:minmax(0,1fr) minmax(0,440px);gap:48px;align-items:start}.map-col{position:sticky;top:calc(env(safe-area-inset-top,0px) + 68px)}}
 .day-head p{color:var(--ink2)}
 .day-head .day-date{font-weight:600;color:var(--ink)}
@@ -159,7 +170,7 @@ h2{font-family:var(--display);font-weight:700;font-size:clamp(1.5rem,3.6vw,2.1re
 .linkbtn{background:none;border:0;padding:0;color:var(--indigo);font-weight:600;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;text-align:left}
 
 .tl{margin-top:24px}
-.tl-item{display:grid;grid-template-columns:3.9rem 30px minmax(0,1fr) auto;column-gap:10px;position:relative;padding-bottom:18px}
+.tl-item{display:grid;grid-template-columns:3.9rem 30px minmax(0,1fr);column-gap:10px;position:relative;padding-bottom:18px}
 .tl-leg{display:grid;grid-template-columns:3.9rem 30px minmax(0,1fr);column-gap:10px;position:relative;padding-bottom:16px;color:var(--ink2);font-size:.9rem}
 .tl-leg::before{content:"";position:absolute;left:calc(3.9rem + 10px + 14px);top:0;bottom:0;border-left:1.5px dashed var(--line)}
 .tl-leg .tl-time{font-size:.9rem;font-weight:600;color:var(--ink);padding-top:1px}
@@ -192,19 +203,19 @@ h2{font-family:var(--display);font-weight:700;font-size:clamp(1.5rem,3.6vw,2.1re
 .keys b{font-variant-numeric:tabular-nums}
 .todo{margin-top:18px}
 .todo legend{font-weight:600;padding:0}
-.daymemo{margin-top:26px}
+.daymemo{margin-top:0}
 .daymemo label{font-weight:600}
 .daymemo textarea{width:100%;margin-top:6px;padding:10px 12px;border-radius:10px;border:1.5px solid var(--line);background:var(--surface);resize:vertical;min-height:72px}
 .tl-item::before{content:"";position:absolute;left:calc(3.9rem + 10px + 14px);top:30px;bottom:0;width:1.5px;background:var(--line)}
 .tl-item:last-child::before{display:none}
-.tl-time{font-weight:600;font-size:.98rem;padding-top:3px;text-align:right;font-variant-numeric:tabular-nums;line-height:1.3}
+.tl-time{font-weight:600;font-size:.9rem;padding-top:5px;text-align:right;font-variant-numeric:tabular-nums;line-height:1.3;color:var(--indigo)}
 .tl-time small{display:block;font-weight:400;font-size:.8rem;color:var(--ink2)}
 .tl-mark{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--surface);box-shadow:inset 0 0 0 1.5px currentColor;z-index:1}
 .tl-mark svg{width:17px;height:17px}
 .tl-item.minor .tl-mark{width:14px;height:14px;margin:8px;box-shadow:none;background:currentColor;opacity:.55}
 .tl-item.minor .tl-mark svg{display:none}
 .tl-body{padding-top:2px;min-width:0}
-.tl-title{font-weight:600;font-size:1.02rem}
+.tl-title{font-weight:600;font-size:1.06rem}
 button.tl-title{background:none;border:0;padding:0;text-align:left;text-decoration:underline;text-decoration-color:color-mix(in srgb,currentColor 35%,transparent);text-decoration-thickness:1.5px;text-underline-offset:4px}
 button.tl-title:hover{text-decoration-color:currentColor}
 .tl-note{font-size:.92rem;color:var(--ink2);margin-top:2px}
@@ -212,7 +223,48 @@ button.tl-title:hover{text-decoration-color:currentColor}
 .tl-warn b,.warnbox b{color:var(--verm);font-weight:600}
 .cat-eat{color:var(--c-eat)}.cat-cafe{color:var(--c-cafe)}.cat-sight{color:var(--c-sight)}.cat-shop{color:var(--c-shop)}
 .cat-move{color:var(--c-move)}.cat-stay{color:var(--c-stay)}.cat-todo{color:var(--c-todo)}.cat-rest{color:var(--c-rest)}
-.tl-item .tl-time,.tl-item .tl-body{color:var(--ink)}
+.tl-item .tl-body{color:var(--ink)}
+.tl-mc{display:flex;flex-direction:column;align-items:center;gap:1px;z-index:1}
+.tl-cat{font-size:.66rem;font-weight:600;line-height:1.3;background:var(--paper);white-space:nowrap}
+.tl-head{display:flex;align-items:flex-start;gap:7px}
+.tl-head>span:last-child{min-width:0}
+.pinno{flex:none;display:inline-grid;place-items:center;min-width:19px;height:19px;padding:0 5px;border-radius:999px;background:currentColor;margin-top:4px}
+.pinno b{color:var(--pin-ink);font-size:.72rem;font-weight:700}
+.tl-item.past,.tl-leg.past{opacity:.42}
+.tl-paid{font-size:.86rem;margin-top:3px;font-variant-numeric:tabular-nums}
+.paybtn{margin-top:6px;padding:5px 12px;border-radius:999px;border:1.5px solid var(--line);background:var(--surface);font-size:.84rem;font-weight:600}
+.paybtn:hover{border-color:var(--ink)}
+.now-acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.now .now-acts .btn.light{margin-top:0;padding:8px 14px;font-size:.9rem}
+#nowCard .now{margin-top:0;margin-bottom:12px}
+#nowCard .now p{color:inherit}
+.intrip .scene{height:clamp(84px,14vw,150px)}
+.intrip .scene-city{font-size:clamp(1.4rem,3.4vw,2.4rem)}
+.intrip .scene-wx{display:none}
+.intrip .lists #shopList{order:-1}
+.issue.okd{opacity:.5;border-left-color:var(--line)}
+.iss-ok{display:block;margin-top:12px;font-size:.9rem;cursor:pointer}
+.iss-ok input{width:18px;height:18px;margin:0 6px 0 0;vertical-align:-3px;accent-color:var(--moss)}
+.saylist{margin-top:4px;display:grid;gap:6px;font-size:.95rem}
+.qr-mid{display:grid;place-items:center;width:100%}
+#bigText{text-align:center;padding:0 6px;max-width:640px}
+#bigText .big-ja{font-size:clamp(2rem,8.6vw,3.2rem);font-weight:700;line-height:1.35;word-break:normal;overflow-wrap:anywhere}
+#bigText .big-sub{margin-top:16px;font-size:clamp(1.1rem,4.6vw,1.5rem);font-weight:500;color:#333;line-height:1.5}
+#qrCap{color:#555;font-weight:600}
+.tl-item.flash{animation:flash 1.6s ease}
+@keyframes flash{0%,60%{background:var(--gold-soft)}100%{background:transparent}}
+/* folds */
+.fold{margin-top:12px;border-radius:12px;background:var(--surface);box-shadow:inset 0 0 0 1px var(--line)}
+.fold>summary{list-style:none;cursor:pointer;padding:12px 14px;font-weight:600;display:flex;align-items:center;gap:10px}
+.fold>summary::-webkit-details-marker{display:none}
+.fold>summary::after{content:"";width:8px;height:8px;border-right:2px solid var(--ink2);border-bottom:2px solid var(--ink2);transform:rotate(45deg);flex:none;margin-left:auto;margin-top:-4px}
+.fold[open]>summary::after{transform:rotate(-135deg);margin-top:4px}
+.fold>summary span{font-weight:400;color:var(--ink2);font-size:.9rem}
+.fold-body{padding:0 14px 14px}
+.fold .vary,.fold .todo{margin-top:0}
+.day-head .day-wx{color:var(--ink);margin-top:8px}
+.day-wx a{margin-left:6px;font-size:.88rem}
+.day-wx small{color:var(--ink2);margin-left:4px}
 .empty{margin-top:20px;padding:16px 18px;border-radius:12px;border:1.5px dashed var(--line);color:var(--ink2)}
 
 /* map */
@@ -235,7 +287,10 @@ button.tl-title:hover{text-decoration-color:currentColor}
 .pin:focus-visible circle,.pin:hover circle{stroke:var(--ink)}
 .m-scale{stroke:var(--ink);stroke-width:1.5}
 .m-scale-t{font-family:var(--sans);font-size:11px;fill:var(--ink)}
-.map-cap{padding:12px 16px 4px;font-weight:600}
+.map-cap{padding:12px 16px;font-weight:600;cursor:pointer;list-style:none;display:flex;align-items:center}
+.map-cap::-webkit-details-marker{display:none}
+.map-cap::after{content:"";width:8px;height:8px;border-right:2px solid var(--ink2);border-bottom:2px solid var(--ink2);transform:rotate(45deg);margin-left:auto;margin-top:-4px}
+.map-card[open] .map-cap::after{transform:rotate(-135deg);margin-top:4px}
 .map-foot{padding:0 16px 14px;font-size:.82rem;color:var(--ink2)}
 .legend{padding:8px 8px 10px;display:grid;gap:2px}
 .legend button{display:grid;grid-template-columns:26px minmax(0,1fr) auto;gap:10px;align-items:center;width:100%;background:none;border:0;padding:6px 8px;border-radius:8px;text-align:left}
@@ -307,7 +362,7 @@ button.tl-title:hover{text-decoration-color:currentColor}
 .save-state.bad{color:var(--verm)}
 
 /* cards and payments */
-.k-naver{--kc:var(--k-naver)}.k-haru{--kc:var(--k-haru)}.k-jcb{--kc:var(--k-jcb)}.k-lotte{--kc:var(--k-lotte)}.k-kb{--kc:var(--k-kb)}.k-cash{--kc:var(--k-cash)}
+.k-naver{--kc:var(--k-naver)}.k-haru{--kc:var(--k-haru)}.k-jcb{--kc:var(--k-jcb)}.k-lotte{--kc:var(--k-lotte)}.k-kb,.k-kb2{--kc:var(--k-kb)}.k-cash{--kc:var(--k-cash)}
 .kchip{display:inline-block;font-size:.74rem;font-weight:700;padding:1px 8px;border-radius:6px;color:var(--surface);background:var(--kc);white-space:nowrap;vertical-align:1px}
 .pay-sum{margin-top:22px;display:flex;flex-wrap:wrap;gap:14px 36px;align-items:flex-end}
 .pay-sum p{font-size:.85rem;color:var(--ink2)}
@@ -317,6 +372,7 @@ button.tl-title:hover{text-decoration-color:currentColor}
 .rate-info .linkbtn{font-size:.8rem}
 .rate input{width:4.4rem;padding:6px 8px;border-radius:8px;border:1.5px solid var(--line);background:var(--surface);text-align:right}
 .cardgrid{margin-top:18px;display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(192px,1fr))}
+@media (max-width:720px){.cardgrid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:10px;padding-bottom:8px}.kcard{flex:0 0 80%;scroll-snap-align:start}}
 .kcard{background:var(--surface);border-radius:14px;overflow:hidden;box-shadow:inset 0 0 0 1px var(--line)}
 .kcard header{padding:12px 16px;background:var(--kc);color:var(--surface)}
 .kcard h4{margin:0;font-family:var(--display);font-size:1.05rem}
@@ -338,10 +394,14 @@ button.tl-title:hover{text-decoration-color:currentColor}
 .jrows small{grid-column:1/-1;font-size:.78rem}
 .jrows b{text-align:right;color:var(--ink)}
 .jrows li.ok span:first-child{color:var(--ink);font-weight:600}
-.paycols{margin-top:36px;display:grid;gap:36px}
+.kb2-toggle{display:block;margin-top:14px;font-size:.92rem;cursor:pointer}
+.kb2-toggle input{width:18px;height:18px;margin:0 6px 0 0;vertical-align:-3px;accent-color:var(--k-kb)}
+.kb2-toggle small{display:block;color:var(--ink2);margin:2px 0 0 28px}
+.paycols{margin-top:20px;display:grid;gap:30px}
 @media (min-width:900px){.paycols{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px}}
 #cards h3{font-family:var(--display);font-weight:700;font-size:1.25rem}
-#cards .notes-h{margin-top:34px}
+#cards .notes-h{margin-top:30px}
+.notes-fold{margin-top:24px}
 .payform{margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .payform label{display:grid;gap:4px;font-size:.85rem;color:var(--ink2);min-width:0}
 @media (max-width:560px){.payform label{grid-column:1/-1}.payform label.half{grid-column:auto}}
@@ -403,6 +463,7 @@ button.cost-row:hover{background:var(--surface)}
 .cost-row.total b small{display:block;font-weight:400;font-size:.82rem;color:var(--ink2)}
 .leg-pay{display:block;font-size:.84rem;font-weight:600;color:var(--indigo)}
 .quickpay{margin-top:10px;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr) 4.8rem auto;gap:6px}
+.quickpay #qpType{grid-column:1/-1}
 .quickpay .btn{height:44px;padding-block:0}
 @media (max-width:420px){.quickpay{grid-template-columns:minmax(0,1fr) 4.8rem auto}.quickpay #qpCard{grid-column:1/-1}}
 .qp-state{font-size:.85rem;color:var(--ink2);margin-top:4px}
@@ -415,12 +476,39 @@ footer{padding-block:32px 48px;color:var(--ink2);font-size:.85rem;border-top:1px
 dialog{border:0;padding:0;background:var(--surface);color:var(--ink);width:min(560px,100%);max-width:100%;max-height:88vh;max-height:88dvh;border-radius:20px 20px 0 0;margin:auto auto 0;overflow:auto}
 dialog::backdrop{background:rgba(8,14,26,.55)}
 @media (min-width:720px){dialog{border-radius:18px;margin:auto}}
-.sh{padding:0 22px calc(22px + env(safe-area-inset-bottom,0px))}
-.sh-bar{position:sticky;top:0;display:flex;justify-content:flex-end;padding:10px 10px 0;z-index:2;pointer-events:none}
-.sh-close{pointer-events:auto;background:var(--sunken);border:0;border-radius:999px;padding:6px 14px;font-weight:600;font-size:.9rem}
-.sh-cat{display:flex;align-items:center;gap:6px;font-size:.9rem;font-weight:600}
-.sh-cat svg{width:18px;height:18px}
-.sh h2{margin-top:6px;font-size:1.6rem}
+.sh{padding:14px 20px calc(22px + env(safe-area-inset-bottom,0px))}
+.sh-bar{position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:12px;padding:12px 14px 12px 20px;background:var(--surface);border-bottom:1px solid var(--line)}
+.sh-ttl{min-width:0;flex:1}
+.sh-bar h2{font-size:1.15rem;line-height:1.3;margin:0}
+.sh-close{flex:none;background:var(--sunken);border:0;border-radius:999px;padding:7px 15px;font-weight:600;font-size:.9rem}
+.sh-cat{display:flex;align-items:center;gap:5px;font-size:.78rem;font-weight:600}
+.sh-cat svg{width:15px;height:15px}
+.sh-status{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-top:8px;font-weight:600}
+.qa{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.qa .btn{flex:1 1 0;min-width:88px;padding:11px 10px;font-size:.95rem}
+.qa.big .btn{flex-basis:140px;padding:14px 10px}
+.sh-move{margin-top:14px;padding:10px 12px;border-radius:10px;background:var(--sunken);font-size:.94rem}
+.sh-move b{display:block;font-size:.8rem;color:var(--ink2);font-weight:600}
+.sh details{border-top:1px solid var(--line);margin-top:0}
+.sh details:first-of-type{margin-top:16px}
+.sh details>summary{padding:13px 0;font-weight:600;cursor:pointer;list-style:none;display:flex;align-items:center}
+.sh details>summary::-webkit-details-marker{display:none}
+.sh details>summary::after{content:"";width:8px;height:8px;border-right:2px solid var(--ink2);border-bottom:2px solid var(--ink2);transform:rotate(45deg);margin-left:auto;margin-top:-4px}
+.sh details[open]>summary::after{transform:rotate(-135deg);margin-top:4px}
+.sh details>div{padding-bottom:14px}
+.sh details h3{margin-top:0}
+.hsteps{margin-top:14px;display:grid;gap:0;counter-reset:hs}
+.hsteps li{counter-increment:hs;display:grid;grid-template-columns:26px minmax(0,1fr);gap:10px;padding:6px 0;align-items:baseline}
+.hsteps li::before{content:counter(hs);width:24px;height:24px;border-radius:50%;background:var(--sunken);display:grid;place-items:center;font-size:.78rem;font-weight:700}
+.hsteps li.key{font-weight:700}
+.hsteps li.key::before{background:var(--ink);color:var(--paper)}
+.sh .tl-table{margin-top:10px}
+.sh-small{margin-top:10px;font-size:.84rem;color:var(--ink2)}
+#qrView{width:100%;max-width:100%;height:100%;max-height:100%;margin:0;border-radius:0;background:#fff;color:#111}
+.qr-in{min-height:100%;display:grid;grid-template-rows:auto 1fr auto;gap:14px;justify-items:center;align-items:center;padding:calc(18px + env(safe-area-inset-top,0px)) 18px calc(18px + env(safe-area-inset-bottom,0px))}
+.qr-in p{font-weight:700;font-size:1.05rem;text-align:center}
+.qr-in img{max-width:min(92vw,560px);max-height:70vh;width:auto;height:auto;image-rendering:pixelated}
+.qr-in .btn{background:#111;color:#fff;min-width:160px;padding:13px 20px}
 .sh-alt{color:var(--ink2);font-size:.95rem}
 .sh .warnbox{margin-top:14px}
 .sh-dl{margin-top:16px;border-top:1px solid var(--line)}
@@ -446,54 +534,55 @@ dialog::backdrop{background:rgba(8,14,26,.55)}
 <header class="hero wrap">
   <div class="hero-top">
     <div>
-      <h1>교토에서 나흘 밤,<br>오사카에서 사흘 밤</h1>
-      <p class="hero-sub">2026년 10월 4일 일요일부터 11일 일요일까지. 비로 시작해서 맑게 끝나는 일주일.</p>
+      <h1>교토에서 나흘 밤, 오사카에서 사흘 밤</h1>
+      <p class="hero-sub">2026년 10월 4일 일요일부터 11일 일요일까지</p>
     </div>
     <p class="dday" id="dday"></p>
   </div>
-  <figure class="scene" id="scene"></figure>
-  <div class="cityband" aria-hidden="true"><span class="cb-kyoto">교토 4박</span><span class="cb-osaka">오사카 3박</span></div>
-  <div class="ribbon" id="ribbon" role="tablist" aria-label="날짜 선택"></div>
 </header>
 
-<nav class="nav" aria-label="페이지 안에서 이동">
+<nav class="nav" aria-label="메뉴">
   <div class="wrap"><ul>
-    <li><button type="button" data-scroll="days">일정</button></li>
-    <li><button type="button" data-scroll="issues">확인할 것<span class="count alert" id="navIssues"></span></button></li>
-    <li><button type="button" data-scroll="cards">카드</button></li>
-    <li><button type="button" data-scroll="stays">숙소와 예약</button></li>
-    <li><button type="button" data-scroll="lists">체크리스트<span class="count" id="navChecks"></span></button></li>
+    <li><button type="button" data-view="days" aria-current="true">일정</button></li>
+    <li><button type="button" data-view="issues">확인<span class="count alert" id="navIssues"></span></button></li>
+    <li><button type="button" data-view="cards">카드</button></li>
+    <li><button type="button" data-view="stays">숙소·예약</button></li>
+    <li><button type="button" data-view="lists">체크<span class="count" id="navChecks"></span></button></li>
   </ul></div>
 </nav>
 
 <main>
-  <section id="days"><div class="wrap day-grid">
+  <section id="days" class="view">
+    <div class="wrap">
+      <div id="nowCard"></div>
+      <figure class="scene" id="scene"></figure>
+      <div class="cityband" aria-hidden="true"><span class="cb-kyoto">교토 4박</span><span class="cb-osaka">오사카 3박</span></div>
+      <div class="ribbon" id="ribbon" role="tablist" aria-label="날짜 선택"></div>
+    </div>
+    <div class="wrap day-grid">
     <div>
       <div class="day-head" id="dayHead"></div>
       <ol class="tl" id="timeline"></ol>
       <div id="dayFoot"></div>
     </div>
     <aside class="map-col" aria-label="이날의 동선">
-      <div class="map-card">
-        <p class="map-cap" id="mapCap"></p>
+      <details class="map-card" id="mapBox" open>
+        <summary class="map-cap"><span id="mapCap"></span></summary>
         <div id="map"></div>
-        <ol class="legend" id="legend"></ol>
-        <p class="map-foot">위치를 대략 옮긴 약도예요. 번호를 누르면 상세 정보와 Google 지도 링크가 열려요.</p>
-      </div>
+        <p class="map-foot">번호는 일정의 번호와 같아요. 누르면 그 일정으로 가요. 위치는 대략 옮긴 약도예요.</p>
+      </details>
     </aside>
   </div></section>
 
-  <section id="issues"><div class="wrap">
+  <section id="issues" class="view" hidden><div class="wrap">
     <h2>떠나기 전에 확인할 것</h2>
     <p class="sec-lede">메모를 정리하면서 영업일과 동선을 대조해 봤어요. 그대로 가면 어긋나는 곳들입니다.</p>
     <div class="issues" id="issueList"></div>
   </div></section>
 
-  <section id="cards"><div class="wrap">
+  <section id="cards" class="view" hidden><div class="wrap">
     <h2>카드와 결제</h2>
-    <p class="sec-lede">어디서 어떤 카드를 낼지와 지금까지 채운 실적을 한곳에서 봐요. 결제를 기록하면 일정에 붙은 카드 안내도 따라 바뀌어요.</p>
-    <div class="pay-sum" id="paySum"></div>
-    <div class="cardgrid" id="cardGrid"></div>
+    <p class="sec-lede">결제할 매장과 금액을 넣으면 어떤 카드로 낼지 알려 줘요. 기록하면 일정의 카드 안내도 따라 바뀌어요.</p>
     <div class="paycols">
       <div>
         <h3>다음 결제</h3>
@@ -518,7 +607,11 @@ dialog::backdrop{background:rgba(8,14,26,.55)}
         <div id="guide"></div>
       </div>
     </div>
-    <h3 class="notes-h">알아 둘 것</h3>
+    <h3 class="notes-h">카드별 진행</h3>
+    <div class="pay-sum" id="paySum"></div>
+    <div class="cardgrid" id="cardGrid"></div>
+    <label class="kb2-toggle"><input type="checkbox" id="kb2On"> 아내 KB 카드도 같은 이벤트에 응모했어요 <small>본인 카드와 실적을 따로 계산해요. 끄면 아내 카드는 추천과 카드 선택에서 빠져요.</small></label>
+    <details class="fold notes-fold"><summary>알아 둘 것</summary><div class="fold-body">
     <ul class="sh-list paynotes">
       <li>줄이 그어진 단계는 이미 채운 것이고, 굵은 단계가 지금 낼 카드예요.</li>
       <li>네이버 이벤트는 예산이 떨어지면 일찍 끝날 수 있어요. 정액 혜택 매장은 여행 초반에 결제하세요.</li>
@@ -529,31 +622,39 @@ dialog::backdrop{background:rgba(8,14,26,.55)}
       <li>롯데 이벤트에 앱과 온라인 결제가 포함되는지, 네이버·롯데·KB의 상시 해외 적립률은 확인하지 못했어요.</li>
       <li>환율은 페이지를 열 때 그날의 기준 환율을 불러와요. 하루에 한 번 바뀌는 값이고, 못 불러오면 10월 1일 환율 8.64원을 써요.</li>
       <li>카드 청구 금액은 해외 수수료 때문에 기준 환율보다 1–2% 높게 잡혀요. 명세서를 보고 직접 고치면 그 값이 유지돼요.</li>
+      <li>KB는 본인과 아내 카드 실적을 따로 계산해요. 패션과 백화점은 다음 구간까지 덜 남은 카드를 먼저 추천해요.</li>
       <li>환급액은 정리해 둔 이벤트 조건으로 계산한 예상치예요. 실제 지급은 카드사 기준을 따라요.</li>
     </ul>
+    </div></details>
     <div class="backup"><button type="button" class="btn ghost" id="bkExport">기록 백업 파일 받기</button><label class="btn ghost">백업 파일 불러오기<input type="file" id="bkImport" accept="application/json,.json" hidden></label><span class="qp-state" id="bkState" role="status"></span></div>
   </div></section>
 
-  <section id="stays"><div class="wrap">
+  <section id="stays" class="view" hidden><div class="wrap">
     <h2>숙소와 예약</h2>
     <p class="sec-lede">일곱 밤을 네 곳에서 보내요. 누르면 체크인 날짜와 메모가 열려요.</p>
     <div class="staybar" id="staybar"></div>
     <div class="nightrow" aria-hidden="true"><span>4일 밤</span><span>5일 밤</span><span>6일 밤</span><span>7일 밤</span><span>8일 밤</span><span>9일 밤</span><span>10일 밤</span></div>
-    <p class="stay-sum">숙박비는 863,602원과 61,291엔, 그리고 무료숙박권으로 3박이에요.</p>
-    <div class="rsv">
+        <div class="rsv">
       <h3>식당 일정과 예약</h3>
       <div class="rsv-list" id="rsvList"></div>
     </div>
+    <details class="fold notes-fold"><summary>급할 때 연락처</summary><div class="fold-body"><ul class="sh-list">
+      <li>경찰 <a href="tel:110">110</a>, 구급과 소방 <a href="tel:119">119</a></li>
+      <li>외교부 영사콜센터 (24시간) <a href="tel:+82232100404">+82 2-3210-0404</a></li>
+      <li>일본 관광청 방문객 핫라인 (24시간, 한국어) <a href="tel:+815038162787">050-3816-2787</a></li>
+      <li>카드 분실 신고 번호는 각 카드 뒷면에 있어요. 출발 전에 사진으로 찍어 두세요.</li>
+      <li>숙소 전화번호는 위 숙소 카드를 누르면 나와요.</li>
+    </ul></div></details>
     <div class="rsv">
       <h3>교통비 어림</h3>
       <div class="rsv-list" id="costTable"></div>
       <p class="gnote">택시는 거리로 계산한 미터 요금에 신호 대기 몫 12%를 더한 값이에요. 교토는 900m까지 500엔에 255m마다 100엔, 오사카는 1.2km까지 600엔에 231m마다 100엔이고, 22시부터는 20% 할증이에요. 2명이 한 대를 타는 기준이고, 실제 요금은 길과 정체에 따라 10–20% 달라질 수 있어요.</p>
-      <p class="gnote">택시 구간마다 어떤 앱으로 부를지 적어 뒀어요. Uber 신규 코드는 본인과 아내 계정에서 한 번씩, 가장 비싼 두 구간에 쓰고, GO는 Haru로 5,000엔어치를 타서 JCB 상한을 채워요. Uber로 결제한 건을 기록하면 남은 횟수가 줄어요.</p>
+      <p class="gnote">택시 구간마다 어떤 앱으로 부를지 적어 뒀어요. Uber 신규 코드는 본인과 아내 계정에서 한 번씩, 가장 비싼 두 구간에 쓰고, GO는 Haru로 5,000엔어치를 타서 JCB 상한을 채워요. 일정 선택을 바꾸면 배정도 다시 계산돼요.</p>
       <p class="gnote">앱 호출료, 시내 지하철과 버스, Airporter 요금은 빠져 있어요. 날짜별 일정 선택을 바꾸면 여기도 같이 바뀌어요.</p>
     </div>
   </div></section>
 
-  <section id="lists"><div class="wrap">
+  <section id="lists" class="view" hidden><div class="wrap">
     <h2>체크리스트</h2>
     <p class="sec-lede">체크한 내용은 이 기기의 브라우저에 저장돼서 다음에 열어도 그대로예요.</p>
     <div class="lists">
@@ -570,9 +671,13 @@ dialog::backdrop{background:rgba(8,14,26,.55)}
 </div></footer>
 
 <dialog id="sheet" aria-labelledby="sheetTitle">
-  <div class="sh-bar"><button class="sh-close" id="sheetClose" type="button">닫기</button></div>
+  <div class="sh-bar"><div class="sh-ttl"><p class="sh-cat" id="sheetCat"></p><h2 id="sheetTitle"></h2></div><button class="sh-close" id="sheetClose" type="button">닫기</button></div>
   <div class="sh" id="sheetBody"></div>
 </dialog>
+<dialog id="qrView" aria-label="QR 크게 보기">
+  <div class="qr-in"><p id="qrCap"></p><div class="qr-mid"><img id="qrImg" alt="하루카 교환권 QR"><div id="bigText" hidden></div></div><button class="btn" id="qrClose" type="button">닫기</button></div>
+</dialog>
+<input type="file" id="qrFile" accept="image/*" hidden>
 
 <script>
 (function(){
@@ -657,11 +762,16 @@ function wxOf(dn){
 const HRS='Google 지도 기준, 방문 전 다시 확인';
 const P={
   kix:{n:'간사이 국제공항',a:'関西国際空港 第2ターミナル',c:'move',q:'Kansai International Airport Terminal 2',
-    tips:['제주항공은 제2터미널을 써요. 역이 있는 에어로플라자까지 무료 셔틀버스로 7–10분.','교토로 가는 하루카는 17:44가 목표, 빠르면 17:14, 늦으면 18:15예요. 교토역까지 약 80분.','11일 귀국 때는 우메다에서 리무진버스를 타면 제2터미널까지 바로 가요.']},
+    tips:['제주항공은 제2터미널을 써요. 역이 있는 에어로플라자까지 무료 셔틀버스로 7–10분.','하루카는 제2터미널에서 바로 못 타요. 셔틀로 에어로플라자까지 간 뒤 JR 간사이공항역에서 타요.','11일 귀국 때는 우메다에서 리무진버스를 타면 제2터미널까지 바로 가요.']},
   kyotosta:{n:'교토역',a:'京都駅',c:'move',lat:34.9858,lng:135.7588,q:'京都駅',tips:['택시 승강장은 가라스마 출구 쪽이에요.']},
   limo:{n:'공항 리무진버스 승차장 (우메다)',a:'阪急三番街 · ハービス大阪',c:'move',lat:34.7065,lng:135.4985,q:'関西空港リムジンバス 阪急三番街 のりば',area:'한큐 산반가이, 하비스 오사카 두 곳',
     tips:['버스는 하비스 오사카, 한큐 산반가이, 제1터미널, 제2터미널 순서로 서요.','월도프에서는 한큐 산반가이 쪽이 더 가까워 보여요. 핀은 그 근처를 대략 찍은 거예요.','공항까지 50분에서 1시간쯤, 제2터미널은 조금 더 걸려요. 요금과 시각표는 타기 전에 확인하세요.']},
+  umeda:{n:'한큐 오사카우메다역',a:'阪急 大阪梅田駅',c:'move',lat:34.7055,lng:135.4985,q:'阪急 大阪梅田駅'},
   hankyu:{n:'한큐 교토가와라마치역',a:'阪急 京都河原町駅',c:'move',lat:35.0037,lng:135.7687,q:'阪急 京都河原町駅',tips:['오사카우메다행 특급으로 약 45분.']},
+  haruka:{n:'하루카 (간사이공항 → 교토)',a:'HARUKA TICKET LIMITED EDITION, 편도',c:'move',haruka:1,
+    book:[['가격','1,800엔 × 2명, 구매 완료'],['교환 기한','2026년 12월 20일까지 (발행일 9월 21일)']],
+    links:[['교환 장소','https://www.westjr.co.jp/global/en/ticket/receive/'],['발권기 사용법','https://www.westjr.co.jp/travel-information/en/train-usage-guide/howto/ticket-vending-machine/'],['JR 이용 방법','https://www.westjr.co.jp/travel-information/en/train-usage-guide/howto/']],
+    tips:['교환권은 한 사람에 한 장씩이에요. QR 두 개가 모두 필요해요.','발권기는 여권 마크가 붙은 것을 쓰세요. 여권을 읽힌 뒤 QR을 대는 방식이에요.','제가 확인한 평일 시각표는 17:16, 17:46, 18:16이었어요. 1–2분 차이가 날 수 있으니 역 전광판을 따르세요.','종이 승차권으로 바꾼 뒤에는 환불이 안 돼요.']},
   flightOut:{n:'제주항공 7C1327',a:'김포 → 간사이',c:'move',
     book:[['출발','10월 4일 (일) 13:55, 김포공항 국제선 터미널'],['도착','15:40, 간사이공항 제2터미널'],['운임','스탠다드'],['탑승객','2명'],['탑승구','미정']]},
   flightIn:{n:'제주항공 7C1328',a:'간사이 → 김포',c:'move',
@@ -669,19 +779,19 @@ const P={
     tips:['출발 2시간 전인 14:30까지 제2터미널에 도착하는 것으로 잡았어요.']},
   stay1:{n:'솔라리아 니시테츠 호텔 교토 프리미어',a:'ソラリア西鉄ホテル京都プレミア 三条鴨川',c:'stay',city:'교토',lat:35.0105,lng:135.7709,pid:'ChIJ38cs05IIAWARPYoHAjX4h-0',q:'ソラリア西鉄ホテル京都プレミア 三条鴨川',
     area:'나카교구 가미오사카초 509, 가모가와 강변',tel:'+81 75-708-5757',stay:{in:'10월 4일 (일)',out:'10월 6일 (화)',nights:2,range:'10/4 – 10/6'},
-    book:[['예약 ID','1776828042'],['참조 번호','101197915501'],['객실','트윈 (욕조, 금연) 1실, 성인 2명'],['예약자','Jeonghwan Lee'],['포함','무료 Wi-Fi'],['결제','아고다 캐시 536,063원']],
+    book:[['객실','트윈 (욕조, 금연) 1실, 성인 2명'],['포함','무료 Wi-Fi']],
     tips:['숙박세는 체크인할 때 호텔에 직접 내요.','무료 취소는 10월 2일 전까지. 그 뒤 취소나 노쇼는 전액 부과돼요.','교토역에서 택시로 15분쯤, 야키니쿠 츠무기까지 걸어서 5분 안팎.','6일 아침에 체크아웃하고 힐튼 교토로 옮겨요. 걸어서 3–4분 거리예요.']},
   hilton:{n:'힐튼 교토',a:'Hilton Kyoto',c:'stay',city:'교토',lat:35.0098,lng:135.7691,q:'Hilton Kyoto',area:'가와라마치 산조 북쪽',
     stay:{in:'10월 6일 (화) 15:00',out:'10월 8일 (목) 11:00',nights:2,range:'10/6 – 10/8'},
-    book:[['확인번호','3531964850 (6일 밤)'],['결제','6일 밤은 힐튼·더블트리 무료숙박권'],['확인번호','3100746738 (7일 밤)'],['결제','7일 밤은 61,291엔'],['인원','2명']],
+    book:[['인원','2명']],
     tips:['1박짜리 예약 두 건이에요. 체크인할 때 두 예약을 이어서 같은 방을 쓰게 해 달라고 요청하세요.','6일 아침에는 캐리어만 맡기고 체크인은 저녁에 해요. 솔라리아 니시테츠에서 걸어서 3–4분.','조식은 7일과 8일 아침 07:00–08:00으로 잡혀 있어요.','힐튼 아너스 다이아몬드라면 얼리 체크인과 레이트 체크아웃을 요청해 볼 만해요.','8일 아침에 캐리어를 프런트에 맡기면 Airporter가 그란 레스파이어로 보내요.']},
   granrespire:{n:'호텔 한큐 그란 레스파이어 오사카',a:'ホテル阪急グランレスパイア大阪',c:'stay',city:'오사카',lat:34.7041,lng:135.4941,q:'ホテル阪急グランレスパイア大阪',area:'우메다, 그랜드 그린 오사카',
     tel:'+81 6-6372-8506',stay:{in:'10월 8일 (목)',out:'10월 9일 (금)',nights:1,range:'10/8 – 10/9'},
-    book:[['예약번호','500036662 (웹투어)'],['Booking No','1775139236'],['API No','2609160056-1'],['객실','코너 트윈룸, 2명, 식사 없음, 세금과 봉사료 포함'],['주소','GRAND GREEN OSAKA South Tower, 5-54 Ofuka-cho, Kita-ku'],['결제','포인트 204,326원과 카드 123,213원, 합계 327,539원']],
+    book:[['객실','코너 트윈룸, 2명, 식사 없음, 세금과 봉사료 포함'],['주소','GRAND GREEN OSAKA South Tower, 5-54 Ofuka-cho, Kita-ku']],
     tips:['프런트에 웹투어 바우처를 보여 주세요. 보증금용 카드를 요구할 수 있지만 숙박료는 청구되지 않아요.','체크인에 문제가 생기면 바우처에 적힌 아고다 고객센터 +82 2-6022-2442로.','8일 저녁에 Airporter로 보낸 캐리어가 도착했는지 확인하세요.','다음 숙소인 월도프 아스토리아와 같은 단지라 9일 이동은 걸어서 몇 분이에요.']},
   waldorf:{n:'월도프 아스토리아 오사카',a:'Waldorf Astoria Osaka',c:'stay',city:'오사카',lat:34.7052,lng:135.4926,q:'Waldorf Astoria Osaka',area:'우메다, 그랜드 그린 오사카',
     stay:{in:'10월 9일 (금) 15:00',out:'10월 11일 (일) 12:00',nights:2,range:'10/9 – 10/11'},
-    book:[['확인번호','3514929765'],['결제','힐튼 무료숙박권'],['인원','2명']],
+    book:[['인원','2명']],
     tips:['9일 오전에 그란 레스파이어에서 체크아웃한 뒤 짐부터 맡기세요.','힐튼 아너스 다이아몬드 혜택(조식, 업그레이드, 레이트 체크아웃)을 체크인 때 확인하세요.','9일 모미지 예약은 이 호텔 컨시어지가 잡아 줬어요. 변경도 컨시어지에 요청하세요.','10일과 11일 아침은 다이아몬드 혜택으로 호텔 조식.','11일은 12:00 체크아웃 뒤 우메다에서 리무진버스를 타요.']},
   drug:{n:'드럭스토어',a:'마츠모토키요시 등',c:'shop',q:'マツモトキヨシ 京都 河原町',
     buy:['카오 화이트 비누','란도린 섬유유연제 향수'],
@@ -703,7 +813,7 @@ const P={
   kiki:{n:'TEA ROOM KIKI',a:'紅茶&スコーン専門店 京都・嵐山本店',c:'cafe',lat:35.0166,lng:135.6807,pid:'ChIJGSbcVzGpAWARorIPlY9n7ZU',q:'TEA ROOM KIKI 嵐山',
     area:'사가텐류지 구루마미치초',hours:'매일 09:00–17:00',tel:'+81 75-432-7385'},
   otsuka:{n:'스테이크 오츠카',a:'ステーキおおつか',c:'eat',lat:35.0204,lng:135.6805,pid:'ChIJeVvryfipAWARmfvGZx3CApw',q:'Steak Otsuka Arashiyama',
-    area:'사가텐류지 와카미야초',hours:'11:00–14:30',closed:'목요일, 일요일',tel:'+81 75-864-7989',rsv:{s:'done',when:'10월 5일 (월) 12:00',party:'2명',id:'GJ3YJP',via:'온라인 예약',change:'예약 확인 화면에서 변경과 취소를 할 수 있어요.'},
+    area:'사가텐류지 와카미야초',hours:'11:00–14:30',closed:'목요일, 일요일',tel:'+81 75-864-7989',rsv:{s:'done',when:'10월 5일 (월) 12:00',party:'2명',via:'온라인 예약',change:'예약 확인 화면에서 변경과 취소를 할 수 있어요.'},
     tips:['예약 시간대는 11:00, 12:00, 13:00 세 가지예요.','예약석 말고는 온 순서대로 안내해요.']},
   shopzone:{n:'시내 쇼핑',a:'시조 · 가와라마치 · 산조 일대',c:'shop',lat:35.0062,lng:135.7668,q:'河原町 京都 ショッピング',
     warn:'후지이 다이마루 본관은 재건축으로 2026년 5월 6일부터 휴관 중이에요. 2030년 재개 목표.',
@@ -721,8 +831,7 @@ const P={
   kinkakuji:{n:'금각사',a:'金閣寺 (鹿苑寺)',c:'sight',lat:35.0394,lng:135.7292,q:'金閣寺',area:'기타구',hours:'09:00–17:00'},
   futaba:{n:'데마치 후타바 (다카시마야)',a:'出町ふたば · 京都髙島屋 地下1階 銘菓百選',c:'cafe',lat:35.0033,lng:135.7688,q:'京都高島屋',
     area:'시조 가와라마치, 다카시마야 지하 1층',buy:['마메모치 2개입 2팩, 모두 4개 (560엔 × 2 = 1,120엔)'],
-    rsv:{s:'done',when:'10월 5일 (월) 14:30–18:00 수령',qty:'2개입 2팩',id:'350167',via:'다카시마야 웹 예약',change:'확인 페이지에서 예약번호와 확인 코드로 조회하고 취소해요. 웹 취소는 수령 2시간 전까지.'},
-    book:[['확인 코드','7h964kvlq5i8']],
+    rsv:{s:'done',when:'10월 5일 (월) 14:30–18:00 수령',qty:'2개입 2팩',via:'다카시마야 웹 예약',change:'확인 페이지에서 예약번호와 확인 코드로 조회하고 취소해요. 웹 취소는 수령 2시간 전까지.'},
     links:[['예약 확인 페이지','https://takashimaya-2.resv.jp/user/usr_cancel_guest.php'],['다카시마야 판매와 예약 안내','https://www.takashimaya.co.jp/kyoto/departmentstore/topics/13_1_20230208180556/']],
     tips:['18:00까지 받지 않으면 예약이 취소돼요.','계산대 줄 맨 뒤에 서서 예약번호 화면을 보여 주면 돼요.','당일에 먹는 떡이에요. 받고 나서 일찍 먹을수록 좋아요.']},
   donki:{n:'돈키호테',a:'ドン・キホーテ 京都四条河原町店',c:'shop',lat:35.0045,lng:135.7692,q:'ドン・キホーテ 京都四条河原町店',area:'시조 가와라마치',tips:['면세 받으려면 여권을 챙기세요.']},
@@ -750,6 +859,18 @@ Object.entries({
   hilton:'7일 밤 숙박비를 현지에서 결제한다면 Haru 누적을 크게 채울 수 있어요.',
   okonomi:'작은 가게라 카드가 되는지는 확인하지 못했어요. 현금도 챙기세요.'
 }).forEach(([k,v])=>{if(P[k])P[k].payNote=v});
+Object.entries({stay1:'ソラリア西鉄ホテル京都プレミア 三条鴨川',hilton:'ヒルトン京都',granrespire:'ホテル阪急グランレスパイア大阪',waldorf:'ウォルドーフ・アストリア大阪',tsumugi:'焼肉 紬',otsuka:'ステーキおおつか',unafuji:'炭焼 うな富士 大丸京都別邸',masters:'マスターズドリームハウス 京都',sushizen:'すし善',katsuda:'京都とんかつ かつ田 四条烏丸店',itadaki:'生ホルモンいただき 四条河原町店',okonomi:'お好み焼き 昌',bushido:'焼肉・ホルモン武士道 梅田のすみっこ店',momiji:'お好み焼き もみじ',tenryuji:'天龍寺',kinkakuji:'金閣寺',shoseien:'渉成園',kenninji:'建仁寺',shirakawa:'祇園白川 巽橋',futaba:'京都髙島屋',donki:'ドン・キホーテ 京都四条河原町店',kyotosta:'京都駅',lucua:'ルクア大阪',inoda:'イノダコーヒ 本店'}).forEach(([k,v])=>{if(P[k])P[k].jp=v});
+Object.entries({stay1:'京都市中京区木屋町通三条上る上大阪町509',hilton:'京都市中京区河原町通三条上る下丸屋町416',granrespire:'大阪市北区大深町5-54 グラングリーン大阪 南館',waldorf:'大阪市北区大深町5-54 グラングリーン大阪 南館',tsumugi:'京都市中京区北車屋町272-1',otsuka:'京都市右京区嵯峨天龍寺若宮町21-3',unafuji:'京都市下京区四条通高倉西入立売西町79 大丸京都店8階',masters:'京都市中京区備前島町310-2 立誠ガーデン ヒューリック京都 1階',okonomi:'京都市中京区紙屋町366 麗峰会館1階',katsuda:'京都市下京区大政所町673-1',momiji:'大阪市天王寺区生玉町9-19',tenryuji:'京都市右京区嵯峨天龍寺芒ノ馬場町68',kinkakuji:'京都市北区金閣寺町1'}).forEach(([k,v])=>{if(P[k])P[k].ja=v});
+const LATE=['예약한 사람인데 10분쯤 늦을 것 같아요.','予約している者ですが、10分ほど遅れます。すみません。'];
+Object.entries({
+  okonomi:[['7일 19시 30분에 두 명 예약할 수 있을까요?','10月7日の19時30分に、2名で予約できますか？'],['그럼 몇 시가 가능한가요?','では、何時なら空いていますか？']],
+  sushizen:[['두 명이에요. 얼마나 기다리나요?','2名です。どのくらい待ちますか？']],
+  hilton:[['예약이 두 건인데, 같은 방에서 이어서 묵을 수 있을까요?','予約が2件ありますが、同じ部屋で続けて泊まれますか？'],['짐을 맡아 주실 수 있나요?','荷物を預かっていただけますか？']],
+  stay1:[['짐을 맡아 주실 수 있나요?','荷物を預かっていただけますか？']],
+  futaba:[['예약한 마메모치를 받으러 왔어요.','予約した豆餅を受け取りに来ました。']],
+  tsumugi:[LATE],otsuka:[LATE],unafuji:[LATE],masters:[LATE],itadaki:[LATE],bushido:[LATE],momiji:[LATE]
+}).forEach(([k,v])=>{if(P[k])P[k].say=v});
+Object.entries({sushizen:'현금만 받는다는 후기가 있어요.',tenryuji:'입장료는 현금으로, 정원 500엔 안팎.',kinkakuji:'입장료는 현금으로, 500엔 안팎.',shoseien:'입장 기부금은 현금으로, 500엔 안팎.',kenninji:'입장료는 현금으로, 800엔 안팎.',okonomi:'카드가 되는지 확인하지 못했어요. 현금을 준비하세요.'}).forEach(([k,v])=>{if(P[k])P[k].cash=v});
 const RSV={need:['현장 예약 필요','need'],unk:['예약 여부 미입력','unk'],walk:['예약 없이 현장 대기','walk'],ok:['일정 있음','ok'],done:['예약 확정','ok']};
 
 /* ---------- days ---------- */
@@ -773,7 +894,7 @@ const EVE5=[
   {t:'22:10',title:'숙소 귀환',p:'stay1',c:'stay',home:1}
 ];
 const DAYTODO={
-  4:[['여권, 모바일 탑승권'],['Visit Japan Web QR'],['하루카 표 (예약 화면)'],['엔화 현금'],['츠무기 예약 화면']],
+  4:[['여권, 모바일 탑승권'],['Visit Japan Web QR'],['하루카 교환권 QR 2매'],['eSIM 회선 전환, 데이터 로밍 확인'],['엔화 현금'],['츠무기 예약 화면']],
   5:[['우산, 젖어도 되는 신발'],['스테이크 오츠카 예약 화면'],['후타바 예약번호와 확인 코드'],['텐류지 입장료용 현금'],['우나후지, 마스터즈 드림 예약 화면']],
   6:[['솔라리아 체크아웃'],['캐리어를 힐튼에 맡기기'],['면세용 여권'],['오코노미야키 쇼 7일 19:30 현장 예약'],['이타다키 예약 화면']],
   7:[['스시젠용 현금'],['오코노미야키 쇼 예약 확인']],
@@ -788,17 +909,17 @@ function buildDays(){
     items:[
       {t:'13:55',end:'15:40',title:'김포 출발, 제주항공 7C1327',p:'flightOut',c:'move',st:'rsv',note:'김포공항 국제선 터미널.'},
       {t:'15:40',title:'간사이공항 제2터미널 도착',p:'kix',c:'move'},
-      {t:'16:50',end:'17:20',title:'입국심사, 수하물, 세관',c:'move',st:'est',note:'착륙 후 70–100분으로 잡았어요.'},
-      {t:'17:20',title:'무료 셔틀버스로 JR 간사이공항역',p:'kix',c:'move',st:'est',note:'하루카는 제2터미널에서 바로 못 타요. 셔틀로 에어로플라자까지 간 뒤 역에서 발권해요. 20–35분.'},
-      {t:'17:44',end:'19:04',title:'하루카로 교토역까지',p:'kix',c:'move',
-        table:[['목표','17:44 출발','19:04 도착'],['빠르면','17:14 출발','18:34쯤 도착'],['늦으면','18:15 출발','19:35쯤 도착']],
-        cost:{yen:4400,label:'방일 외국인용 편도 할인권 2,200엔 × 2명. 정가 지정석은 3,590엔씩이에요.'},
-        note:'제가 확인한 평일 시각표는 17:16, 17:46, 18:16이었어요. 1–2분 차이가 날 수 있으니 역 전광판을 따르세요.'},
+      {t:'15:50',end:'17:20',title:'입국심사, 수하물, 세관',c:'move',st:'est',note:'착륙 후 70–100분으로 잡았어요. 16:50에서 17:20 사이에 끝나요.'},
+      {t:'17:20',title:'셔틀버스로 JR 간사이공항역, 교환권 바꾸기',p:'haruka',c:'move',st:'est',note:'제2터미널 무료 셔틀로 에어로플라자까지 간 뒤, JR 발권기에서 종이 승차권으로 바꿔요.'},
+      {t:'17:44',end:'19:04',title:'하루카로 교토역까지',p:'haruka',c:'move',st:'tix',
+        table:[['현재 목표','17:44 출발','19:04 도착'],['빠르면','17:14 출발','18:34쯤 도착'],['늦으면','18:15 출발','19:35쯤 도착']],
+        cost:{yen:3600,label:'1,800엔 × 2명, 구매 완료'},note:'누르면 QR과 타는 순서가 나와요.'},
       {t:'19:04',title:'교토역 도착',p:'kyotosta',c:'move',noleg:1},
       {t:'19:30',title:'솔라리아 니시테츠 체크인, 쉬기',p:'stay1',c:'stay',mode:'taxi',st:'est',note:'19:25–19:45 도착 예상.'},
+      {t:'20:00',title:'가는 길에 드럭스토어',p:'drug',c:'shop',minor:1,skip:1,note:'카오 화이트 비누, 란도린 섬유유연제 향수.'},
       Object.assign({t:'',note:'21:00까지 영업. 츠무기 가는 길에 7일 19:30으로.'},SHO_VISIT),
       {t:'20:30',end:'22:00',title:'야키니쿠 츠무기',p:'tsumugi',c:'eat',st:'rsv',note:'2명.'},
-      {t:'22:30',title:'드럭스토어',p:'drug',c:'shop',near:1,note:'카오 화이트 비누, 란도린 섬유유연제 향수.'},
+      {t:'22:30',title:'드럭스토어',p:'drug',c:'shop',near:1,note:'앞에서 못 샀을 때만.'},
       {t:'23:00',title:'편의점',p:'conv',c:'shop',near:1,note:'간식, 내일 아침거리, 음료.'},
       {t:'23:30',title:'숙소 귀환',p:'stay1',c:'stay',home:1},
       {t:'24:00',title:'취침',c:'rest'}
@@ -828,11 +949,11 @@ function buildDays(){
       {t:'10:00',end:'11:30',title:'스시젠',p:'sushizen',c:'eat',st:'wait'},
       {t:'11:30',end:'12:30',title:'스타벅스',c:'cafe',near:1},
       {t:'13:00',end:'14:30',title:'금각사',p:'kinkakuji',c:'sight'},
-      {t:'15:10',end:'19:10',title:'못 다 한 쇼핑',p:'shopzone',c:'shop',warn:FUJII},
+      {t:'15:10',end:'16:45',title:'못 다 한 쇼핑',p:'shopzone',c:'shop',warn:FUJII},
       Object.assign({t:'17:00',note:'7일 19:30으로.'},SHO_VISIT),
       {t:'19:30',end:'21:00',title:'나마호르몬 이타다키',p:'itadaki',c:'eat',st:'rsv'},
       {t:'21:10',end:'21:50',title:'돈키호테',p:'donki',c:'shop'},
-      {t:'22:05',title:'힐튼 교토 체크인',p:'hilton',c:'stay',home:1,note:'아침에 맡긴 캐리어를 받아요.'}
+      {t:'22:05',title:'힐튼 교토 체크인',p:'hilton',c:'stay',home:1,note:'예약 두 건을 이어서 같은 방으로 해 달라고 하세요. 아침에 맡긴 캐리어도 받아요.'}
     ]}:v6==='ara'?{title:'아라시야마, 금각사, 힐튼으로 옮기기',items:[
       {t:'06:30',title:'기상, 준비, 솔라리아 체크아웃',c:'rest'},
       {t:'07:35',title:'힐튼 교토에 캐리어 맡기기',p:'hilton',c:'stay',note:'체크인은 저녁에 해요. 지금은 짐만.'},
@@ -842,7 +963,7 @@ function buildDays(){
       Object.assign({t:'17:00',note:'7일 19:30으로. 아직 못 했을 때만.'},SHO_VISIT),
       {t:'19:30',end:'21:00',title:'나마호르몬 이타다키',p:'itadaki',c:'eat',st:'rsv'},
       {t:'21:10',end:'21:50',title:'돈키호테',p:'donki',c:'shop'},
-      {t:'22:05',title:'힐튼 교토 체크인',p:'hilton',c:'stay',home:1,note:'아침에 맡긴 캐리어를 받아요.'}
+      {t:'22:05',title:'힐튼 교토 체크인',p:'hilton',c:'stay',home:1,note:'예약 두 건을 이어서 같은 방으로 해 달라고 하세요. 아침에 맡긴 캐리어도 받아요.'}
     ]}:{title:'쇼세이엔, 시내 쇼핑, 힐튼으로 옮기기',items:[
       {t:'08:00',title:'기상, 준비, 솔라리아 체크아웃',c:'rest'},
       {t:'09:15',title:'힐튼 교토에 캐리어 맡기기',p:'hilton',c:'stay',note:'체크인은 저녁에 해요. 지금은 짐만.'},
@@ -881,12 +1002,13 @@ function buildDays(){
       {t:'07:00',end:'08:00',title:'힐튼 조식',p:'hilton',c:'eat'},
       {t:'08:00',end:'09:00',title:'씻고 준비',c:'rest'},
       {t:'10:45',title:'캐리어를 프런트에 맡기기',p:'hilton',c:'todo',cost:{yen:0,label:'Airporter 요금은 예약 내역을 확인하세요. 아래 합계에는 빠져 있어요.'},warn:'<b>확인 필요</b> Airporter로 그란 레스파이어까지 보내요. 접수 마감과 수령 시각은 예약 내역으로 확인하세요.'},
-      {t:'11:00',title:'힐튼 교토 체크아웃',p:'hilton',c:'stay'},
+      {t:'11:00',title:'힐튼 교토 체크아웃',p:'hilton',c:'stay',payBtn:1,note:'숙박비를 여기서 결제해요.'},
       {t:'11:30',end:'12:15',title:'점심',c:'eat',note:'가게 미정.'},
       {t:'12:30',end:'13:30',title:'겐닌지',p:'kenninji',c:'sight',note:'시간이 없으면 건너뛰어요.'},
       {t:'14:00',end:'14:45',title:'기온 시라카와',p:'shirakawa',c:'sight'},
       {t:'15:00',end:'15:50',title:'한큐 특급으로 오사카우메다',p:'hankyu',c:'move',cost:{yen:820,label:'410엔 × 2명'},note:'교토가와라마치역에서 약 45분. 캐리어는 따로 가니 빈손이에요.'},
-      {t:'16:30',title:'그란 레스파이어 체크인',p:'granrespire',c:'stay',noleg:1,note:'오사카우메다역에서 걸어서 10분쯤.'},
+      {t:'15:50',title:'오사카우메다역 도착',p:'umeda',c:'move',noleg:1},
+      {t:'16:30',title:'그란 레스파이어 체크인',p:'granrespire',c:'stay',note:'프런트에 웹투어 바우처를 보여 주세요.'},
       {t:'17:00',end:'20:05',title:'루쿠아 쇼핑',p:'lucua',c:'shop'},
       {t:'',title:'캐리어 도착 확인',c:'todo',minor:1,note:'Airporter 수령은 저녁 이후예요.'},
       {t:'20:30',end:'22:00',title:'야키니쿠 부시도우',p:'bushido',c:'eat',st:'rsv'},
@@ -917,8 +1039,8 @@ function buildDays(){
       {t:'16:30',end:'18:15',title:'간사이 출발, 제주항공 7C1328',p:'flightIn',c:'move',st:'rsv',note:'김포공항 국제선 터미널 도착.'}
     ]};
   d2.opts=[{id:'ara',label:'아라시야마',sub:'스테이크 오츠카 12:00 예약이 이날이에요.'},{id:'shop',label:'하루 종일 쇼핑',sub:'스시젠으로 시작. 오츠카 예약은 옮기거나 취소해야 해요.'}];d2.sel=v5;
-  d3.opts=[{id:'town',label:'쇼세이엔과 시내 쇼핑',sub:'돈키호테 뒤에 힐튼 체크인, 저녁은 이타다키.'},{id:'city',label:'스시젠과 금각사',sub:'처음 메모의 6일 일정.'},{id:'ara',label:'아라시야마와 금각사',sub:'오츠카 예약을 6일로 바꿔야 해요.'}];d3.sel=v6;
-  d4.opts=[{id:'kinkaku',label:'스시젠과 금각사',sub:'맑은 날 금각사. 저녁은 오코노미야키 쇼.'},{id:'slow',label:'쇼세이엔과 느슨한 오후',sub:'처음 메모의 7일 일정.'}];d4.sel=v7;
+  d3.opts=[{id:'city',label:'스시젠과 금각사',sub:'아라시야마를 5일에 다녀올 때.'},{id:'ara',label:'아라시야마와 금각사',sub:'오츠카 예약을 6일로 바꿔야 해요.'}];d3.sel=v6;
+
   const all=[d1,d2,d3,d4,d5,d6,d7,d8];
   const KEYP={tenryuji:'아라시야마',shoseien:'쇼세이엔',kinkakuji:'금각사',sushizen:'스시젠',katsuda:'카츠다'};
   const where={};Object.keys(KEYP).forEach(k=>where[k]=all.filter(d=>d.items.some(it=>it.p===k)).map(d=>d.dn));
@@ -938,6 +1060,7 @@ const Store=(()=>{
   const RATE0=8.64;
   if(!s.pay||!Array.isArray(s.pay.list))s.pay={rate:RATE0,list:[]};
   if(!s.pay.rateUser||!(s.pay.rate>0))s.pay.rate=RATE0;
+  if(typeof s.pay.kb2!=='boolean')s.pay.kb2=true;
   let db=null,failed=false;
   const dirty={checks:new Set(),notes:new Set(),custom:new Set(),gone:new Set()};
   const chain={};const subs=[];
@@ -981,19 +1104,22 @@ const Store=(()=>{
     payAdd(e){s.pay.list.push(Object.assign({id:'p'+Date.now().toString(36)+Math.random().toString(36).slice(2,5),ts:Date.now()},e));put('pay',s.pay);emit()},
     payDel(id){s.pay.list=s.pay.list.filter(x=>x.id!==id);put('pay',s.pay);emit()},
     payRate(r){s.pay.rate=r;s.pay.rateUser=true;put('pay',s.pay);emit()},
+    img(k){try{return localStorage.getItem(NS+'img:'+k)||''}catch(e){return ''}},
+    setImg(k,v){try{if(v)localStorage.setItem(NS+'img:'+k,v);else localStorage.removeItem(NS+'img:'+k);return true}catch(e){return false}},
+    payKb2(v){s.pay.kb2=!!v;put('pay',s.pay);emit()},
     payRateAuto(r){if(s.pay.rateUser||s.pay.rate===r)return;s.pay.rate=r;put('pay',s.pay);emit()},
     payRateReset(r){s.pay.rateUser=false;s.pay.rate=r>0?r:RATE0;put('pay',s.pay);emit()},
     dump(){return {v:1,checks:s.checks,notes:s.notes,custom:s.custom,pay:s.pay,ui:s.ui}},
     load(o){if(!o||typeof o!=='object')return false;
       ['checks','notes','custom','ui'].forEach(k=>{if(o[k]&&typeof o[k]==='object'){s[k]=o[k];put(k,s[k])}});
-      if(o.pay&&Array.isArray(o.pay.list)){s.pay={rate:o.pay.rateUser&&+o.pay.rate>0?+o.pay.rate:RATE0,rateUser:!!o.pay.rateUser,list:o.pay.list};put('pay',s.pay)}
+      if(o.pay&&Array.isArray(o.pay.list)){s.pay={rate:o.pay.rateUser&&+o.pay.rate>0?+o.pay.rate:RATE0,rateUser:!!o.pay.rateUser,kb2:!!o.pay.kb2,list:o.pay.list};put('pay',s.pay)}
       emit();return true}
   };
 })();
 
 /* ---------- cards and payments ---------- */
-const CARDS={naver:{n:'네이버페이 머니카드',s:'네이버'},haru:{n:'신한 Haru (JCB)',s:'Haru'},lotte:{n:'롯데 Mastercard',s:'롯데'},kb:{n:'KB국민 Visa',s:'KB'},cash:{n:'현금·기타',s:'현금'}};
-const PTYPE={general:'식당·카페·드럭스토어·일반 매장',cvs:'편의점 (세븐일레븐·패밀리마트·로손)',donki:'돈키호테',uniqlo:'유니클로',kbfashion:'GU·BAPE·CdG·BEAMS·HUMAN MADE·KAPITAL·STUSSY',dept:'다이마루·파르코·한큐 교토점',hankyu:'한큐 우메다 본점·한신 우메다·한큐맨즈',ichiran:'이치란라멘',sushiro:'스시로',komeda:'코메다커피',go:'택시앱 GO',uber:'Uber',hotel:'호텔 현지 결제',online:'온라인·앱 결제'};
+const CARDS={naver:{n:'네이버페이 머니카드',s:'네이버'},haru:{n:'신한 Haru (JCB)',s:'Haru'},lotte:{n:'롯데 Mastercard',s:'롯데'},kb:{n:'KB국민 Visa',s:'KB'},kb2:{n:'KB국민 Visa (아내)',s:'KB 아내'},cash:{n:'현금·기타',s:'현금'}};
+const PTYPE={general:'식당·카페·드럭스토어·일반 매장',cvs:'편의점 (세븐일레븐·패밀리마트·로손)',donki:'돈키호테',uniqlo:'유니클로',kbfashion:'GU·BAPE·꼼데가르송·BEAMS·HUMAN MADE·KAPITAL·STUSSY',dept:'다이마루·파르코·한큐 교토점',hankyu:'한큐 우메다 본점·한신 우메다·한큐맨즈',ichiran:'이치란라멘',sushiro:'스시로',komeda:'코메다커피',go:'택시앱 GO',uber:'Uber',hotel:'호텔 현지 결제',online:'온라인·앱 결제'};
 const OFFLINE=t=>!['go','uber','online'].includes(t);
 const won=n=>Math.round(n).toLocaleString('ko-KR')+'원';
 const man=n=>{n=Math.round(n);if(n>=10000){const m=n/10000;return (Number.isInteger(m)?m:m.toFixed(1))+'만원'}return won(n)};
@@ -1017,8 +1143,15 @@ function payState(extra){
   const k=by('kb'),kF=sum(k.filter(e=>e.type==='uniqlo'||e.type==='kbfashion')),kFt=kF>=1000000?200000:kF>=500000?70000:kF>=200000?20000:0;
   const kD=sum(k.filter(e=>e.type==='dept'||e.type==='hankyu')),kDt=kD>=500000?100000:0,kDon=one(k,['donki'],100000);
   const kEarn=kFt+kDt+(kDon?20000:0);
-  const total=sum(L),refund=nEarn+hTier+hBase+Math.round(jYen*rate)+lTier+kEarn;
-  return {L,rate,total,refund,nTot,nFirst,nTier,nIch,nDon,nUni,nDept,nCvs,nCvsSum,nEarn,hTot,hTier,hBase,jcb,jYen,lTot,lTier,kF,kFt,kD,kDt,kDon,kEarn};
+  const k2=by('kb2'),k2F=sum(k2.filter(e=>e.type==='uniqlo'||e.type==='kbfashion')),k2Ft=k2F>=1000000?200000:k2F>=500000?70000:k2F>=200000?20000:0;
+  const k2D=sum(k2.filter(e=>e.type==='dept'||e.type==='hankyu')),k2Dt=k2D>=500000?100000:0,k2Don=one(k2,['donki'],100000),k2Earn=k2Ft+k2Dt+(k2Don?20000:0);
+  const total=sum(L),refund=nEarn+hTier+hBase+Math.round(jYen*rate)+lTier+kEarn+k2Earn;
+  return {L,rate,total,refund,nTot,nFirst,nTier,nIch,nDon,nUni,nDept,nCvs,nCvsSum,nEarn,hTot,hTier,hBase,jcb,jYen,lTot,lTier,kF,kFt,kD,kDt,kDon,kEarn,k2F,k2Ft,k2D,k2Dt,k2Don,k2Earn,kb2On:!!Store.s.pay.kb2};
+}
+function kbSteps(S,kind){
+  const cards=[['kb',kind==='f'?S.kF:S.kD]].concat(S.kb2On?[['kb2',kind==='f'?S.k2F:S.k2D]]:[]),goals=kind==='f'?[2e5,5e5,1e6]:[5e5];
+  return cards.map(([c,x],i)=>{const g=goals.find(v=>x<v);return {c,x,g,need:g?g-x:Infinity,i}}).sort((a,b)=>a.need-b.need||a.i-b.i)
+    .map(o=>({card:o.c,text:o.g?`${kind==='f'?'패션':'백화점'} 월 합산 ${man(o.g)}까지 ${man(o.need)} 남음`:`${kind==='f'?'패션':'백화점'} 구간을 모두 채웠어요`,done:!o.g}));
 }
 function rec(type,S){
   const left=(goal,cur)=>cur>=goal?'채움':man(goal-cur)+' 남음';
@@ -1026,19 +1159,20 @@ function rec(type,S){
   const jd=o=>o.earn>=o.cap;
   switch(type){
     case 'cash':return [{card:'cash',text:'현금만 받는다는 후기가 있어요',done:false}];
-    case 'cvs':return [{card:'naver',text:`편의점 누적 3만원까지 (${left(30000,S.nCvsSum)})`,done:S.nCvs},...gen()];
-    case 'donki':return [{card:'haru',text:`15,000엔까지, JCB 20% (지금 ${yen(S.jcb.donki.y)})`,done:jd(S.jcb.donki)},{card:'naver',text:'한 번에 10만원 이상, 2만원',done:S.nDon},{card:'kb',text:'한 번에 10만원 이상, 2만원권',done:S.kDon},{card:'haru',text:'그 이상',done:false}];
-    case 'uniqlo':return [{card:'naver',text:'한 번에 5만원 이상, 2만원',done:S.nUni},{card:'kb',text:`초과분, 패션 합산 (지금 ${man(S.kF)})`,done:false}];
-    case 'kbfashion':return [{card:'kb',text:`패션 월 합산 20만원부터 (지금 ${man(S.kF)})`,done:false},{card:'naver',text:'누적용',done:false}];
-    case 'dept':return [{card:'naver',text:'한 번에 10만원 이상, 3만원',done:S.nDept},{card:'kb',text:`백화점 월 합산 50만원 이상일 때 (지금 ${man(S.kD)})`,done:S.kDt>0},...gen()];
-    case 'hankyu':return [{card:'haru',text:`15,000엔까지, JCB 20% (지금 ${yen(S.jcb.hankyu.y)})`,done:jd(S.jcb.hankyu)},{card:'naver',text:'한 번에 10만원 이상, 3만원',done:S.nDept},{card:'kb',text:`백화점 월 합산 50만원 이상일 때 (지금 ${man(S.kD)})`,done:S.kDt>0}];
+    case 'cvs':{const g=gen();if(S.nFirst==='todo'&&!S.nCvs){const f0=g.find(x=>!x.done)||g[0];return [{card:f0.card,text:f0.text+'. 네이버는 3만원 이상 첫 결제를 한 뒤부터',done:false},{card:'naver',text:'첫 결제 뒤에는 편의점 누적 3만원까지',done:false}]}
+      return [{card:'naver',text:`편의점 누적 3만원까지 (${left(30000,S.nCvsSum)})`,done:S.nCvs},...g]}
+    case 'donki':return [{card:'haru',text:`15,000엔까지, JCB 20% (지금 ${yen(S.jcb.donki.y)})`,done:jd(S.jcb.donki)},{card:'naver',text:'한 번에 10만원 이상, 2만원',done:S.nDon},{card:'kb',text:'한 번에 10만원 이상, 2만원권',done:S.kDon},...(S.kb2On?[{card:'kb2',text:'한 번에 10만원 이상, 2만원권',done:S.k2Don}]:[]),{card:'haru',text:'그 이상',done:false}];
+    case 'uniqlo':return [{card:'naver',text:'한 번에 5만원 이상, 2만원',done:S.nUni},...kbSteps(S,'f')];
+    case 'kbfashion':return [...kbSteps(S,'f'),{card:'naver',text:'누적용',done:false}];
+    case 'dept':return [{card:'naver',text:'한 번에 10만원 이상, 3만원',done:S.nDept},...kbSteps(S,'d'),...gen()];
+    case 'hankyu':return [{card:'haru',text:`15,000엔까지, JCB 20% (지금 ${yen(S.jcb.hankyu.y)})`,done:jd(S.jcb.hankyu)},{card:'naver',text:'한 번에 10만원 이상, 3만원',done:S.nDept},...kbSteps(S,'d')];
     case 'ichiran':return [{card:'naver',text:'한 번에 2만원 이상, 1만원',done:S.nIch},...gen()];
     case 'sushiro':return [{card:'haru',text:`합계 4,000엔 이상, JCB 20% (지금 ${yen(S.jcb.sushiro.y)})`,done:jd(S.jcb.sushiro)},...gen()];
     case 'komeda':return [{card:'haru',text:`합계 2,000엔 이상, JCB 20% (지금 ${yen(S.jcb.komeda.y)})`,done:jd(S.jcb.komeda)},...gen()];
     case 'go':return [{card:'haru',text:`GO 앱에 Haru 등록, 합계 3,000엔 이상 JCB 20% (지금 ${yen(S.jcb.go.y)})`,done:jd(S.jcb.go)},...gen()];
     case 'uber':return [{card:'lotte',text:'TSUKIMIRFT 입력 뒤 결제. 본인과 아내 계정에서 한 번씩',done:false}];
     case 'hotel':case 'online':return gen().slice(0,2);
-    default:return gen();
+    default:return S.nFirst==='todo'?[{card:'naver',text:'3만원 이상이면 첫 결제 1만원. 그보다 적으면 다음 카드로',done:false},...gen()]:gen();
   }
 }
 const recNow=(type,S)=>{const r=rec(type,S);return r.find(x=>!x.done)||r[r.length-1]};
@@ -1067,6 +1201,11 @@ async function loadRate(){
 }
 function renderPay(){
   const S=payState();
+  const kbTile=(cls,name,sub,earn,F,D,Dt,Don)=>{const g=[2e5,5e5,1e6].find(x=>F<x);
+    return `<article class="kcard ${cls}"><header><h4>${name}</h4><p>${sub}</p></header><div class="kc-body">
+      <p class="kc-big">${won(earn)} <small>상품권</small></p><p class="kc-sub">패션 ${won(F)}, 백화점 ${won(D)}</p>
+      <p class="kc-next">${g?`패션 다음 구간 ${man(g)}까지 ${man(g-F)}`:'패션 최고 구간을 채웠어요'}</p>
+      <ul class="ticks">${[[F>=2e5,'패션 월 20만원, 2만원권'],[F>=5e5,'패션 월 50만원, 7만원권'],[F>=1e6,'패션 월 100만원, 20만원권'],[Dt>0,'백화점 월 50만원, 10만원권'],[Don,'돈키호테 10만원 이상, 2만원권']].map(([ok,t])=>`<li class="${ok?'ok':''}">${t}</li>`).join('')}</ul></div></article>`};
   const bar=(cur,goals,cls)=>{const g=goals.find(x=>cur<x)||goals[goals.length-1],pct=Math.min(100,Math.round(cur/g*100));
     return `<div class="bar k-${cls}" aria-hidden="true"><i style="width:${pct}%"></i></div><p class="kc-next">${cur>=goals[goals.length-1]?'최고 구간을 채웠어요':`다음 구간 ${man(g)}까지 ${man(g-cur)}`}</p>`};
   const tick=(ok,t,bad)=>`<li class="${ok?'ok':bad?'bad':''}">${esc(t)}</li>`;
@@ -1087,9 +1226,10 @@ function renderPay(){
     <article class="kcard k-lotte"><header><h4>롯데 Mastercard</h4><p>10월 31일까지, 온라인도 인정</p></header><div class="kc-body">
       <p class="kc-big">${won(S.lTier)} <small>네이버페이 포인트</small></p><p class="kc-sub">해외 누적 ${won(S.lTot)}</p>${bar(S.lTot,[100000,200000,400000],'lotte')}
       <ul class="ticks">${tick(S.lTot>=100000,'10만원 이상, 1.5만')}${tick(S.lTot>=200000,'20만원 이상, 3만')}${tick(S.lTot>=400000,'40만원 이상, 5만')}</ul></div></article>
-    <article class="kcard k-kb"><header><h4>KB국민 Visa</h4><p>11월 30일까지, 신세계상품권</p></header><div class="kc-body">
-      <p class="kc-big">${won(S.kEarn)} <small>상품권</small></p><p class="kc-sub">패션 ${won(S.kF)}, 백화점 ${won(S.kD)}</p>
-      <ul class="ticks">${tick(S.kF>=200000,'패션 월 20만원, 2만원권')}${tick(S.kF>=500000,'패션 월 50만원, 7만원권')}${tick(S.kF>=1000000,'패션 월 100만원, 20만원권')}${tick(S.kDt>0,'백화점 월 50만원, 10만원권')}${tick(S.kDon,'돈키호테 10만원 이상, 2만원권')}</ul></div></article>`;
+    ${kbTile('k-kb','KB국민 Visa','11월 30일까지, 신세계상품권',S.kEarn,S.kF,S.kD,S.kDt,S.kDon)}`
+    +(S.kb2On?kbTile('k-kb2','KB국민 Visa (아내)','같은 이벤트, 본인 카드와 따로 계산',S.k2Earn,S.k2F,S.k2D,S.k2Dt,S.k2Don):'');
+  const kt=$('#kb2On');if(kt)kt.checked=S.kb2On;
+  const pc=$('#pfCard');if(pc&&pc.options.length){const v=pc.value;pc.innerHTML=cardOpts(v==='kb2'&&!S.kb2On?'lotte':v)}
   $('#guideTabs').innerHTML=GUIDE.map(g=>`<button type="button" aria-pressed="${g.g===guideTab}" data-gtab="${g.g}">${g.g}</button>`).join('');
   $('#guide').innerHTML=!guideTab?'<p class="gnote">분류를 누르면 그 안의 카드 순서가 나와요.</p>':GUIDE.filter(g=>g.g===guideTab).map(g=>`<div class="ggrp">${g.rows.map(([n,t,note])=>`<div class="grow"><p class="gname">${esc(n)}</p>${stepsHTML(rec(t,S))}${note?`<p class="gnote">${esc(note)}</p>`:''}</div>`).join('')}</div>`).join('');
   const days={};S.L.slice().sort((a,b)=>a.date<b.date?1:a.date>b.date?-1:b.ts-a.ts).forEach(e=>(days[e.date]=days[e.date]||[]).push(e));
@@ -1114,6 +1254,8 @@ function gainDetail(a,b){
   add('KB 패션 상품권',b.kFt-a.kFt);
   add('KB 백화점 상품권',b.kDt-a.kDt);
   add('KB 돈키호테 상품권',(b.kDon-a.kDon)*20000);
+  add('KB 아내 돈키호테 상품권',(b.k2Don-a.k2Don)*20000);
+  add('KB 아내 패션·백화점 상품권',b.k2Ft+b.k2Dt-a.k2Ft-a.k2Dt);
   return o;
 }
 /* which card for the next payment: follows the strategy order, splits only where a fixed threshold makes it worth it */
@@ -1126,39 +1268,43 @@ function planFor(type,amt,cur){
   const mk=ps=>ps.map((p,i)=>({card:p.card,type,cur,amt:p.u,date:'2026-12-31',ts:Date.now()+i}));
   const seg=(x,g,r)=>{for(let i=1;i<g.length;i++)if(x<g[i])return (r[i]-r[i-1])*(x-g[i-1])/(g[i]-g[i-1]);return 0};
   const JK=['sushiro','komeda','go','donki','hankyu'];
+  /* fashion tiers: a tier that needs less extra spending is the likelier one to be reached */
+  const fpot=x=>{const g=[0,2e5,5e5,1e6],r=[0,20000,70000,200000];for(let i=1;i<g.length;i++)if(x<g[i]){const w=g[i]-g[i-1];return .6*Math.pow(2e5/w,2)*(r[i]-r[i-1])*(x-g[i-1])/w}return 0};
   /* benefits you can only earn at this kind of store (confirmed + partial progress) */
-  const storeVal=X=>(X.nIch+X.nCvs)*10000+(X.nDon+X.nUni)*20000+X.nDept*30000+(X.nFirst==='missed'?-10000:0)
+  const storeVal=X=>(X.nIch+X.nCvs)*10000+(X.nDon+X.nUni)*20000+X.nDept*30000+(X.nFirst==='missed'?-10000:X.nFirst==='done'?10000:0)
     +(X.nCvs?0:10000*Math.min(1,X.nCvsSum/30000))
     +JK.reduce((v,k)=>v+(X.jcb[k].y>=X.jcb[k].min?X.jcb[k].earn:X.jcb[k].y*.2*.3)*rate,0)
-    +X.kDon*20000+X.kFt+X.kDt+.6*seg(X.kF,[0,2e5,5e5,1e6],[0,20000,70000,200000]);
+    +X.kDon*20000+X.kFt+X.kDt+fpot(X.kF)+X.k2Don*20000+X.k2Ft+X.k2Dt+fpot(X.k2F);
   /* cumulative tiers any spending can fill (confirmed + partial progress) */
   const genVal=X=>X.lTier+X.hTier+X.hBase+X.nTier+.8*(seg(X.lTot,[0,1e5,2e5,4e5],[0,15000,30000,50000])+seg(X.hTot,[0,5e5,1e6],[0,50000,100000])+seg(X.nTot,[0,5e5,1e6,1.5e6],[0,20000,50000,100000]));
   const confirmed=X=>X.refund;
-  const pot=X=>(X.nCvs?0:10000*Math.min(1,X.nCvsSum/30000))+JK.reduce((v,k)=>v+(X.jcb[k].y<X.jcb[k].min?X.jcb[k].y*.2*rate:0),0)+seg(X.kF,[0,2e5,5e5,1e6],[0,20000,70000,200000])+seg(X.lTot,[0,1e5,2e5,4e5],[0,15000,30000,50000])+seg(X.hTot,[0,5e5,1e6],[0,50000,100000])+seg(X.nTot,[0,5e5,1e6,1.5e6],[0,20000,50000,100000]);
-  const offline=OFFLINE(type),app=type==='go'||type==='uber'||type==='online';
-  const CH={naver:[],haru:[],lotte:[],kb:[]};
+  const pot=X=>(X.nCvs?0:10000*Math.min(1,X.nCvsSum/30000))+JK.reduce((v,k)=>v+(X.jcb[k].y<X.jcb[k].min?X.jcb[k].y*.2*rate:0),0)+seg(X.kF,[0,2e5,5e5,1e6],[0,20000,70000,200000])+seg(X.k2F,[0,2e5,5e5,1e6],[0,20000,70000,200000])+seg(X.lTot,[0,1e5,2e5,4e5],[0,15000,30000,50000])+seg(X.hTot,[0,5e5,1e6],[0,50000,100000])+seg(X.nTot,[0,5e5,1e6,1.5e6],[0,20000,50000,100000]);
+  const offline=OFFLINE(type),app=!['donki','dept','hankyu','uniqlo','kbfashion','cvs'].includes(type);
+  const CH={naver:[],haru:[],lotte:[],kb:[],kb2:[]};
   const add=(c,u)=>{u=Math.round(u);if(u>=tiny&&u<amt&&!CH[c].includes(u))CH[c].push(u)};
   if(!app){
     if(offline){
       const nMin={donki:[S.nDon,100000],uniqlo:[S.nUni,50000],dept:[S.nDept,100000],hankyu:[S.nDept,100000],ichiran:[S.nIch,20000]}[type];
       if(nMin&&!nMin[0])add('naver',toU(nMin[1]));
       if(type==='cvs'&&!S.nCvs)add('naver',toU(30000-S.nCvsSum));
-      if(S.nFirst==='todo')add('naver',toU(30000));
       [5e5,1e6,1.5e6].forEach(g=>{if(S.nTot<g)add('naver',toU(g-S.nTot))});
     }
     if(S.jcb[type]){const o=S.jcb[type];add('haru',yToU(o.cap/.2-o.y));add('haru',yToU(o.min-o.y))}
     [5e5,1e6].forEach(g=>{if(S.hTot<g)add('haru',toU(g-S.hTot))});
     [1e5,2e5,4e5].forEach(g=>{if(S.lTot<g)add('lotte',toU(g-S.lTot))});
     if(type==='donki'&&!S.kDon)add('kb',toU(100000));
+    if(S.kb2On&&type==='donki'&&!S.k2Don)add('kb2',toU(100000));
     if(type==='uniqlo'||type==='kbfashion')[2e5,5e5,1e6].forEach(g=>{if(S.kF<g)add('kb',toU(g-S.kF))});
     if((type==='dept'||type==='hankyu')&&S.kD<5e5)add('kb',toU(5e5-S.kD));
+    if(S.kb2On&&(type==='uniqlo'||type==='kbfashion'))[2e5,5e5,1e6].forEach(g=>{if(S.k2F<g)add('kb2',toU(g-S.k2F))});
+    if(S.kb2On&&(type==='dept'||type==='hankyu')&&S.k2D<5e5)add('kb2',toU(5e5-S.k2D));
   }
-  const order=['lotte','haru','naver','kb'];
+  const order=S.kb2On?['lotte','haru','naver','kb','kb2']:['lotte','haru','naver','kb'];
   const cands=type==='uber'?[[{card:'lotte',u:amt}]]:order.map(c=>[{card:c,u:amt}]);
   if(!app){
     const pick=c=>[0,...CH[c].slice(0,3)];
-    for(const a of pick('naver'))for(const b of pick('haru'))for(const c of pick('lotte'))for(const d of pick('kb')){
-      const base={naver:a,haru:b,lotte:c,kb:d},sum=a+b+c+d;
+    for(const a of pick('naver'))for(const b of pick('haru'))for(const c of pick('lotte'))for(const e2 of pick('kb2'))for(const d of pick('kb')){
+      const base={naver:a,haru:b,lotte:c,kb:d,kb2:e2},sum=a+b+c+d+e2;
       if(!sum||sum>amt)continue;
       const rem=amt-sum;
       if(rem===0){cands.push(order.filter(k=>base[k]).map(k=>({card:k,u:base[k]})));continue}
@@ -1185,9 +1331,10 @@ function planFor(type,amt,cur){
       if(S.jcb[type]&&S.jcb[type].earn<S.jcb[type].cap)return `JCB 20%, 합계 ${yen(S.jcb[type].min)}부터 적용`;
       return S.hTot<1e6?`${leftTo([5e5,1e6],S.hTot)}, 기본 3.5%`:'기본 3.5%'}
     if(p.card==='lotte')return type==='uber'?'프로모션 코드 입력 뒤 롯데카드':leftTo([1e5,2e5,4e5],S.lTot);
-    if(type==='donki'&&!S.kDon&&k>=100000)return '한 번에 10만원 이상이면 2만원권';
-    if(type==='uniqlo'||type==='kbfashion')return `패션 월 합산 ${leftTo([2e5,5e5,1e6],S.kF)}`;
-    if(type==='dept'||type==='hankyu')return `백화점 월 합산 ${leftTo([5e5],S.kD)}`;
+    if(type==='donki'&&!(p.card==='kb2'?S.k2Don:S.kDon)&&k>=100000)return '한 번에 10만원 이상이면 2만원권';
+    const w2=p.card==='kb2';
+    if(type==='uniqlo'||type==='kbfashion')return `패션 월 합산 ${leftTo([2e5,5e5,1e6],w2?S.k2F:S.kF)}`;
+    if(type==='dept'||type==='hankyu')return `백화점 월 합산 ${leftTo([5e5],w2?S.k2D:S.kD)}`;
     return '이 매장에서는 혜택이 없어요'};
   const parts=best.ps.map(p=>({card:p.card,u:p.u,why:why(p)}));
   const notes=[],K=uKrw(amt);
@@ -1195,6 +1342,7 @@ function planFor(type,amt,cur){
   const nm={donki:[S.nDon,100000],uniqlo:[S.nUni,50000],dept:[S.nDept,100000],hankyu:[S.nDept,100000],ichiran:[S.nIch,20000]}[type];
   if(offline&&nm&&!nm[0]&&K<nm[1])notes.push(`네이버의 ${man(nm[1])} 혜택에는 금액이 모자라요.`);
   if(S.jcb[type]&&S2.jcb[type].y>S.jcb[type].y&&S2.jcb[type].y<S.jcb[type].min)notes.push(`JCB 20%는 Haru 합계가 ${yen(S.jcb[type].min)}을 넘어야 붙어요. 지금은 ${yen(S2.jcb[type].y)}까지 쌓여요.`);
+  if(type==='general'||type==='hotel'||type==='ichiran'||type==='sushiro'||type==='komeda')notes.push('식당과 호텔은 나눠 내기 어려워서 카드 한 장으로 추천해요.');
   if(type==='go')notes.push('GO 앱은 등록해 둔 카드로 결제돼요. 타기 전에 앱의 결제 카드를 확인하세요.');
   const gain=confirmed(S2)-confirmed(S);
   const prog=Math.round(pot(S2)-pot(S));
@@ -1223,17 +1371,17 @@ function renderQuickPlan(){
   const el=$('#qpPlan');if(!el)return;
   const amt=+$('#qpAmt').value,btn=$('#qpAdd');
   if(!(amt>0)||!btn){qpPlanNow=null;el.innerHTML='';return}
-  qpPlanNow=planFor(btn.dataset.type,amt,$('#qpCur').value);el.innerHTML=planHTML(qpPlanNow,'qpPlanAdd');
+  qpPlanNow=planFor($('#qpType').value,amt,$('#qpCur').value);el.innerHTML=planHTML(qpPlanNow,'qpPlanAdd');
 }
 
-const cardOpts=sel=>Object.keys(CARDS).map(k=>`<option value="${k}"${k===sel?' selected':''}>${CARDS[k].n}</option>`).join('');
+const cardOpts=sel=>Object.keys(CARDS).filter(k=>k!=='kb2'||Store.s.pay.kb2).map(k=>`<option value="${k}"${k===sel?' selected':''}>${CARDS[k].n}</option>`).join('');
 const typeOpts=sel=>Object.keys(PTYPE).map(k=>`<option value="${k}"${k===sel?' selected':''}>${PTYPE[k]}</option>`).join('');
 function payBlock(id){
   const p=P[id];if(!p||!p.pay)return '';
   const S=payState(),type=p.pay==='cash'?'general':p.pay,r=rec(p.pay,S),now=recNow(p.pay,S);
   if(p.pay==='cash')return `<h3>결제 카드</h3>${stepsHTML(r)}`;
   return `<h3>결제 카드</h3>${stepsHTML(r)}${p.payNote?`<p class="gnote">${esc(p.payNote)}</p>`:''}
-    <div class="quickpay"><select id="qpCard" aria-label="카드">${cardOpts(now.card)}</select><input type="number" id="qpAmt" inputmode="numeric" min="0" placeholder="금액" aria-label="금액"><select id="qpCur" aria-label="통화"><option value="JPY">엔</option><option value="KRW">원</option></select><button type="button" class="btn ghost" id="qpAdd" data-type="${type}">기록</button></div><div class="planbox" id="qpPlan" aria-live="polite"></div><p class="qp-state" id="qpState" role="status"></p>`;
+    <div class="quickpay"><select id="qpType" aria-label="매장 종류">${typeOpts(type)}</select><select id="qpCard" aria-label="카드">${cardOpts(now.card)}</select><input type="number" id="qpAmt" inputmode="numeric" min="0" placeholder="금액" aria-label="금액"><select id="qpCur" aria-label="통화"><option value="JPY">엔</option><option value="KRW">원</option></select><button type="button" class="btn ghost" id="qpAdd">기록</button></div><div class="planbox" id="qpPlan" aria-live="polite"></div><p class="qp-state" id="qpState" role="status"></p>`;
 }
 function initPayForm(){
   const n=nowJ(),d=n&&n.ix>=0?n.ix+4:4;
@@ -1246,7 +1394,7 @@ const START=new Date(2026,9,4), END=new Date(2026,9,11);
 const today=(()=>{const d=new Date();return new Date(d.getFullYear(),d.getMonth(),d.getDate())})();
 const dayDiff=(a,b)=>Math.round((a-b)/864e5);
 const uv=Store.s.ui.vary2||{};
-const variant={5:uv[5]==='shop'?'shop':'ara',6:['town','city','ara'].includes(uv[6])?uv[6]:'town',7:uv[7]==='slow'?'slow':'kinkaku'};
+const variant={5:uv[5]==='shop'?'shop':'ara',6:uv[6]==='ara'?'ara':'city',7:'slow'};
 let dayIx=Number.isInteger(Store.s.ui.day)?Store.s.ui.day:0;
 const pinKey=()=>{const n=nowJ();return n&&n.ix>=0?'d'+n.ix:''};
 if(pinKey()&&Store.s.ui.pinnedOn!==pinKey())dayIx=nowJ().ix;
@@ -1346,7 +1494,8 @@ function renderScene(){
 const toMin=t=>{if(!t)return null;const a=t.split(':');return (+a[0])*60+(+a[1])};
 const toHM=m=>String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0');
 const MODE={walk:'도보',taxi:'택시'};
-const ST={rsv:['예약 확정','ok'],wait:['예약 없이 현장 대기','walk'],onsite:['현장 예약 필요','need'],est:['예상','est']};
+const CATS={sight:'관광',eat:'식사',cafe:'카페',shop:'쇼핑',move:'이동',stay:'숙소',todo:'할 일',rest:''};
+const ST={tix:['교환권 2매 구매 완료','ok'],rsv:['예약 확정','ok'],wait:['예약 없이 현장 대기','walk'],onsite:['현장 예약 필요','need'],est:['예상','est']};
 function legOf(a,b,mode){
   const d=Math.hypot((a.lng-b.lng)*91200,(a.lat-b.lat)*111000);
   const m=mode||(d<=1200?'walk':'taxi');
@@ -1363,19 +1512,17 @@ function taxiFare(a,b,at){
 }
 /* two new Uber accounts (50% off up to 1,500 yen, once each) go to the priciest rides; GO with Haru until the JCB cap (5,000 yen of rides); taxi stands need no app */
 function taxiPlan(){
-  const S=payState(),n=nowJ(),from=n&&n.ix>=0?n.ix:0,legs=[];
-  DAYS.forEach((d,i)=>{if(i<from)return;dayRows(d).forEach(r=>{if(r.leg&&r.leg.m==='taxi')legs.push({key:i+':'+r.before,fare:r.leg.fare,stand:r.from==='kyotosta',day:i})})});
-  const plan={},who=['본인','아내'],usedU=Math.min(2,S.L.filter(e=>e.type==='uber').length),off=l=>Math.min(1500,Math.round(l.fare*.5));
-  const pick=legs.filter(l=>!l.stand).slice().sort((a,b)=>off(b)-off(a)).slice(0,2-usedU);
-  let k=usedU,uberSave=0;
-  legs.forEach(l=>{if(pick.includes(l)){plan[l.key]={app:'uber',save:off(l),text:`Uber ${who[k]} 계정, TSUKIMIRFT로 약 ${yen(off(l))} 할인`};uberSave+=off(l);k++}});
-  let need=Math.max(0,5000-S.jcb.go.y),go=S.jcb.go.y;
-  legs.forEach(l=>{if(plan[l.key])return;
-    if(l.stand)plan[l.key]={app:'stand',save:0,text:'승강장 택시, 앱 없이. 여기서 Uber를 부르면 신규 코드가 먼저 써져요'};
-    else if(need>0){plan[l.key]={app:'go',save:0,text:'GO 앱에 Haru, JCB 20%'};need-=l.fare;go+=l.fare}
+  const legs=[];
+  DAYS.forEach((d,i)=>dayRows(d).forEach(r=>{if(r.leg&&r.leg.m==='taxi')legs.push({key:i+':'+r.before,fare:r.leg.fare,stand:r.from==='kyotosta'})}));
+  const off=l=>Math.min(1500,Math.round(l.fare*.5)),who=['본인','아내'];
+  const pick=legs.filter(l=>!l.stand).slice().sort((a,b)=>off(b)-off(a)).slice(0,2);
+  const plan={};let k=0,uberSave=0,go=0;
+  legs.forEach(l=>{
+    if(pick.includes(l)){plan[l.key]={app:'uber',save:off(l),text:`Uber ${who[k]} 계정, 약 ${yen(off(l))} 할인`};uberSave+=off(l);k++}
+    else if(l.stand)plan[l.key]={app:'stand',save:0,text:'승강장 택시. 여기서는 Uber를 부르지 마세요'};
+    else if(go<5000){plan[l.key]={app:'go',save:0,text:'GO 앱에 Haru, JCB 20%'};go+=l.fare}
     else plan[l.key]={app:'street',save:0,text:'일반 택시. 안 잡히면 GO'}});
-  const jcbSave=Math.max(0,(go>=3000?Math.min(1000,Math.floor(go*.2)):0)-S.jcb.go.earn);
-  return {plan,uberSave,jcbSave,uberN:pick.length};
+  return {plan,uberSave,jcbSave:go>=3000?Math.min(1000,Math.floor(go*.2)):0,uberN:pick.length};
 }
 function dayCost(d){
   let taxi=0,n=0,transit=0;
@@ -1419,35 +1566,46 @@ function renderDay(){
   const keys=d.items.filter(it=>it.st==='rsv'&&(it.c==='eat'||it.c==='cafe'));
   const S=payState(),TP=taxiPlan();
   const todo=DAYTODO[d.dn]||[];
+  const cst=dayCost(d),cut=Object.keys(TP.plan).filter(k=>k.startsWith(dayIx+':')).reduce((x,k)=>x+TP.plan[k].save,0);
+  const tdone=todo.filter((x,k)=>Store.s.checks[`d${d.dn}-${k}`]).length;
+  const cur=d.opts?d.opts.find(o=>o.id===d.sel):null;
+  const dstr=`2026-10-${String(d.dn).padStart(2,'0')}`,paid=S.L.filter(e=>e.date===dstr);
+  const cashAt=[...new Set(d.items.filter(it=>it.p&&P[it.p].cash&&!it.skip).map(it=>P[it.p].n))];
+  const nj=nowJ(),isToday=!!nj&&nj.ix===dayIx;
   $('#dayHead').innerHTML=`<p class="day-date">${d.md} ${d.dow}, ${esc(d.city)}</p><h2>${esc(d.title)}</h2>
-    <div class="day-meta"><p>${esc(d.wx.area)} ${esc(d.wx.t)}C, ${esc(d.wx.s)}, 강수확률 ${esc(d.wx.pop)}${d.wx.mm!=null?`, 예상 강수량 ${d.wx.mm}mm`:''}</p>
-    ${stay?`<p>오늘 밤은 <button type="button" class="linkbtn" data-place="${d.stay}">${esc(stay.n)}</button></p>`:''}</div>
+    <p class="day-wx">${esc(d.wx.area)} ${esc(d.wx.t)}C, ${esc(d.wx.s)}, 강수확률 ${esc(d.wx.pop)}${d.wx.mm!=null?`, ${d.wx.mm}mm`:''}<small>${d.wx.live?'실시간':'10월 1일 예보'}</small><a href="${d.wx.url}" target="_blank" rel="noopener">tenki.jp</a></p>
     ${d.wx.extra?`<p class="wx-extra">${esc(d.wx.extra)}</p>`:''}
-    <p class="wx-src">${d.wx.live?`Open-Meteo 실시간 예보예요. ${d.wx.at.getMonth()+1}월 ${d.wx.at.getDate()}일 ${String(d.wx.at.getHours()).padStart(2,'0')}:${String(d.wx.at.getMinutes()).padStart(2,'0')}에 불러왔고 30분마다 새로 고쳐요.`:`tenki.jp ${esc(d.wx.issued)} 발표 예보예요. 실시간 예보를 불러오면 바뀌어요.`} <a href="${d.wx.url}" target="_blank" rel="noopener">tenki.jp에서 지금 예보 보기</a></p>
-    ${(()=>{const c=dayCost(d);const cut=Object.keys(TP.plan).filter(k=>k.startsWith(dayIx+':')).reduce((x,k)=>x+TP.plan[k].save,0);return c.total?`<p class="day-cost">오늘 교통비 약 <b>${yen(c.total)}</b> <small>${c.n?`택시 ${c.n}번 ${yen(c.taxi)}`:''}${c.n&&c.transit?', ':''}${c.transit?`대중교통 ${yen(c.transit)}`:''}, 약 ${won(c.total*Store.s.pay.rate)}${cut?`. Uber 할인을 받으면 약 ${yen(c.total-cut)}`:''}</small></p>`:''})()}
-    <div id="nowCard"></div>
+    <div class="day-meta">${stay?`<p>오늘 밤은 <button type="button" class="linkbtn" data-place="${d.stay}">${esc(stay.n)}</button></p>`:''}
+    ${cst.total?`<p class="day-cost">교통비 약 <b>${yen(cst.total)}</b><small>${cut?`Uber 할인 뒤 ${yen(cst.total-cut)}, `:''}약 ${won((cst.total-cut)*Store.s.pay.rate)}</small></p>`:''}
+    ${paid.length?`<p class="day-cost">오늘 쓴 돈 <b>${yen(paid.reduce((x,e)=>x+e.yen,0))}</b><small>${paid.length}건, 약 ${won(paid.reduce((x,e)=>x+e.krw,0))}</small></p>`:''}
+    ${cashAt.length?`<p class="day-cost">현금 쓸 곳<small>${esc(cashAt.join(', '))}</small></p>`:''}</div>
     ${keys.length?`<div class="keys"><p>오늘 예약</p><ul>${keys.map(it=>`<li><b>${it.t}</b> <button type="button" class="linkbtn" data-place="${it.p}">${esc(it.title)}</button></li>`).join('')}</ul></div>`:''}
-    ${d.opts?`<fieldset class="vary"><legend>이날 일정 고르기</legend><div class="vary-opts">${d.opts.map(o=>`<label class="plan-opt"><input type="radio" name="vary-${d.dn}" data-vary="${d.dn}" value="${o.id}"${o.id===d.sel?' checked':''}><strong>${esc(o.label)}</strong><span>${esc(o.sub)}</span></label>`).join('')}</div>${d.hint?`<p class="plan-hint warn">${esc(d.hint)}</p>`:''}</fieldset>`:''}
-    ${todo.length?`<fieldset class="todo"><legend>오늘 챙길 것</legend><ul>${todo.map(([label],k)=>{const id=`d${d.dn}-${k}`;return `<li class="ck"><input type="checkbox" id="ck-${id}" data-check="${id}"${Store.s.checks[id]?' checked':''}><label for="ck-${id}">${esc(label)}</label><span></span></li>`}).join('')}</ul></fieldset>`:''}`;
+    ${d.opts?`<details class="fold"${d.hint?' open':''}><summary>이날 일정 고르기<span>${esc(cur?cur.label:'')}</span></summary><div class="fold-body"><fieldset class="vary"><div class="vary-opts">${d.opts.map(o=>`<label class="plan-opt"><input type="radio" name="vary-${d.dn}" data-vary="${d.dn}" value="${o.id}"${o.id===d.sel?' checked':''}><strong>${esc(o.label)}</strong><span>${esc(o.sub)}</span></label>`).join('')}</div>${d.hint?`<p class="plan-hint warn">${esc(d.hint)}</p>`:''}</fieldset></div></details>`:''}
+    ${todo.length?`<details class="fold todo-fold"${isToday&&tdone<todo.length?' open':''}><summary>오늘 챙길 것<span id="todoCount">${tdone} / ${todo.length}</span></summary><div class="fold-body"><ul class="todo">${todo.map(([label],k)=>{const id=`d${d.dn}-${k}`;return `<li class="ck"><input type="checkbox" id="ck-${id}" data-check="${id}"${Store.s.checks[id]?' checked':''}><label for="ck-${id}">${esc(label)}</label><span></span></li>`}).join('')}</ul></div></details>`:''}`;
+  const pinNo=new Map(dayPins(d).map(p=>[p.id,p.n])),shown=new Set();
   $('#timeline').innerHTML=dayRows(d).map(r=>{
     if(r.leg){const L=r.leg;
       return `<li class="tl-leg${r.tight?' tight':''}"><span class="tl-time">${r.dep!=null?`${toHM(r.dep)}<small>출발</small>`:''}</span><span class="leg-ico">${icon(L.m)}</span>
-        <div class="leg-body">${MODE[L.m]} 약 ${L.min}분, 여유 ${L.buf}분${L.fare?`, 약 ${yen(L.fare)}`:''} <a href="${gdir2(r.from,r.to,L.m)}" target="_blank" rel="noopener">길찾기</a>${L.m==='taxi'&&TP.plan[dayIx+':'+r.before]?`<span class="leg-pay">${esc(TP.plan[dayIx+':'+r.before].text)}</span>`:''}${r.tight?'<b class="leg-tight">앞 일정과 빠듯해요</b>':''}</div></li>`}
+        <div class="leg-body">${MODE[L.m]} 약 ${L.min}분${L.fare?`, 약 ${yen(L.fare)}`:''} <a href="${gdir2(r.from,r.to,L.m)}" target="_blank" rel="noopener">길찾기</a>${L.m==='taxi'&&TP.plan[dayIx+':'+r.before]?`<span class="leg-pay">${esc(TP.plan[dayIx+':'+r.before].text)}</span>`:''}${r.tight?'<b class="leg-tight">앞 일정과 빠듯해요</b>':''}</div></li>`}
     const it=r.it,c=it.c||'rest',key=doneKey(d,r.i),done=!!Store.s.checks[key];
     const title=it.p?`<button type="button" class="tl-title" data-place="${it.p}">${esc(it.title)}</button>`:`<span class="tl-title">${esc(it.title)}</span>`;
     const st=it.st?`<span class="st ${ST[it.st][1]}">${ST[it.st][0]}</span>`:'';
     const home=it.home?`<p class="tl-note">${esc(P[it.p].n)}</p>`:'';
     const pp=it.p&&P[it.p]&&P[it.p].pay&&P[it.p].c!=='stay'&&!it.home&&!it.skip&&['eat','shop','cafe'].includes(c)?recNow(P[it.p].pay,S):null;
-    const payLine=pp?`<p class="tl-pay"><span class="kchip k-${pp.card}">${CARDS[pp.card].s}</span> ${esc(pp.text)}</p>`:'';
+    const hp=it.payBtn?(it.amt?(x=>({card:x.card,text:x.why}))(planFor('hotel',it.amt,'JPY').parts[0]):recNow('hotel',S)):null,pq=pp||hp;
+    const mine=it.p&&(pp||hp)?paid.filter(e=>e.memo===P[it.p].n):[];
+    const payLine=pq?`<p class="tl-pay"><span class="kchip k-${pq.card}">${CARDS[pq.card].s}</span> ${esc(pq.text)}</p>${mine.map(e=>`<p class="tl-paid">기록 ${e.cur==='KRW'?won(e.krw):yen(e.yen)} <span class="kchip k-${e.card}">${CARDS[e.card].s}</span></p>`).join('')}<button type="button" class="paybtn" data-payfor="${it.p}"${it.amt?` data-amt="${it.amt}"`:''}>결제 기록</button>`:'';
+    const cashTag=it.p&&P[it.p].cash&&!it.skip&&!it.home?'<span class="st walk">현금</span>':'';
     const table=it.table?`<table class="tl-table"><tbody>${it.table.map(row=>`<tr>${row.map(x=>`<td>${esc(x)}</td>`).join('')}</tr>`).join('')}</tbody></table>`:'';
-    return `<li class="tl-item${it.minor?' minor':''}${done?' done':''}" data-i="${r.i}"><span class="tl-time">${timeHTML(it)}</span><span class="tl-mark cat-${c}" title="${CAT[c]}">${icon(c)}</span>
-      <div class="tl-body">${title}${st}${home}${it.note?`<p class="tl-note">${esc(it.note)}</p>`:''}${it.cost?`<p class="tl-cost">${it.cost.yen?`약 ${yen(it.cost.yen)} `:''}<small>${esc(it.cost.label)}</small></p>`:''}${payLine}${table}${it.warn?`<p class="tl-warn">${it.warn}</p>`:''}</div>
-      <label class="tl-done"><input type="checkbox" data-check="${key}"${done?' checked':''} aria-label="${esc(it.title)} 완료"></label></li>`;
+    let no='';if(it.p&&pinNo.has(it.p)&&!shown.has(it.p)){shown.add(it.p);no=`<span class="pinno cat-${P[it.p].c}"><b>${pinNo.get(it.p)}</b></span>`}
+    return `<li class="tl-item${it.minor?' minor':''}" data-i="${r.i}"${no?` data-pinrow="${it.p}"`:''}><span class="tl-time">${timeHTML(it)}</span><span class="tl-mc"><span class="tl-mark cat-${c}">${icon(c)}</span>${!it.minor&&CATS[c]?`<small class="tl-cat cat-${c}">${CATS[c]}</small>`:''}</span>
+      <div class="tl-body"><div class="tl-head">${no}<span>${title}${st}${cashTag}</span></div>${home}${it.note?`<p class="tl-note">${esc(it.note)}</p>`:''}${it.cost?`<p class="tl-cost">${it.cost.yen?`약 ${yen(it.cost.yen)} `:''}<small>${esc(it.cost.label)}</small></p>`:''}${payLine}${table}${it.warn?`<p class="tl-warn">${it.warn}</p>`:''}</div></li>`;
   }).join('');
   const old=$('#dayBlank');if(old)old.remove();
   if(d.blank){const p=document.createElement('p');p.id='dayBlank';p.className='empty';p.textContent=d.blank;$('#timeline').after(p)}
-  $('#dayFoot').innerHTML=`<div class="daymemo"><label for="dayMemo">이날 메모</label><textarea id="dayMemo" maxlength="2000" placeholder="택시 요금, 바뀐 계획, 기억해 둘 것">${esc(Store.s.notes['day'+d.dn]||'')}</textarea>
-    <div class="sh-memo-row"><button type="button" class="btn ghost" id="dayMemoSave" data-dn="${d.dn}">메모 저장</button><span id="dayMemoState" role="status"></span></div></div>`;
+  const memo=Store.s.notes['day'+d.dn]||'';
+  $('#dayFoot').innerHTML=`<details class="fold"${memo?' open':''}><summary>이날 메모</summary><div class="fold-body daymemo"><textarea id="dayMemo" maxlength="2000" aria-label="이날 메모" placeholder="택시 요금, 바뀐 계획, 기억해 둘 것">${esc(memo)}</textarea>
+    <div class="sh-memo-row"><button type="button" class="btn ghost" id="dayMemoSave" data-dn="${d.dn}">메모 저장</button><span id="dayMemoState" role="status"></span></div></div></details>`;
   renderNow();
   renderMap(d);
 }
@@ -1461,24 +1619,39 @@ function nowJ(){
 const span=m=>m>=60?`${Math.floor(m/60)}시간${m%60?' '+m%60+'분':''}`:`${m}분`;
 function renderNow(){
   const el=$('#nowCard');if(!el)return;
-  document.querySelectorAll('.tl-item.cur').forEach(x=>x.classList.remove('cur'));
-  const n=nowJ();if(!n||n.ix<0){el.innerHTML='';return}
+  document.querySelectorAll('.tl-item.cur,.tl-item.past,.tl-leg.past').forEach(x=>x.classList.remove('cur','past'));
+  const n=nowJ();document.body.classList.toggle('intrip',!!n&&n.ix>=0);
+  if(!n||n.ix<0){el.innerHTML='';return}
   if(n.ix!==dayIx){el.innerHTML=`<div class="now"><p>오늘은 ${DAYS[n.ix].md}이에요.</p><button type="button" class="btn light" data-goto="${n.ix}">오늘 일정 보기</button></div>`;return}
   const d=DAYS[dayIx],rows=dayRows(d);
-  const timed=rows.filter(r=>r.it&&r.it.t&&!r.it.skip&&!r.it.minor).map(r=>({it:r.it,i:r.i,s:toMin(r.it.t),e:toMin(r.it.end)}));
+  const endOf=it=>it.end?toMin(it.end):toMin(it.t)+30;
+  const timed=rows.filter(r=>r.it&&r.it.t&&!r.it.skip&&!r.it.minor).map(r=>({it:r.it,i:r.i,s:toMin(r.it.t),e:endOf(r.it)}));
   let cur=null,next=null;
   for(const x of timed){if(x.s<=n.min)cur=x;else{next=x;break}}
-  if(cur&&cur.e!=null&&cur.e<=n.min)cur=null;
+  if(cur&&cur.e<=n.min)cur=null;
   const leg=next?rows.find(r=>r.leg&&r.before===next.i):null;
   let h=`<div class="now"><p class="now-clock">지금 ${toHM(n.min)}</p>`;
-  if(cur)h+=`<p class="now-cur">${esc(cur.it.title)}${cur.e!=null?`, ${toHM(cur.e)}까지`:''}</p>`;
+  if(cur)h+=`<p class="now-cur">${esc(cur.it.title)}${cur.it.end?`, ${cur.it.end}까지`:''}</p>`;
   if(next){
     h+=`<p class="now-next">다음은 <b>${next.it.t} ${esc(next.it.title)}</b>, ${span(next.s-n.min)} 뒤</p>`;
-    if(leg){const late=leg.dep!=null&&n.min>leg.dep;
-      h+=`<p class="now-leg${late?' late':''}">${leg.dep!=null?(late?'지금 바로 출발해야 해요. ':`${toHM(leg.dep)}에 출발하세요. `):''}${MODE[leg.leg.m]} 약 ${leg.leg.min}분${leg.leg.fare?`, 약 ${yen(leg.leg.fare)}`:''}.${(()=>{const x=leg.leg.m==='taxi'?taxiPlan().plan[dayIx+':'+leg.before]:null;return x?' '+esc(x.text)+'.':''})()}</p><a class="btn light" href="${gdir2(leg.from,leg.to,leg.leg.m)}" target="_blank" rel="noopener">길찾기</a>`}
-  }else h+=`<p class="now-next">오늘 일정은 끝났어요.</p>`;
+    if(leg){const late=leg.dep!=null&&n.min>leg.dep,x=leg.leg.m==='taxi'?taxiPlan().plan[dayIx+':'+leg.before]:null;
+      h+=`<p class="now-leg${late?' late':''}">${leg.dep!=null?(late?'지금 바로 출발해야 해요. ':`${toHM(leg.dep)}에 출발하세요. `):''}${MODE[leg.leg.m]} 약 ${leg.leg.min}분${leg.leg.fare?`, 약 ${yen(leg.leg.fare)}`:''}.${x?' '+esc(x.text)+'.':''}</p>`}
+  }else h+=`<p class="now-next">${cur?'오늘 남은 일정은 이것뿐이에요.':'오늘 남은 일정이 없어요.'}</p>`;
+  const todo=DAYTODO[d.dn]||[],left=todo.filter((x,k)=>!Store.s.checks[`d${d.dn}-${k}`]).length;
+  if(left&&n.min<12*60)h+=`<p class="now-leg">오늘 챙길 것이 ${left}개 남았어요.</p>`;
+  const acts=[];
+  if((cur&&cur.it.p==='haruka')||(next&&next.it.p==='haruka'))acts.push('<button type="button" class="btn light" data-place="haruka">QR과 타는 순서</button>');
+  if(leg)acts.push(`<a class="btn light" href="${gdir2(leg.from,leg.to,leg.leg.m)}" target="_blank" rel="noopener">길찾기</a>`);
+  if(next&&next.it.p&&P[next.it.p].lat!=null&&leg&&leg.leg.m==='taxi')acts.push(`<button type="button" class="btn light" data-showjp="${next.it.p}">기사에게 보여주기</button>`);
+  if(cur||next)acts.push('<button type="button" class="btn light" data-tocur="1">지금 일정으로</button>');
+  if(acts.length)h+=`<div class="now-acts">${acts.join('')}</div>`;
   el.innerHTML=h+'</div>';
   const mark=cur||next;if(mark){const li=$(`.tl-item[data-i="${mark.i}"]`);if(li)li.classList.add('cur')}
+  /* dim what is already over */
+  let past=false;const lis=[...document.querySelectorAll('#timeline>li')];
+  rows.forEach((r,ix)=>{const li=lis[ix];if(!li)return;
+    if(r.it){if(r.it.t)past=endOf(r.it)<=n.min;if(past&&!(mark&&mark.i===r.i))li.classList.add('past')}
+    else{const nx=rows[ix+1];if(nx&&nx.it&&nx.it.t&&toMin(nx.it.t)<=n.min)li.classList.add('past')}});
 }
 
 /* ---------- map ---------- */
@@ -1507,7 +1680,7 @@ const GEO={
 function renderMap(d){
   const pins=dayPins(d);
   $('#mapCap').textContent=pins.length?`${d.md} 동선, ${pins.length}곳`:`${d.md} 동선`;
-  if(!pins.length){$('#map').innerHTML='<p class="empty" style="margin:8px 16px 12px">지도에 올릴 장소가 아직 없어요.</p>';$('#legend').innerHTML='';return}
+  if(!pins.length){$('#map').innerHTML='<p class="empty" style="margin:8px 16px 12px">지도에 올릴 장소가 아직 없어요.</p>';return}
   const W=520,H=400,PAD=48,K=Math.cos(35*Math.PI/180);
   const lats=pins.map(p=>p.lat),lngs=pins.map(p=>p.lng);
   const cLat=(Math.min(...lats)+Math.max(...lats))/2,cLng=(Math.min(...lngs)+Math.max(...lngs))/2;
@@ -1538,12 +1711,11 @@ function renderMap(d){
     if(!moved)break}
   if(anc.length>1)o+=`<polyline class="m-route" points="${anc.map(a=>a.x.toFixed(1)+','+a.y.toFixed(1)).join(' ')}"/>`;
   pins.forEach((p,i)=>{if(Math.hypot(pos[i].x-anc[i].x,pos[i].y-anc[i].y)>7)o+=`<line class="m-lead" x1="${anc[i].x.toFixed(1)}" y1="${anc[i].y.toFixed(1)}" x2="${pos[i].x.toFixed(1)}" y2="${pos[i].y.toFixed(1)}"/><circle class="m-anchor" cx="${anc[i].x.toFixed(1)}" cy="${anc[i].y.toFixed(1)}" r="2.2"/>`});
-  pins.forEach((p,i)=>{o+=`<g class="pin cat-${p.c}" tabindex="0" role="button" data-place="${p.id}" aria-label="${p.n}번, ${esc(p.name)}"><circle cx="${pos[i].x.toFixed(1)}" cy="${pos[i].y.toFixed(1)}" r="13.5"/><text x="${pos[i].x.toFixed(1)}" y="${pos[i].y.toFixed(1)}" dy=".36em" text-anchor="middle">${p.n}</text></g>`});
+  pins.forEach((p,i)=>{o+=`<g class="pin cat-${p.c}" tabindex="0" role="button" data-pin="${p.id}" aria-label="${p.n}번, ${esc(p.name)}"><circle cx="${pos[i].x.toFixed(1)}" cy="${pos[i].y.toFixed(1)}" r="13.5"/><text x="${pos[i].x.toFixed(1)}" y="${pos[i].y.toFixed(1)}" dy=".36em" text-anchor="middle">${p.n}</text></g>`});
   const km=[20,10,5,2,1,0.5,0.2].find(v=>v*pxKm<=130)||0.2;const bl=km*pxKm;
   o+=`<line class="m-scale" x1="16" y1="${H-16}" x2="${(16+bl).toFixed(1)}" y2="${H-16}"/><text class="m-scale-t" x="16" y="${H-22}">${km>=1?km+' km':km*1000+' m'}</text>`;
   o+=`<text class="m-scale-t" x="${W-16}" y="22" text-anchor="end">북쪽이 위</text></svg>`;
   $('#map').innerHTML=o;
-  $('#legend').innerHTML=pins.map(p=>`<li><button type="button" class="cat-${p.c}" data-place="${p.id}"><span class="lg-n"><b>${p.n}</b></span><span class="lg-name">${esc(p.name)}</span><span class="lg-t">${esc(p.t)}</span></button></li>`).join('');
 }
 
 /* ---------- issues ---------- */
@@ -1559,7 +1731,7 @@ function issues(){
     {day:od<0?null:od,t:'오코노미야키 쇼는 직접 가서 예약해야 해요',b:'전화번호가 없는 가게예요. 매일 17:00–21:00 영업이고 6–8석이라 자리가 금방 차요. 이타다키와 같은 골목이니 4일 밤이나 5일, 6일 저녁에 들러 7일 19:30으로 잡으세요.'},
     {day:4,t:'8일 Airporter 접수 시간을 확인하세요',b:'힐튼 교토에서 그란 레스파이어로 캐리어를 보내는 날이에요. 프런트 접수 마감과 오사카 호텔 수령 시각을 예약 내역에서 확인해 두세요. 지금은 10:45 접수, 저녁 수령으로 넣어 뒀어요.'},
     ...(fd>=0&&DAYS[fd].dn!==6?[{day:fd,soft:1,href:TAKA,link:'다카시마야 판매 안내',t:'후타바는 18:00까지 받아야 해요',b:'5일 14:30–18:00 사이에 다카시마야 지하 1층에서 받는 예약이에요. 18:00을 넘기면 취소되니 쇼핑을 시작하기 전에 먼저 들르세요.'}]:[]),
-    {day:0,soft:1,t:'하루카는 17:44 열차가 목표예요',b:'빠르면 17:14, 늦으면 18:15 열차예요. 18:15 열차를 타도 19:35쯤 교토역에 도착해서 20:30 츠무기 예약에 맞출 수 있어요. 표는 미리 사 두고 좌석은 도착해서 다음 열차로 잡으세요.'},
+    {day:0,soft:1,t:'하루카 교환권은 그대로 탈 수 없어요',b:'구매해 둔 교환권 2매는 JR 간사이공항역 발권기에서 종이 승차권으로 바꿔야 해요. 여권과 QR 두 개가 필요합니다. 17:44 열차가 목표이고, 18:15 열차를 타도 20:30 츠무기 예약에 맞출 수 있어요.'},
     {day:2,soft:1,t:'힐튼 교토는 1박 예약 두 건이에요',b:'6일 밤과 7일 밤이 따로 예약돼 있어요. 체크인할 때 두 예약을 이어서 같은 방을 쓰게 해 달라고 요청하면 7일에 방을 옮기지 않아도 돼요.'},
     {day:sd<0?null:sd,soft:1,t:'스시젠은 현금을 챙기세요',b:'예약 없이 10:00부터 현장에서 기다려요. 평일 10:00–18:00 영업이고 현금 결제만 된다는 후기가 있어요.'},
     {day:null,soft:1,t:'후지이 다이마루는 휴관 중이에요',b:'본관이 재건축으로 2026년 5월 6일부터 문을 닫았고 2030년 재개가 목표예요. TNF는 THE NORTH FACE KYOTO와 STANDARD KYOTO 매장으로 대신하세요.'},
@@ -1568,9 +1740,12 @@ function issues(){
   ];
 }
 function renderIssues(){
-  const L=issues();
-  $('#issueList').innerHTML=L.map(x=>`<article class="issue${x.soft?' soft':''}"><h3>${esc(x.t)}</h3><p>${esc(x.b)}</p>${x.day==null?'':`<button type="button" class="linkbtn" data-goto="${x.day}">${DAYS[x.day].md} 일정 보기</button>`}${x.href?`<a href="${x.href}" target="_blank" rel="noopener">${esc(x.link)}</a>`:''}</article>`).join('');
-  $('#navIssues').textContent=L.filter(x=>!x.soft).length;
+  const hash=t=>{let h=0;for(const c of t)h=(h*31+c.charCodeAt(0))>>>0;return 'iss-'+h.toString(36)};
+  const L=issues().map(x=>Object.assign({key:hash(x.t)},x)).map(x=>Object.assign(x,{ok:!!Store.s.checks[x.key]}));
+  $('#issueList').innerHTML=L.map(x=>`<article class="issue${x.soft?' soft':''}${x.ok?' okd':''}"><h3>${esc(x.t)}</h3><p>${esc(x.b)}</p>${x.day==null?'':`<button type="button" class="linkbtn" data-goto="${x.day}">${DAYS[x.day].md} 일정 보기</button>`}${x.href?`<a href="${x.href}" target="_blank" rel="noopener">${esc(x.link)}</a>`:''}
+    <label class="iss-ok"><input type="checkbox" data-issue="${x.key}"${x.ok?' checked':''}> 확인했어요</label></article>`).join('');
+  const left=L.filter(x=>!x.soft&&!x.ok).length;
+  $('#navIssues').textContent=left||'';
 }
 
 /* ---------- stays + reservations ---------- */
@@ -1594,16 +1769,16 @@ function renderCosts(){
     return c.total?`<button type="button" class="cost-row" data-goto="${i}"><span class="rsv-when">${d.dn}일 (${d.dw})</span><span>${c.n?`택시 ${c.n}번 ${yen(c.taxi)}`:''}${c.n&&c.transit?', ':''}${c.transit?`대중교통 ${yen(c.transit)}`:''}</span><b>${yen(c.total)}</b></button>`:''}).join('');
   const TP=taxiPlan(),cut=TP.uberSave+TP.jcbSave;
   $('#costTable').innerHTML=rows+`<div class="cost-row total"><span class="rsv-when">합계</span><span>택시 ${N}번 ${yen(T)}, 대중교통 ${yen(X)}</span><b>${yen(T+X)}<small>약 ${won((T+X)*rate)}</small></b></div>`
-    +(cut?`<div class="cost-row"><span class="rsv-when">할인</span><span>${TP.uberN?`Uber 신규 코드 ${TP.uberN}번 ${yen(TP.uberSave)}`:''}${TP.uberN&&TP.jcbSave?', ':''}${TP.jcbSave?`GO JCB 캐시백 ${yen(TP.jcbSave)}`:''}</span><b>−${yen(cut)}</b></div><div class="cost-row total"><span class="rsv-when">할인 후</span><span>남은 일정 기준이에요</span><b>${yen(T+X-cut)}<small>약 ${won((T+X-cut)*rate)}</small></b></div>`:'');
+    +(cut?`<div class="cost-row"><span class="rsv-when">할인</span><span>${TP.uberN?`Uber 신규 코드 ${TP.uberN}번 ${yen(TP.uberSave)}`:''}${TP.uberN&&TP.jcbSave?', ':''}${TP.jcbSave?`GO JCB 캐시백 ${yen(TP.jcbSave)}`:''}</span><b>−${yen(cut)}</b></div><div class="cost-row total"><span class="rsv-when">할인 후</span><span>계획대로 탈 때</span><b>${yen(T+X-cut)}<small>약 ${won((T+X-cut)*rate)}</small></b></div>`:'');
 }
 /* ---------- checklists ---------- */
 const PREP=[
   {g:'서류와 결제',items:[['doc-passport','여권 (유효기간 확인)'],['doc-vjw','Visit Japan Web 입국·세관 QR'],['doc-air','제주항공 모바일 체크인 (7C1327, 김포 국제선)'],['doc-hotel','숙소 네 곳 예약 확인서'],['doc-rsv','식당 예약 내역 캡처'],['doc-ins','여행자보험'],['pay-cash','엔화 현금 (스시젠 등 현금 결제)'],['pay-card','해외 결제 카드'],['pay-ic','교통 IC카드 (ICOCA, 모바일 Suica)']]},
-  {g:'전자기기',items:[['el-charger','휴대폰 충전기와 케이블'],['el-batt','보조배터리 (기내 반입)'],['el-plug','110V 돼지코 어댑터'],['el-esim','eSIM 또는 로밍'],['el-ear','이어폰']]},
+  {g:'전자기기',items:[['el-charger','휴대폰 충전기와 케이블'],['el-batt','보조배터리 (기내 반입)'],['el-plug','110V 돼지코 어댑터'],['el-esim','eSIM 설치 확인 (말톡 KDDI 8일권, 구매 완료)'],['el-ear','이어폰']]},
   {g:'옷과 비 대비',items:[['cl-umb','접이식 우산 (4–6일 비 예보)'],['cl-shell','방수 자켓이나 바람막이'],['cl-shoes','젖어도 되는 편한 신발'],['cl-socks','여벌 양말'],['cl-layer','아침용 얇은 겉옷 (최저 15–18도)'],['cl-day','낮에 입을 반팔과 얇은 긴팔 (최고 23–28도)'],['cl-sleep','잠옷과 속옷']]},
   {g:'세면과 건강',items:[['hy-wash','세면도구와 스킨케어'],['hy-sun','선크림 (7일부터 맑음)'],['hy-med','상비약 (소화제, 진통제, 밴드)'],['hy-eye','안경이나 렌즈']]},
   {g:'쇼핑 대비',items:[['sh-bag','접이식 보조가방'],['sh-space','캐리어에 빈 공간 남기기'],['sh-weight','위탁 수하물 허용 무게 확인'],['sh-tax','면세용 여권 지참']]},
-  {g:'출발 전에 할 일',items:[['td-okonomi','오코노미야키 쇼 방문 예약 (7일 19:30)'],['td-haruka','하루카 표 미리 사 두기'],['td-airporter','Airporter 예약 확인 (8일, 힐튼에서 그란 레스파이어)'],['td-taxi','GO 앱 설치하고 Haru(신용) 등록'],['td-uber','Uber 두 계정(본인, 아내)에 카드와 TSUKIMIRFT 등록'],['td-harucard','Haru 실물 카드 챙기기'],['td-fx','환전']]}
+  {g:'출발 전에 할 일',items:[['td-okonomi','오코노미야키 쇼 방문 예약 (7일 19:30)'],['td-haruka','하루카 교환권 QR 2매를 이 페이지에 넣어 두기'],['td-airporter','Airporter 예약 확인 (8일, 힐튼에서 그란 레스파이어)'],['td-taxi','GO 앱 설치하고 Haru(신용) 등록'],['td-uber','Uber 두 계정(본인, 아내)에 카드와 TSUKIMIRFT 등록'],['td-harucard','Haru 실물 카드 챙기기'],['td-fx','환전']]}
 ];
 const SHOP=[
   {g:'드럭스토어',items:[['bu-kao','카오 화이트 비누'],['bu-laundrin','란도린 섬유유연제 향수']]},
@@ -1644,53 +1819,118 @@ const sheet=$('#sheet');let sheetId=null;
 const gq=p=>encodeURIComponent(p.q||p.a||p.n);
 const gmap=p=>'https://www.google.com/maps/search/?api=1&query='+gq(p)+(p.pid?'&query_place_id='+p.pid:'');
 const gdir=p=>'https://www.google.com/maps/dir/?api=1&destination='+gq(p)+(p.pid?'&destination_place_id='+p.pid:'');
-function openSheet(id){
+function openSheet(id,toPay){
   const p=P[id];if(!p)return;sheetId=id;
   const row=(k,v)=>`<div><dt>${k}</dt><dd>${v}</dd></div>`;
-  const occ=occurrences(id);
-  let h=`<p class="sh-cat cat-${p.c}">${icon(p.c)}${CAT[p.c]}</p><h2 id="sheetTitle">${esc(p.n)}</h2>${p.a?`<p class="sh-alt">${esc(p.a)}</p>`:''}`;
+  const occ=occurrences(id),d=DAYS[dayIx];
+  $('#sheetCat').className='sh-cat cat-'+p.c;$('#sheetCat').innerHTML=icon(p.c)+CAT[p.c];
+  $('#sheetTitle').textContent=p.n;
+  let h=p.a?`<p class="sh-alt">${esc(p.a)}</p>`:'';
+  const today=occ.filter(o=>o.day===dayIx);
+  if(p.rsv||p.haruka||today.length)h+=`<p class="sh-status">${p.haruka?'<span class="badge ok">교환권 2매 구매 완료</span>':''}${p.rsv?`<span class="badge ${RSV[p.rsv.s][1]}">${RSV[p.rsv.s][0]}</span>`:''}${today.length?`<span>${esc(today.map(o=>o.label.replace(/^.*?\) ?/,'')||o.title).filter(Boolean).join(', '))}</span>`:''}</p>`;
+  if(p.haruka)h+=harukaHTML();
+  else{
+    const qa=[];
+    if(p.lat!=null||p.q){qa.push(`<a class="btn" href="${gmap(p)}" target="_blank" rel="noopener">지도</a>`,`<a class="btn ghost" href="${gdir(p)}" target="_blank" rel="noopener">길찾기</a>`)}
+    if(p.tel)qa.push(`<a class="btn ghost" href="tel:${p.tel.replace(/[^+\d]/g,'')}">전화</a>`);
+    if(p.jp)qa.push(`<button type="button" class="btn ghost" data-showjp="${id}">일본어로 보여주기</button>`);
+    if(qa.length)h+=`<div class="qa">${qa.join('')}</div>`;
+  }
   if(p.warn)h+=`<p class="warnbox"><b>확인 필요</b> ${esc(p.warn)}</p>`;
-  h+='<dl class="sh-dl">';
-  if(p.stay){h+=row('체크인',esc(p.stay.in))+row('체크아웃',esc(p.stay.out))+row('숙박',p.stay.nights+'박')}
-  if(p.book)p.book.forEach(([k,v])=>h+=row(esc(k),esc(v)));
-  if(occ.length)h+=row('이번 일정',occ.map(o=>`${esc(o.label)}<small>${esc(o.title)}</small>`).join(''));
-  if(p.rsv){h+=row('예약',`<span class="badge ${RSV[p.rsv.s][1]}">${RSV[p.rsv.s][0]}</span>`);
-    if(p.rsv.s==='done'){
-      h+=row('예약 일시',esc(p.rsv.when));
-      if(p.rsv.party)h+=row('인원',esc(p.rsv.party));
-      if(p.rsv.seat)h+=row('좌석',esc(p.rsv.seat));
-      if(p.rsv.qty)h+=row('수량',esc(p.rsv.qty));
-      if(p.rsv.id)h+=row('예약 ID',`<b>${esc(p.rsv.id)}</b>`);
-      if(p.rsv.via)h+=row('예약 경로',`${esc(p.rsv.via)}<small>${esc(p.rsv.change||'')}</small>`);
-    }else if(p.rsv.s!=='walk')h+=row('예약번호','<span class="todo">미입력</span><small>아래 메모에 적어 두거나 알려 주세요</small>')}
-  if(p.area)h+=row('위치',esc(p.area));
-  if(p.hours)h+=row('영업시간',`${esc(p.hours)}<small>${HRS}</small>`);
-  if(p.closed)h+=row('휴무',esc(p.closed));
-  if(p.tel)h+=row('전화',`<a href="tel:${p.tel.replace(/[^+\d]/g,'')}">${esc(p.tel)}</a>`);
-  h+='</dl>';
+  const leg=dayRows(d).find(r=>r.leg&&r.to===id);
+  if(leg){const TP=taxiPlan().plan[dayIx+':'+leg.before];
+    h+=`<p class="sh-move"><b>이동</b>${esc(P[leg.from].n)}에서 ${MODE[leg.leg.m]} 약 ${leg.leg.min}분${leg.leg.fare?`, 약 ${yen(leg.leg.fare)}`:''}${leg.dep!=null?`. ${toHM(leg.dep)}에 출발`:''}${TP?`. ${esc(TP.text)}`:''}</p>`}
+  let dl='';
+  if(p.stay)dl+=row('체크인',esc(p.stay.in))+row('체크아웃',esc(p.stay.out))+row('숙박',p.stay.nights+'박');
+  if(p.rsv&&p.rsv.s==='done'){
+    dl+=row('예약 일시',esc(p.rsv.when));
+    if(p.rsv.party)dl+=row('인원',esc(p.rsv.party));
+    if(p.rsv.seat)dl+=row('좌석',esc(p.rsv.seat));
+    if(p.rsv.qty)dl+=row('수량',esc(p.rsv.qty));
+    if(p.rsv.id)dl+=row('예약 ID',`<b>${esc(p.rsv.id)}</b>`);
+    if(p.rsv.via)dl+=row('예약 경로',`${esc(p.rsv.via)}<small>${esc(p.rsv.change||'')}</small>`);
+  }
+  if(p.book)p.book.forEach(([k,v])=>dl+=row(esc(k),esc(v)));
+  if(occ.length>today.length||(!p.rsv&&occ.length>1))dl+=row('이번 일정',occ.map(o=>`${esc(o.label)}<small>${esc(o.title)}</small>`).join(''));
+  if(p.area)dl+=row('위치',esc(p.area));
+  if(p.hours)dl+=row('영업시간',`${esc(p.hours)}<small>${HRS}</small>`);
+  if(p.closed)dl+=row('휴무',esc(p.closed));
+  if(p.cash)dl+=row('현금',esc(p.cash));
+  if(p.tel)dl+=row('전화',esc(p.tel));
+  if(dl)h+=`<dl class="sh-dl">${dl}</dl>`;
+  if(p.say)h+=`<h3>일본어로 말하기</h3><ul class="saylist">${p.say.map(([ko],i)=>`<li><button type="button" class="linkbtn" data-say="${id}:${i}">${esc(ko)}</button></li>`).join('')}</ul>`;
   if(p.buy)h+=`<h3>여기서 살 것</h3><ul class="sh-list">${p.buy.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`;
   if(p.stores)h+=`<h3>들를 매장</h3><ul class="sh-list">${p.stores.map(([n,q])=>`<li><a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}" target="_blank" rel="noopener">${esc(n)}</a></li>`).join('')}</ul>`;
-  if(p.links)h+=`<h3>링크</h3><ul class="sh-list">${p.links.map(([n,u])=>`<li><a href="${u}" target="_blank" rel="noopener">${esc(n)}</a></li>`).join('')}</ul>`;
-  if(p.tips)h+=`<h3>메모</h3><ul class="sh-list">${p.tips.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`;
-  h+=`<div id="payBlock">${payBlock(id)}</div>`;
-  h+=`<h3><label for="memo">내 메모</label></h3><textarea id="memo" maxlength="2000" placeholder="예약번호, 예약자 이름, 좌석, 요청 사항">${esc(Store.s.notes[id]||'')}</textarea>
-    <div class="sh-memo-row"><button type="button" class="btn ghost" id="memoSave">메모 저장</button><span id="memoState" role="status"></span></div>`;
-  if(p.lat!=null||p.q)h+=`<div class="sh-actions"><a class="btn" href="${gmap(p)}" target="_blank" rel="noopener">Google 지도에서 열기</a><a class="btn ghost" href="${gdir(p)}" target="_blank" rel="noopener">여기로 길찾기</a></div>`;
+  if(p.links&&!p.haruka)h+=`<h3>자료</h3><ul class="sh-list">${p.links.map(([n,u])=>`<li><a href="${u}" target="_blank" rel="noopener">${esc(n)}</a></li>`).join('')}</ul>`;
+  const memo=Store.s.notes[id]||'';
+  if(p.tips)h+=`<details><summary>참고</summary><div><ul class="sh-list">${p.tips.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div></details>`;
+  if(p.pay)h+=`<details id="payFold"${toPay?' open':''}><summary>결제 카드와 기록</summary><div id="payBlock">${payBlock(id)}</div></details>`;
+  h+=`<details${memo?' open':''}><summary>내 메모</summary><div><textarea id="memo" maxlength="2000" aria-label="내 메모" placeholder="예약번호, 예약자 이름, 좌석, 요청 사항">${esc(memo)}</textarea>
+    <div class="sh-memo-row"><button type="button" class="btn ghost" id="memoSave">메모 저장</button><span id="memoState" role="status"></span></div></div></details>`;
   $('#sheetBody').innerHTML=h;
   if(!sheet.open){if(sheet.showModal)sheet.showModal();else sheet.setAttribute('open','')}
   sheet.scrollTop=0;
+  if(toPay&&$('#payFold')){$('#payFold').scrollIntoView({block:'start'});sheet.scrollTop-=64;const a=$('#qpAmt');if(a)a.focus({preventScroll:true})}
+}
+/* Haruka: exchange order -> paper ticket -> train. QR images live on this device. */
+const QR_EMBED={A:'',B:''};
+const qrOf=k=>QR_EMBED[k]||Store.img('qr'+k);
+function harukaHTML(){
+  const btn=k=>qrOf(k)?`<button type="button" class="btn" data-qrshow="${k}">티켓 ${k} QR 보기</button>`:`<button type="button" class="btn ghost" data-qradd="${k}">티켓 ${k} QR 넣기</button>`;
+  const P0=P.haruka;
+  return `<p class="warnbox"><b>교환권은 탑승권이 아니에요.</b> JR 간사이공항역 발권기에서 종이 승차권으로 바꿔야 탈 수 있어요.</p>
+    <div class="qa big">${btn('A')}${btn('B')}</div>
+    ${qrOf('A')||qrOf('B')?`<p class="sh-small">${['A','B'].filter(k=>Store.img('qr'+k)).map(k=>`<button type="button" class="linkbtn" data-qradd="${k}">티켓 ${k} 이미지 바꾸기</button>`).join(' ')}</p>`:'<p class="sh-small">교환권 QR을 캡처한 이미지를 넣어 두면 여기서 크게 볼 수 있어요. 이 기기에만 저장돼요.</p>'}
+    <ol class="hsteps"><li>제2터미널 도착</li><li>입국심사, 수하물, 세관</li><li>제2터미널 무료 셔틀버스 탑승</li><li>제1터미널 쪽 에어로플라자에서 내리기</li><li>JR 간사이공항역으로 이동</li><li class="key">여권 마크가 있는 JR 발권기에서 교환권을 종이 승차권으로 교환 (여권, QR 2개)</li><li>종이 승차권 2장 받기</li><li class="key">하루카 탑승</li><li>교토역 도착</li></ol>
+    <table class="tl-table"><tbody><tr><td>현재 목표</td><td>17:44 출발</td><td>19:04 도착</td></tr><tr><td>빠르면</td><td>17:14 출발</td><td>18:34쯤 도착</td></tr><tr><td>늦으면</td><td>18:15 출발</td><td>19:35쯤 도착</td></tr></tbody></table>
+    <p class="sh-small">준비물은 여권, 티켓 A와 B의 QR, 스마트폰이에요.</p>
+    <div class="qa">${P0.links.map(([n,u])=>`<a class="btn ghost" href="${u}" target="_blank" rel="noopener">${esc(n)}</a>`).join('')}</div>`;
+}
+function showQR(k){
+  const src=qrOf(k);if(!src)return;
+  const no=(P.haruka.book.find(r=>r[0]==='티켓 '+k)||[])[1];$('#qrImg').hidden=false;$('#bigText').hidden=true;$('#qrImg').src=src;$('#qrCap').textContent=`하루카 티켓 ${k}${no?' · '+no:''}`;
+  const v=$('#qrView');if(!v.open){if(v.showModal)v.showModal();else v.setAttribute('open','')}
+}
+function showBig(cap,big,small){
+  $('#qrImg').hidden=true;const b=$('#bigText');b.hidden=false;
+  b.innerHTML=`<p class="big-ja" lang="ja">${esc(big)}</p>${small.filter(Boolean).map(x=>`<p class="big-sub"${/[ぁ-んァ-ヶ一-龠]/.test(x)?' lang="ja"':''}>${esc(x)}</p>`).join('')}`;
+  $('#qrCap').textContent=cap;
+  const v=$('#qrView');if(!v.open){if(v.showModal)v.showModal();else v.setAttribute('open','')}
+}
+function addQR(k,file){
+  if(!file||!/^image\//.test(file.type)){alert('QR이 보이는 이미지 파일을 골라 주세요. PDF는 화면을 캡처해서 넣으면 돼요.');return}
+  const rd=new FileReader();
+  rd.onload=()=>{const im=new Image();im.onload=()=>{
+    const m=Math.min(1,1100/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*m);c.height=Math.round(im.height*m);
+    const g=c.getContext('2d');g.fillStyle='#fff';g.fillRect(0,0,c.width,c.height);g.imageSmoothingEnabled=false;g.drawImage(im,0,0,c.width,c.height);
+    if(!Store.setImg('qr'+k,c.toDataURL('image/png')))alert('저장 공간이 모자라서 넣지 못했어요. 더 작은 이미지로 해 보세요.');
+    if(sheetId==='haruka'&&sheet.open)openSheet('haruka')};im.src=rd.result};
+  rd.readAsDataURL(file);
 }
 $('#sheetClose').addEventListener('click',()=>sheet.close());
+$('#qrClose').addEventListener('click',()=>$('#qrView').close());
+let qrSlot='A';
+$('#qrFile').addEventListener('change',e=>{const fl=e.target.files&&e.target.files[0];if(fl)addQR(qrSlot,fl);e.target.value=''});
 sheet.addEventListener('click',e=>{if(e.target===sheet)sheet.close()});
 
 /* ---------- events ---------- */
+function setView(v){
+  document.querySelectorAll('.view').forEach(x=>x.hidden=x.id!==v);
+  document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-current',b.dataset.view===v?'true':'false'));
+  window.scrollTo(0,0);
+}
 function selectDay(i,scroll){
   dayIx=Math.max(0,Math.min(7,i));Store.ui({day:dayIx,pinnedOn:pinKey()});
   renderRibbon();renderScene();renderDay();
-  if(scroll)$('#days').scrollIntoView({behavior:'smooth',block:'start'});
+  if(scroll){setView('days');$('#dayHead').scrollIntoView({block:'start'})}
+}
+function jumpToPin(id){
+  const li=$(`.tl-item[data-pinrow="${id}"]`);
+  if(!li){openSheet(id);return}
+  li.scrollIntoView({behavior:'smooth',block:'center'});li.classList.remove('flash');void li.offsetWidth;li.classList.add('flash');
 }
 document.addEventListener('click',e=>{
-  const t=e.target.closest('[data-day],[data-place],[data-goto],[data-del],[data-addbtn],[data-scroll],[data-gtab],[data-paydel],[data-rateauto],#memoSave,#dayMemoSave,#pfAdd,#qpAdd,#pfPlanAdd,#qpPlanAdd,#bkExport');
+  const t=e.target.closest('[data-day],[data-place],[data-goto],[data-del],[data-addbtn],[data-view],[data-pin],[data-qrshow],[data-qradd],[data-payfor],[data-tocur],[data-showjp],[data-say],[data-gtab],[data-paydel],[data-rateauto],#memoSave,#dayMemoSave,#pfAdd,#qpAdd,#pfPlanAdd,#qpPlanAdd,#bkExport');
   if(!t)return;
   if(t.dataset.gtab){guideTab=guideTab===t.dataset.gtab?'':t.dataset.gtab;renderPay();const b=$(`[data-gtab="${t.dataset.gtab}"]`);if(b)b.focus();return}
   if(t.dataset.paydel){Store.payDel(t.dataset.paydel);return}
@@ -1698,17 +1938,24 @@ document.addEventListener('click',e=>{
   if(t.id==='pfPlanAdd'&&pfPlanNow){const memo=$('#pfMemo').value.trim().slice(0,60),date=$('#pfDate').value||'2026-10-04',type=$('#pfType').value,pl=pfPlanNow;
     pl.parts.forEach(p=>Store.payAdd({date,card:p.card,type,cur:pl.cur,amt:p.u,memo}));
     $('#pfAmt').value='';$('#pfMemo').value='';renderPlan();$('#pfState').textContent='추천대로 기록했어요';return}
-  if(t.id==='qpPlanAdd'&&qpPlanNow){const type=$('#qpAdd').dataset.type,date=`2026-10-${String(DAYS[dayIx].dn).padStart(2,'0')}`,pl=qpPlanNow;
+  if(t.id==='qpPlanAdd'&&qpPlanNow){const type=$('#qpType').value,date=`2026-10-${String(DAYS[dayIx].dn).padStart(2,'0')}`,pl=qpPlanNow;
     pl.parts.forEach(p=>Store.payAdd({date,card:p.card,type,cur:pl.cur,amt:p.u,memo:P[sheetId].n}));
     $('#payBlock').innerHTML=payBlock(sheetId);$('#qpState').textContent='추천대로 기록했어요';return}
   if(t.id==='pfAdd'){const amt=+$('#pfAmt').value;if(!(amt>0)){$('#pfAmt').focus();return}
     Store.payAdd({date:$('#pfDate').value||'2026-10-04',card:$('#pfCard').value,type:$('#pfType').value,cur:$('#pfCur').value,amt,memo:$('#pfMemo').value.trim().slice(0,60)});
     $('#pfAmt').value='';$('#pfMemo').value='';renderPlan();$('#pfState').textContent='기록했어요';return}
   if(t.id==='qpAdd'){const amt=+$('#qpAmt').value;if(!(amt>0)){$('#qpAmt').focus();return}
-    Store.payAdd({date:`2026-10-${String(DAYS[dayIx].dn).padStart(2,'0')}`,card:$('#qpCard').value,type:t.dataset.type,cur:$('#qpCur').value,amt,memo:P[sheetId].n});
+    Store.payAdd({date:`2026-10-${String(DAYS[dayIx].dn).padStart(2,'0')}`,card:$('#qpCard').value,type:$('#qpType').value,cur:$('#qpCur').value,amt,memo:P[sheetId].n});
     $('#payBlock').innerHTML=payBlock(sheetId);$('#qpState').textContent='기록했어요';return}
   if(t.id==='bkExport'){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(Store.dump(),null,1)],{type:'application/json'}));a.download='kyoto-osaka-backup.json';document.body.appendChild(a);a.click();a.remove();return}
-  if(t.dataset.scroll){const el=document.getElementById(t.dataset.scroll);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});return}
+  if(t.dataset.view){setView(t.dataset.view);return}
+  if(t.dataset.payfor){openSheet(t.dataset.payfor,true);if(t.dataset.amt&&$('#qpAmt')){$('#qpAmt').value=t.dataset.amt;renderQuickPlan()}return}
+  if(t.dataset.tocur){const li=$('.tl-item.cur');if(li)li.scrollIntoView({behavior:'smooth',block:'center'});return}
+  if(t.dataset.showjp){const p=P[t.dataset.showjp];showBig('ここまでお願いします',p.jp,[p.ja,p.tel?'☎ '+p.tel:'',p.n]);return}
+  if(t.dataset.say){const [pid,i]=t.dataset.say.split(':'),x=P[pid].say[+i];showBig(P[pid].n,x[1],[x[0]]);return}
+  if(t.dataset.pin){jumpToPin(t.dataset.pin);return}
+  if(t.dataset.qrshow){showQR(t.dataset.qrshow);return}
+  if(t.dataset.qradd){qrSlot=t.dataset.qradd;$('#qrFile').click();return}
   if(t.id==='dayMemoSave'){Store.note('day'+t.dataset.dn,$('#dayMemo').value.trim());$('#dayMemoState').textContent='메모를 저장했어요';return}
   if(t.id==='memoSave'){Store.note(sheetId,$('#memo').value.trim());$('#memoState').textContent='메모를 저장했어요';return}
   if(t.dataset.day!=null){selectDay(+t.dataset.day,false);return}
@@ -1720,18 +1967,20 @@ document.addEventListener('click',e=>{
 function addItem(key){const el=$('#add-'+key);const v=el.value.trim();if(!v){el.focus();return}el.value='';Store.addCustom(key,v);$('#add-'+key).focus()}
 document.addEventListener('keydown',e=>{
   if(e.key==='Enter'&&e.target.dataset&&e.target.dataset.add){e.preventDefault();addItem(e.target.dataset.add);return}
-  if((e.key==='Enter'||e.key===' ')&&e.target.closest&&e.target.closest('g.pin')){e.preventDefault();openSheet(e.target.closest('g.pin').dataset.place);return}
+  if((e.key==='Enter'||e.key===' ')&&e.target.closest&&e.target.closest('g.pin')){e.preventDefault();jumpToPin(e.target.closest('g.pin').dataset.pin);return}
   const rb=e.target.closest&&e.target.closest('.rb');
   if(rb&&(e.key==='ArrowRight'||e.key==='ArrowLeft')){e.preventDefault();selectDay(dayIx+(e.key==='ArrowRight'?1:-1),false);const b=$(`.rb[data-day="${dayIx}"]`);if(b)b.focus()}
 });
 document.addEventListener('change',e=>{
   const t=e.target;
+  if(t.dataset.issue){Store.check(t.dataset.issue,t.checked);renderIssues();return}
+  if(t.id==='kb2On'){Store.payKb2(t.checked);return}
   if(t.id==='pfType'||t.id==='pfCur'){renderPlan();return}
-  if(t.id==='qpCur'){renderQuickPlan();return}
+  if(t.id==='qpCur'||t.id==='qpType'){renderQuickPlan();return}
   if(t.id==='payRate'){const r=+t.value;if(r>=5&&r<=20)Store.payRate(r);return}
   if(t.id==='bkImport'){const fl=t.files&&t.files[0];if(!fl)return;fl.text().then(x=>{let ok=false;try{ok=Store.load(JSON.parse(x))}catch(e){}if(ok)location.reload();else $('#bkState').textContent='파일을 읽지 못했어요'});return}
   if(t.dataset.vary){const dn=+t.dataset.vary;variant[dn]=t.value;Store.ui({vary2:variant});DAYS=buildDays();renderDay();renderIssues();renderRsv();renderCosts();const r=$(`input[data-vary="${dn}"]:checked`);if(r)r.focus();return}
-  if(t.dataset.check){Store.check(t.dataset.check,t.checked);const li=t.closest('.tl-item');if(li)li.classList.toggle('done',t.checked);return}
+  if(t.dataset.check){Store.check(t.dataset.check,t.checked);const li=t.closest('.tl-item');if(li)li.classList.toggle('done',t.checked);const tf=t.closest('.todo-fold');if(tf){const all=tf.querySelectorAll('input');$('#todoCount').textContent=`${[...all].filter(x=>x.checked).length} / ${all.length}`}return}
   if(t.dataset.custom){Store.checkCustom(t.dataset.custom,t.checked);return}
 });
 Store.on(renderLists);
@@ -1742,6 +1991,7 @@ let wxKey=JSON.stringify(Store.s.weather);
 Store.on(()=>{const k=JSON.stringify(Store.s.weather);if(k===wxKey)return;wxKey=k;DAYS=buildDays();renderRibbon();renderScene();renderDay();renderIssues()});
 
 /* ---------- boot ---------- */
+if(window.matchMedia&&matchMedia('(max-width:919px)').matches)$('#mapBox').removeAttribute('open');
 renderRibbon();renderScene();renderDay();renderIssues();renderStays();renderRsv();renderCosts();renderLists();initPayForm();renderPay();
 if(new URLSearchParams(location.search).has('selftest'))window.__t={Store,payState,planFor,gainDetail};
 loadLive();
